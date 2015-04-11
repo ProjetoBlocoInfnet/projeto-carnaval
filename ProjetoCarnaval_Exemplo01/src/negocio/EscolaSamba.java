@@ -15,6 +15,8 @@ public class EscolaSamba
 	private String lema;
 	private String filiacao;
 	private Grupos grupoAtual;
+	private String email;
+	private String telefone;
 	
 
 	@Override
@@ -96,4 +98,17 @@ public class EscolaSamba
 	public void setGrupoAtual(Grupos grupoAtual) {
 		this.grupoAtual = grupoAtual;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
 }
