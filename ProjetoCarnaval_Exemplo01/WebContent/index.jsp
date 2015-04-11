@@ -6,6 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <title>Projeto Carnaval</title>
 </head>
 <body>
@@ -20,9 +28,9 @@
 	<form action="ControlaAcesso" method="post">	
 		<input type="hidden" name="tela" value="index.jsp">
 			
-		<input type="text" name="usuario"> 
-		<input type="password" name="senha">
-		<input type="submit" value="Entrar">
+		<input type="text" class="form-control" name="usuario"> 
+		<input type="password" class="form-control" name="senha">
+		<input type="submit" value="Entrar" class="btn btn-default">
 			
 		<hr>
 		
