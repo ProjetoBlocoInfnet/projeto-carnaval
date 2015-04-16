@@ -1,7 +1,14 @@
 package negocio;
 
-public class Jurado
+public class Jurado extends Pessoa
 {
-	private String nome;
-	
+	private Quesito quesitoJulgado;
+
+	public Quesito getQuesitoJulgado() {
+		return quesitoJulgado;
+	}
+
+	public void setQuesitoJulgado(Quesito quesitoJulgado) {
+		this.quesitoJulgado = quesitoJulgado;
+	}
 }

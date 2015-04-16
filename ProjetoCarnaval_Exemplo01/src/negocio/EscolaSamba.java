@@ -17,14 +17,13 @@ public class EscolaSamba
 	private Grupos grupoAtual;
 	private String email;
 	private String telefone;
-	
+	private String cnpj;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((dataFundacao == null) ? 0 : dataFundacao.hashCode());
+		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -37,10 +36,10 @@ public class EscolaSamba
 		if (getClass() != obj.getClass())
 			return false;
 		EscolaSamba other = (EscolaSamba) obj;
-		if (dataFundacao == null) {
-			if (other.dataFundacao != null)
+		if (cnpj == null) {
+			if (other.cnpj != null)
 				return false;
-		} else if (!dataFundacao.equals(other.dataFundacao))
+		} else if (!cnpj.equals(other.cnpj))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -50,6 +49,12 @@ public class EscolaSamba
 		return true;
 	}
 
+	public String getCnpj() {
+		return cnpj;
+	}
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 	public String getNome() {
 		return nome;
 	}
