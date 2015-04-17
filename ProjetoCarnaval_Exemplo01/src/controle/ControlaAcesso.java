@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import negocio.Galera;
 import negocio.Usuario;
-import dao.GaleraDao;
 
 public class ControlaAcesso extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +26,6 @@ public class ControlaAcesso extends HttpServlet {
 		if ("main.jsp".equals(tela)){
 			request.setAttribute("user", session.getAttribute("usuarioLogado"));
 		} else {
-			request.setAttribute("minhaGalera", GaleraDao.obterGalera());
 			tela = "index.jsp";
 		}
 		request.getRequestDispatcher(tela).forward(request, response);
@@ -39,7 +36,6 @@ public class ControlaAcesso extends HttpServlet {
 		session = request.getSession();
 		
 		logado = new Usuario(request.getParameter("usuario"), request.getParameter("senha"));
-		logado.setGalera(new Galera(request.getParameter("galera")));
 		
 		session.setAttribute("usuarioLogado", logado);
 		

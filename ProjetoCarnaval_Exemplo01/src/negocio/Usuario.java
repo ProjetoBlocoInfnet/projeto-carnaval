@@ -4,13 +4,21 @@ public class Usuario {
 
 	private String login;
 	private String senha;
-	private Galera galera;
+	private String id;
+	
+	public void setId( String id ) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
 	
 	public String obterMensagemAcesso(){
-		return String.format("O login %s com senha %s est� logado pela galera %s", 
+		return String.format("O login %s com senha %s está logado", 
 							this.getLogin(),
-							this.getSenha(),
-							this.getGalera().getNome());
+							this.getSenha());
 	}
 	
 	public Usuario(String login, String senha) {
@@ -28,11 +36,5 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	public Galera getGalera() {
-		return galera;
-	}
-	public void setGalera(Galera galera) {
-		this.galera = galera;
 	}
 }
