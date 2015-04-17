@@ -5,8 +5,11 @@ import java.util.Set;
 
 import enumerator.Grupos;
 
-public class EscolaSamba
+public class EscolaSamba extends Usuario
 {
+	public EscolaSamba(String login, String senha) {
+		super(login, senha);	
+	}
 	private String nome;
 	private String enderecoQuadra;
 	private String enderecoBarracao;
