@@ -9,6 +9,8 @@
 <body>
 	<form action="ControlaEscolaSamba" method="get">
 	
+		<input type="hidden" name="acao" value="salvar">
+	
 		<h2>Cadastro de Escolas de Samba</h2>
 	
 		<h3>Nome</h3><input type="text" name="nome">

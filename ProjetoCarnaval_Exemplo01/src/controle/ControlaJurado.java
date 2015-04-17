@@ -7,44 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ControlaEscolaSamba
+ * Servlet implementation class ControlaJurado
  */
-public class ControlaEscolaSamba extends HttpServlet {
+public class ControlaJurado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControlaEscolaSamba() {
+    public ControlaJurado() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
-    {
-		//TODO Emmanuel Aranha - Fazer as opções de salvar, alterar e excluir
-    	
-    	if("salvar".equals(acao))
-    	{
-    		return true;
-    	}
-		return false;
-    }
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO Emmanuel Aranha - Salva e continua na tela de manter
-		//request.getParameter("acao").toString();
-		//request.setAttribute("acao","salvar");
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO Emmanuel Aranha - Salva e sai da tela de manter
+		// TODO Auto-generated method stub
 	}
 
 }

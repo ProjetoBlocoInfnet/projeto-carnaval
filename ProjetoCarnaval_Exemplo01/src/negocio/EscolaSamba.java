@@ -5,7 +5,7 @@ import java.util.Set;
 
 import enumerator.Grupos;
 
-public class EscolaSamba
+public class EscolaSamba extends Usuario
 {
 	private String nome;
 	private String enderecoQuadra;
@@ -18,6 +18,11 @@ public class EscolaSamba
 	private String email;
 	private String telefone;
 	private String cnpj;
+
+	public EscolaSamba(String login, String senha) {
+		super(login, senha);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int hashCode() {
