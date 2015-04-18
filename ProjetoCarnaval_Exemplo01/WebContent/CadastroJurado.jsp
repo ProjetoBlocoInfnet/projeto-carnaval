@@ -26,7 +26,6 @@ if(request.getAttribute("oSucesso") != null)
 		var sucesso = "<%=oSucesso%>";
 		if(sucesso != "")
 		{
-			alert("variavel retornou " + sucesso);
 			if(sucesso == "s")
 			{
 				alert("cadastro efetuado com sucesso");
@@ -35,10 +34,6 @@ if(request.getAttribute("oSucesso") != null)
 			{
 				alert("houve uma falha no seu cadastro. tente novamente.");
 			}
-		}
-		else
-		{
-			alert("variavel retornou " + sucesso);
 		}
 	</script>
 
