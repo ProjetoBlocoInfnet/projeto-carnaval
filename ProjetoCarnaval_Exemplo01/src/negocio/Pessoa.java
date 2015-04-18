@@ -1,7 +1,12 @@
 package negocio;
 
-public abstract class Pessoa
+public abstract class Pessoa extends Usuario
 {
+	public Pessoa(String login, String senha) {
+		super(login, senha);
+		// TODO Auto-generated constructor stub
+	}
+
 	private enum Sexo
 	{
 		M,F;
