@@ -18,4 +18,7 @@ public class IntegranteDAO {
 		return integrante.getId();
 	}
 
+	public static Integrante obtemPorId(String id) {
+		return integrantes.get( id );
+	}
 }

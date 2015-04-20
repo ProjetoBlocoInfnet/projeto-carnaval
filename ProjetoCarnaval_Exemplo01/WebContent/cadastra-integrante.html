@@ -3,26 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Cadastro de Integrante</title>
-
-
-
 </head>
 <body>
 	<h1>Cadastro de Integrante</h1>
 	<section>
-		<form action="CadastroIntegrante" method="post">
-			
+		<form action="CadastroIntegrante" method="post">			
 			<h1>Escola</h1>
-			
-		
 			<fieldset>
-			
+				<legend>Dados cadastrais</legend>		
 				<datalist id="sexos">
 					<option>
 					Masculino
 					</option>
 					<option>
 					Feminino
+					</option>
+				</datalist>
+
+				<datalist id="acao-integrante">
+					<option>
+					Carpinteiro				
+					</option>
+					<option>
+					Ala
 					</option>
 				</datalist>
 				
@@ -66,11 +69,8 @@
 						</li>
 
 					</ul>
-
-
-				
-				<input type="submit" />
 			</fieldset>
+			<input type="submit" />	
 		</form>
 	</section>
 	<footer>

@@ -3,7 +3,8 @@ package negocio;
 import enumerator.Acao;
 
 public class Atividade
-{
+{	
+	private String id;
 	private EscolaSamba escolaSamba;
 	private Acao acao;
 
@@ -47,4 +48,12 @@ public class Atividade
 	public void setAcao(Acao acao) {
 		this.acao = acao;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 }

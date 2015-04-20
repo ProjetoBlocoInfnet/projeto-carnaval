@@ -45,4 +45,14 @@
     <servlet-name>CadastroIntegrante</servlet-name>
     <url-pattern>/CadastroIntegrante</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CadastroAtividadeIntegrante</display-name>
+    <servlet-name>CadastroAtividadeIntegrante</servlet-name>
+    <servlet-class>controle.CadastroAtividadeIntegrante</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CadastroAtividadeIntegrante</servlet-name>
+    <url-pattern>/CadastroAtividadeIntegrante</url-pattern>
+  </servlet-mapping>
 </web-app>
