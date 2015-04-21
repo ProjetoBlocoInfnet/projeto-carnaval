@@ -3,7 +3,7 @@ package controle;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnsarioDAO {
+public class EnsaioDAO {
 	
 	public static final Map< String, Ensaio > ensaios = new HashMap<>();
 
