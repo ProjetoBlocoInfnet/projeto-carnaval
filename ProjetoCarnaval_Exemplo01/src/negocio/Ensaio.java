@@ -1,8 +1,6 @@
-package controle;
+package negocio;
 
 import java.util.Date;
-
-import negocio.EscolaSamba;
 
 public class Ensaio {
 
