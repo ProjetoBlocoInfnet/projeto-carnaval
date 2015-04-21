@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>ProjetoCarnaval_Exemplo01</display-name>
+  <display-name>Carnaval</display-name>
   <welcome-file-list>
     <welcome-file>ControlaAcesso</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -17,6 +17,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>CadastroEnsaio</display-name>
+    <servlet-name>CadastroEnsaio</servlet-name>
+    <servlet-class>controle.CadastroEnsaio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CadastroEnsaio</servlet-name>
+    <url-pattern>/CadastroEnsaio</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>ControlaEscolaSamba</display-name>
     <servlet-name>ControlaEscolaSamba</servlet-name>
     <servlet-class>controle.ControlaEscolaSamba</servlet-class>
@@ -24,5 +34,25 @@
   <servlet-mapping>
     <servlet-name>ControlaEscolaSamba</servlet-name>
     <url-pattern>/ControlaEscolaSamba</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CadastroIntegrante</display-name>
+    <servlet-name>CadastroIntegrante</servlet-name>
+    <servlet-class>controle.CadastroIntegrante</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CadastroIntegrante</servlet-name>
+    <url-pattern>/CadastroIntegrante</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CadastroAtividadeIntegrante</display-name>
+    <servlet-name>CadastroAtividadeIntegrante</servlet-name>
+    <servlet-class>controle.CadastroAtividadeIntegrante</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CadastroAtividadeIntegrante</servlet-name>
+    <url-pattern>/CadastroAtividadeIntegrante</url-pattern>
   </servlet-mapping>
 </web-app>

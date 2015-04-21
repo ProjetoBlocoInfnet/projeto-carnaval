@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de ensaio</title>
+
+
+
+</head>
+<body>
+	<h1>Cadastro de ensaio</h1>
+	<section>
+		<form action="CadastroEnsaio" method="post">
+			
+			<datalist id="escolas">
+				<option>Salgueiro</option>
+				<option>Viradouro</option>
+				<option>Mangueira</option>
+			</datalist>
+		
+			<fieldset>
+				<label for="escola">Escola</label> <input name="escola"
+					list="escolas" /> <label for="data">Data</label> <input
+					name="data" type="date" /> <input type="submit" />
+			</fieldset>
+		</form>
+	</section>
+	<footer>
+	<a href="principal.html">Voltar</a>
+	</footer>
+</body>
+</html>
