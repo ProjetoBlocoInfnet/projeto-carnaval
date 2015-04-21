@@ -2,6 +2,9 @@
 <%@ page import="controle.TorcedorDAO" %>
 <%@ page import="negocio.EscolaSamba" %>
 <%@ page import="negocio.Torcedor" %>
+<%@ page import="controle.EnsaioDAO" %>
+<%@ page import="negocio.Ensaio" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -64,11 +67,23 @@
 	</fieldset>
 	
 	<section>
+	<hr/>
 	<h2>torcedores:</h2>
 		<%
 			for ( Torcedor t : TorcedorDAO.obtemTodos() ) {
 				if ( t.getEscolaSamba() == escola ) {
 					out.println( "<li>" + t.getNome() + "</li>" );
+				}
+			}
+		%>
+	</section>
+	<section>
+	<hr/>
+	<h2>Ensaios:</h2>
+		<%
+			for ( Ensaio e : EnsaioDAO.obtemTodos() ) {
+				if ( e.escola == escola ) {
+					out.println( "<li>" + e.data + "</li>" );
 				}
 			}
 		%>
