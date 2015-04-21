@@ -7,7 +7,40 @@
 <title>Cadastro de Escolas de Samba</title>
 </head>
 <body>
+<%
+String oAcao = "salvar";
+String oSucesso = "";
+
+if(request.getAttribute("oAcao") != null)
+{
+	oAcao = request.getAttribute("oAcao").toString();
+}
+
+if(request.getAttribute("oSucesso") != null)
+{
+	oSucesso = request.getAttribute("oSucesso").toString();
+}
+%>
+
+	<script language="Javascript" type="text/javascript">
+		var sucesso = "<%=oSucesso%>";
+		if(sucesso != "")
+		{
+			if(sucesso == "s")
+			{
+				alert("cadastro efetuado com sucesso");
+			}
+			else
+			{
+				alert("houve uma falha no seu cadastro. tente novamente.");
+			}
+		}
+	</script>
+
+
 	<form action="ControlaEscolaSamba" method="get">
+	
+		<input type="hidden" name="acao" value="salvar">
 	
 		<h2>Cadastro de Escolas de Samba</h2>
 	

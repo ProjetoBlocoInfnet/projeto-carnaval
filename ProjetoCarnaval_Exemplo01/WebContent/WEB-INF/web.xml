@@ -55,4 +55,24 @@
     <servlet-name>CadastroAtividadeIntegrante</servlet-name>
     <url-pattern>/CadastroAtividadeIntegrante</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControlaJurado</display-name>
+    <servlet-name>ControlaJurado</servlet-name>
+    <servlet-class>controle.ControlaJurado</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlaJurado</servlet-name>
+    <url-pattern>/ControlaJurado</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControlaQuesito</display-name>
+    <servlet-name>ControlaQuesito</servlet-name>
+    <servlet-class>controle.ControlaQuesito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlaQuesito</servlet-name>
+    <url-pattern>/ControlaQuesito</url-pattern>
+  </servlet-mapping>
 </web-app>

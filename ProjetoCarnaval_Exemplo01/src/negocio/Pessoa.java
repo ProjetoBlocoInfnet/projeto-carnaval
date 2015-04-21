@@ -1,7 +1,12 @@
 package negocio;
 
 public abstract class Pessoa extends Usuario {
-
+	
+	public Pessoa(String login, String senha) {
+		super( login, senha );
+	}
+	
+	
 	public enum Sexos {
 		MASCULINO("Masculino", "M"), FEMININO("Feminino", "F");
 
@@ -31,11 +36,6 @@ public abstract class Pessoa extends Usuario {
 
 			return null;
 		}
-	}
-
-	
-	public Pessoa(String login, String senha) {
-		super( login, senha );
 	}
 	
 	private String nome;
