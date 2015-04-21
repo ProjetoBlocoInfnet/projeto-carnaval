@@ -39,7 +39,7 @@ public class CadastroEnsaio extends HttpServlet {
 		Date data = new Date();
 		Ensaio ensaio = new Ensaio( escola, data );
 		
-		String id = EnsarioDAO.grava( ensaio );
+		String id = EnsaioDAO.grava( ensaio );
 	}
 
 }

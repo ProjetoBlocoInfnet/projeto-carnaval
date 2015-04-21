@@ -28,6 +28,10 @@ public class EscolaSambaDAO {
 		
 		
 	}
+	
+	public static EscolaSamba obtemPorId(String id) {
+		return escolas.get( id );
+	}
 
 	public static EscolaSamba obtemPeloNome(String parameter) {
 
