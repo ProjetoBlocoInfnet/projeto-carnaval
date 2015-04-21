@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.AtividadeDAO;
+import dao.EscolaSambaDAO;
+import dao.IntegranteDAO;
 import negocio.Atividade;
 import negocio.EscolaSamba;
 import negocio.Integrante;

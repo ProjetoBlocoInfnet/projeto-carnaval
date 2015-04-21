@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.EnsaioDAO;
+import dao.EscolaSambaDAO;
 import negocio.Ensaio;
 import negocio.EscolaSamba;
+
 
 /**
  * Servlet implementation class CadastroEnsaio

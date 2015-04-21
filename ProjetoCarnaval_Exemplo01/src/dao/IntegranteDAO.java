@@ -1,4 +1,4 @@
-package controle;
+package dao;
 
 import java.util.HashMap;
 import java.util.Map;

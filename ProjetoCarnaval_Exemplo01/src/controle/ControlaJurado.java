@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.Jurado;
-import dao.JuradoDao;
+import dao.JuradoDAO;
 
 /**
  * Servlet implementation class ControlaJurado
@@ -24,7 +24,7 @@ public class ControlaJurado extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    private JuradoDao tabelaJurados = new JuradoDao();
+    private JuradoDAO tabelaJurados = new JuradoDAO();
 
     protected boolean mantemJurado(String acao, HttpServletRequest request)
     {

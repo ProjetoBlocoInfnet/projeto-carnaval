@@ -5,7 +5,7 @@ import java.util.Set;
 
 import negocio.Jurado;
 
-public class JuradoDao
+public class JuradoDAO
 {
 	private Set<Jurado> jurados = new HashSet<Jurado>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
 

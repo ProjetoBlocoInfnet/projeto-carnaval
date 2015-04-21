@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.Quesito;
-import dao.QuesitoDao;
+import dao.QuesitoDAO;
 
 /**
  * Servlet implementation class ControlaQuesito
@@ -24,7 +24,7 @@ public class ControlaQuesito extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    private QuesitoDao tabelaQuesitos = new QuesitoDao();
+    private QuesitoDAO tabelaQuesitos = new QuesitoDAO();
 
     protected boolean mantemQuesito(String acao, HttpServletRequest request)
     {
