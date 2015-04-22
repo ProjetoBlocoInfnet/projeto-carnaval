@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,20 +50,42 @@ public class JuradoDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Jurado jurado = new Jurado("","");
+		if(entidade instanceof Jurado)
+		{
+			jurado = (Jurado) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (JuradoDAO.jurados.replace(jurado.getId(), jurado) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Jurado jurado = new Jurado("","");
+		if(entidade instanceof Jurado)
+		{
+			jurado = (Jurado) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (JuradoDAO.jurados.remove(jurado.getId()) != null);
 	}
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entidade> jurados = new ArrayList<>();
+		for(int i=0; i< JuradoDAO.jurados.size(); i++ )
+		{
+			jurados.add(JuradoDAO.jurados.get(i));
+		}
+		return jurados;
 	}
 
 	@Override

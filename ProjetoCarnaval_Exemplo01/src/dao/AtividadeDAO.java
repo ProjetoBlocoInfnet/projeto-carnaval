@@ -39,14 +39,32 @@ public class AtividadeDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Atividade atividade = new Atividade();
+		if(entidade instanceof Atividade)
+		{
+			atividade = (Atividade) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+		
+		return (AtividadeDAO.atividades.replace(atividade.getId(), atividade) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Atividade atividade = new Atividade();
+		if(entidade instanceof Atividade)
+		{
+			atividade = (Atividade) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+		
+		return (AtividadeDAO.atividades.remove(atividade.getId()) != null);
 	}
 
 	@Override

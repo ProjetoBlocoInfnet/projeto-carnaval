@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,20 +47,42 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Torcedor torcedor = new Torcedor("","");
+		if(entidade instanceof Torcedor)
+		{
+			torcedor = (Torcedor) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (TorcedorDAO.torcedores.replace(torcedor.getId(), torcedor) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Torcedor torcedor = new Torcedor("","");
+		if(entidade instanceof Torcedor)
+		{
+			torcedor = (Torcedor) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (TorcedorDAO.torcedores.remove(torcedor.getId()) != null);
 	}
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entidade> torcedor = new ArrayList<>();
+		for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
+		{
+			torcedor.add(TorcedorDAO.torcedores.get(i));
+		}
+		return torcedor;
 	}
 
 	@Override

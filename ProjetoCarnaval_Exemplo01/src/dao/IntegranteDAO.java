@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,20 +38,42 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Integrante integrante = new Integrante("","");
+		if(entidade instanceof Integrante)
+		{
+			integrante = (Integrante) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (IntegranteDAO.integrantes.replace(integrante.getId(), integrante) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Integrante integrante = new Integrante("","");
+		if(entidade instanceof Integrante)
+		{
+			integrante = (Integrante) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (IntegranteDAO.integrantes.remove(integrante.getId()) != null);
 	}
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entidade> integrantes = new ArrayList<>();
+		for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
+		{
+			integrantes.add(IntegranteDAO.integrantes.get(i));
+		}
+		return integrantes;
 	}
 
 	@Override

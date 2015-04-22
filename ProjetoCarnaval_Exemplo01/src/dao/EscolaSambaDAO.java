@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,20 +71,42 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		EscolaSamba escolaSamba = new EscolaSamba("","");
+		if(entidade instanceof EscolaSamba)
+		{
+			escolaSamba = (EscolaSamba) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+		
+		return (EscolaSambaDAO.escolas.replace(escolaSamba.getId(), escolaSamba) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		EscolaSamba escolaSamba = new EscolaSamba("","");
+		if(entidade instanceof EscolaSamba)
+		{
+			escolaSamba = (EscolaSamba) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+		
+		return (EscolaSambaDAO.escolas.remove(escolaSamba.getId()) != null);
 	}
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entidade> escolasSamba = new ArrayList<>();
+		for(int i=0; i< EscolaSambaDAO.escolas.size(); i++ )
+		{
+			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
+		}
+		return escolasSamba;
 	}
 
 	@Override

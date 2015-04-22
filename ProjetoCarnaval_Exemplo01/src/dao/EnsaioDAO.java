@@ -50,14 +50,32 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Ensaio ensaio = new Ensaio();
+		if(entidade instanceof Ensaio)
+		{
+			ensaio = (Ensaio) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (EnsaioDAO.ensaios.replace(ensaio.getId(), ensaio) != null);
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
+		Ensaio ensaio = new Ensaio();
+		if(entidade instanceof Ensaio)
+		{
+			ensaio = (Ensaio) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		return (EnsaioDAO.ensaios.remove(ensaio.getId()) != null);
 	}
 
 	@Override
