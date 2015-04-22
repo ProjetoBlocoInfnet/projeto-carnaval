@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.IntegranteDAO;
 import negocio.Integrante;
 import negocio.Pessoa.Sexos;
 
@@ -39,7 +40,7 @@ public class CadastroIntegrante extends HttpServlet {
 		integrante.setCep( request.getParameter( "cep" ) );
 		integrante.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
 		
-		String id = IntegranteDAO.gravar( integrante );		
+		new IntegranteDAO().cadastrar( integrante );		
 	}
 
 }

@@ -2,9 +2,9 @@ package negocio;
 
 import enumerator.Acao;
 
-public class Atividade
+public class Atividade implements Entidade
 {	
-	private String id;
+	private Integer id;
 	private EscolaSamba escolaSamba;
 	private Acao acao;
 
@@ -48,10 +48,10 @@ public class Atividade
 	public void setAcao(Acao acao) {
 		this.acao = acao;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

@@ -1,16 +1,16 @@
 package negocio;
 
-public class Usuario {
+public class Usuario implements Entidade{
 
 	private String login;
 	private String senha;
-	private String id;
+	private Integer id;
 	
-	public void setId( String id ) {
-		this.id = id;
+	public void setId( Integer i ) {
+		this.id = i;
 	}
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	

@@ -1,8 +1,8 @@
-<%@ page import="controle.EscolaSambaDAO" %>
-<%@ page import="controle.TorcedorDAO" %>
+<%@ page import="dao.EscolaSambaDAO" %>
+<%@ page import="dao.TorcedorDAO" %>
 <%@ page import="negocio.EscolaSamba" %>
 <%@ page import="negocio.Torcedor" %>
-<%@ page import="controle.EnsaioDAO" %>
+<%@ page import="dao.EnsaioDAO" %>
 <%@ page import="negocio.Ensaio" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.EscolaSamba;
-import dao.EscolaSambaDao;
+import dao.EscolaSambaDAO;
 
 /**
  * Servlet implementation class ControlaEscolaSamba
@@ -24,7 +24,7 @@ public class ControlaEscolaSamba extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    private EscolaSambaDao tabelaEscolaSamba = new EscolaSambaDao();
+    private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
 
     protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
     {
@@ -33,7 +33,7 @@ public class ControlaEscolaSamba extends HttpServlet {
     	if("salvar".equals(acao))
     	{
     		EscolaSamba e = this.criarObjeto(request);
-    		return tabelaEscolaSamba.inserir(e);
+    		return tabelaEscolaSamba.cadastrar(e);
     	}
     	else if("consultar".equals(acao))
     	{

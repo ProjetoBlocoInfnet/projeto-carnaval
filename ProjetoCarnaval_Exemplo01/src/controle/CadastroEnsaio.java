@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.EnsaioDAO;
+import dao.EscolaSambaDAO;
 import negocio.Ensaio;
 import negocio.EscolaSamba;
+
 
 /**
  * Servlet implementation class CadastroEnsaio
@@ -36,11 +39,11 @@ public class CadastroEnsaio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EscolaSamba escola = EscolaSambaDAO.obtemPeloNome( request.getParameter( "escola" ));
+		EscolaSamba escola = new EscolaSambaDAO().obterPorNome( request.getParameter( "escola" ));
 		Date data = new Date();
 		Ensaio ensaio = new Ensaio( escola, data );
 		
-		String id = EnsaioDAO.grava( ensaio );
+		new EnsaioDAO().cadastrar( ensaio );
 	}
 
 }
