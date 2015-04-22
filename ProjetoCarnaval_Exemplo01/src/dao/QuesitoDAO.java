@@ -7,11 +7,11 @@ import negocio.Quesito;
 
 public class QuesitoDAO extends AbstractDAO
 {
-	private Set<Quesito> quesitos = new HashSet<Quesito>(); //TODO n„o estamos usando banco ainda. Por enquanto isso fica aqui.
+	private Set<Quesito> quesitos = new HashSet<Quesito>(); //TODO n√£o estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public boolean inserir(Quesito quesito)
 	{
-		return this.quesitos.add(quesito); // ADD retorna boolean ent„o satisfaz a checagem
+		return this.quesitos.add(quesito); // ADD retorna boolean ent√£o satisfaz a checagem
 	}
 
 	public boolean alterar(Quesito quesito)
