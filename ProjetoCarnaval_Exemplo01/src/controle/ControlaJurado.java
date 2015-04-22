@@ -33,7 +33,7 @@ public class ControlaJurado extends HttpServlet {
     	if("salvar".equals(acao))
     	{
     		Jurado j = this.criarObjeto(request);
-    		return tabelaJurados.inserir(j);
+    		return tabelaJurados.cadastrar(j);
     	}
     	else if("consultar".equals(acao))
     	{

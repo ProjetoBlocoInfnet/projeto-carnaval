@@ -40,7 +40,7 @@ public class CadastroIntegrante extends HttpServlet {
 		integrante.setCep( request.getParameter( "cep" ) );
 		integrante.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
 		
-		String id = IntegranteDAO.gravar( integrante );		
+		new IntegranteDAO().cadastrar( integrante );		
 	}
 
 }

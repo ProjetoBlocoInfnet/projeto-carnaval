@@ -1,34 +1,83 @@
 package dao;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Torcedor;
 
-public class TorcedorDAO extends AbstractDAO
+public class TorcedorDAO extends AbstractDAO implements DAO
 {
-	public static final Map<String, Torcedor> torcedores = new HashMap<>();
+	private static Map<Integer, Torcedor> torcedores = new HashMap<>();
 	
-	static {
+	{
 		Torcedor joaozinho = new Torcedor("joaozinho", "senha123");
-		EscolaSamba escola = EscolaSambaDAO.obtemPorId("0");
+		EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId(0);
 		joaozinho.setNome("Joaozinho das couves");
 		joaozinho.setEscolaSamba( escola );
-		TorcedorDAO.gravar(joaozinho);
+		cadastrar(joaozinho);
 	}
 
-	public static Collection<Torcedor> obtemTodos() {
-		return torcedores.values();
+	@Override
+	public boolean cadastrar(Entidade entidade) {
+		Torcedor torcedor = new Torcedor("","");
+		if(entidade instanceof Torcedor)
+		{
+			torcedor = (Torcedor) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		torcedor.setId( TorcedorDAO.torcedores.size() );
+
+		if(TorcedorDAO.torcedores.put( torcedor.getId(), torcedor ) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	private static String gravar(Torcedor torcedor) {
-		torcedor.setId("" + torcedores.size());
-
-		torcedores.put(torcedor.getId(), torcedor);
-
-		return torcedor.getId();
-
+	@Override
+	public boolean alterar(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+	@Override
+	public boolean excluir(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Entidade> obterTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entidade obterPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		return TorcedorDAO.torcedores.get(numero);
+	}
+	
+	public Torcedor obterPorNome(String nome)
+	{
+		for(int i=0; i<TorcedorDAO.torcedores.size(); i++)
+		{
+			if(TorcedorDAO.torcedores.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
+			{
+				return TorcedorDAO.torcedores.get(i);
+			}
+		}
+		return null;
+	}
+
 }

@@ -1,33 +1,73 @@
 package dao;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import negocio.Entidade;
 import negocio.Quesito;
 
-public class QuesitoDAO extends AbstractDAO
+public class QuesitoDAO extends AbstractDAO implements DAO
 {
-	private Set<Quesito> quesitos = new HashSet<Quesito>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
-
-	public boolean inserir(Quesito quesito)
-	{
-		return this.quesitos.add(quesito); // ADD retorna boolean então satisfaz a checagem
-	}
-
-	public boolean alterar(Quesito quesito)
-	{
-		return true;
-	}
+	private static Map<Integer, Quesito> quesitos = new HashMap<>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public Quesito obterPorNome(String nome)
 	{
-		for(Quesito q : quesitos)
+		for(int i=0; i<QuesitoDAO.quesitos.size(); i++)
 		{
-			if(q.getNome().matches("(.*)" + nome + "(.*)"))
+			if(QuesitoDAO.quesitos.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
 			{
-				return q;
+				return QuesitoDAO.quesitos.get(i);
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean cadastrar(Entidade entidade) {
+		Quesito quesito = new Quesito();
+		if(entidade instanceof Quesito)
+		{
+			quesito = (Quesito) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		quesito.setId( QuesitoDAO.quesitos.size() );
+
+		if(QuesitoDAO.quesitos.put( quesito.getId(), quesito ) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean alterar(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean excluir(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Entidade> obterTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entidade obterPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		return QuesitoDAO.quesitos.get(numero);
 	}
 }

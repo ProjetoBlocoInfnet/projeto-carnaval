@@ -39,15 +39,15 @@ public class CadastroAtividadeIntegrante extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integrante integrante = IntegranteDAO.obtemPorId( request.getParameter("idIntegrante") );
-		EscolaSamba escola = EscolaSambaDAO.obtemPeloNome( request.getParameter( "escola" ) );
-		
+		Integrante integrante = (Integrante) new IntegranteDAO().obterPorId( Integer.valueOf(request.getParameter("idIntegrante")) );
+		EscolaSamba escola = new EscolaSambaDAO().obterPorNome( request.getParameter( "escola" ) );
+
 		Atividade atividade = new Atividade();
 		atividade.setAcao( Acao.from( request.getParameter( "atividade" )) );
 		atividade.setEscolaSamba( escola );
 		integrante.atividades.add( atividade );
-		
-		String id = AtividadeDAO.gravar( atividade );
+
+		new AtividadeDAO().cadastrar( atividade );
 		
 	}
 

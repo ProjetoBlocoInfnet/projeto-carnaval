@@ -33,7 +33,7 @@ public class ControlaEscolaSamba extends HttpServlet {
     	if("salvar".equals(acao))
     	{
     		EscolaSamba e = this.criarObjeto(request);
-    		return tabelaEscolaSamba.inserir(e);
+    		return tabelaEscolaSamba.cadastrar(e);
     	}
     	else if("consultar".equals(acao))
     	{

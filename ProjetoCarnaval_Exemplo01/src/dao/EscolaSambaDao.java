@@ -1,72 +1,95 @@
 package dao;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import negocio.Ensaio;
+import negocio.Entidade;
 import negocio.EscolaSamba;
 
-public class EscolaSambaDAO extends AbstractDAO
+public class EscolaSambaDAO extends AbstractDAO implements DAO
 {
-	private Set<EscolaSamba> escolasSamba = new HashSet<EscolaSamba>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
-
-	public static final Map< String, EscolaSamba > escolas = new HashMap<>();
+	private static Map< Integer, EscolaSamba > escolas = new HashMap<>();
 	
-	//só pra debug
-	static {
-		EscolaSamba salgueiro = new EscolaSamba( "salgueiro", "123" );
-		EscolaSamba viradouro = new EscolaSamba( "viradouro", "123" );
-		EscolaSamba mangueira = new EscolaSamba( "mangueira", "123" );
+	//Dados de teste. As variáveis estão privadas então não temos risco de acesso externo.
+	private EscolaSamba salgueiro;
+	private EscolaSamba viradouro;
+	private EscolaSamba mangueira;
+	{
+		this.salgueiro = new EscolaSamba( "salgueiro", "123" );
+		this.viradouro = new EscolaSamba( "viradouro", "123" );
+		this.mangueira = new EscolaSamba( "mangueira", "123" );
 		
-		salgueiro.setNome( "Salgueiro" );
-		viradouro.setNome( "Viradouro" );
-		mangueira.setNome( "Mangueira" );
-		salgueiro.setId( "0" );
-		viradouro.setId( "1" );
-		mangueira.setId( "2" );
+		this.salgueiro.setNome( "Salgueiro" );
+		this.viradouro.setNome( "Viradouro" );
+		this.mangueira.setNome( "Mangueira" );
+		this.salgueiro.setId( 0 );
+		this.viradouro.setId( 1 );
+		this.mangueira.setId( 2 );
 		
-		escolas.put( salgueiro.getId(),  salgueiro);
-		escolas.put( viradouro.getId(),  viradouro);
-		escolas.put( mangueira.getId(),  mangueira);
-		
-		
+		EscolaSambaDAO.escolas.put( this.salgueiro.getId(),  this.salgueiro);
+		EscolaSambaDAO.escolas.put( this.viradouro.getId(),  this.viradouro);
+		EscolaSambaDAO.escolas.put( this.mangueira.getId(),  this.mangueira);
 	}
 	
-	public static EscolaSamba obtemPorId(String id) {
-		return escolas.get( id );
-	}
-
-	public static EscolaSamba obtemPeloNome(String parameter) {
-
-		for( EscolaSamba es : escolas.values() ) {
-			if ( es.getNome().equalsIgnoreCase( parameter ) ) {
-				return es;
-			}
-		}
-		
-		return null;
-	}
-
-	public boolean inserir(EscolaSamba escolaSamba)
-	{
-		return this.escolasSamba.add(escolaSamba); // ADD retorna boolean então satisfaz a checagem
-	}
-
-	public boolean alterar(EscolaSamba quesito)
-	{
-		return true;
-	}
-
 	public EscolaSamba obterPorNome(String nome)
 	{
-		for(EscolaSamba e : escolasSamba)
+		for(int i=0; i< EscolaSambaDAO.escolas.size(); i++)
 		{
-			if(e.getNome().matches("(.*)" + nome + "(.*)"))
+			if(EscolaSambaDAO.escolas.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
 			{
-				return e;
+				return EscolaSambaDAO.escolas.get(i);
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean cadastrar(Entidade entidade) {
+		EscolaSamba escolaSamba = new EscolaSamba("","");
+		if(entidade instanceof EscolaSamba)
+		{
+			escolaSamba = (EscolaSamba) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		escolaSamba.setId( EscolaSambaDAO.escolas.size() );
+
+		if(EscolaSambaDAO.escolas.put( escolaSamba.getId(), escolaSamba ) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean alterar(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean excluir(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Entidade> obterTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entidade obterPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		return escolas.get( numero );
 	}
 }

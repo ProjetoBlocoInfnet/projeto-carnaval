@@ -1,26 +1,69 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import negocio.Atividade;
+import negocio.Entidade;
 
-public class AtividadeDAO extends AbstractDAO
+public class AtividadeDAO extends AbstractDAO implements DAO
 {
-	public static final Map< String, Atividade> atividades = new HashMap<>();
+	private static Map< Integer, Atividade> atividades = new HashMap<>();
 	
-	public static String gravar(Atividade atividade)
+	@Override
+	public boolean cadastrar(Entidade entidade)
 	{
-		atividade.setId( "" + atividades.size() );
-		
-		atividades.put( atividade.getId(), atividade );
-		
-		return atividade.getId();
+		Atividade atividade = new Atividade();
+		if(entidade instanceof Atividade)
+		{
+			atividade = (Atividade) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		atividade.setId( AtividadeDAO.atividades.size() );
+
+		if(AtividadeDAO.atividades.put( atividade.getId(), atividade ) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	public static Atividade obtemPorId(String id)
-	{
-		return atividades.get( id );
+	@Override
+	public boolean alterar(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean excluir(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Entidade> obterTodos() {
+		// TODO Auto-generated method stub
+		List<Entidade> atividades = new ArrayList<>();
+		for(int i=0; i< AtividadeDAO.atividades.size(); i++ )
+		{
+			atividades.add(AtividadeDAO.atividades.get(i));
+		}
+		return atividades;
+	}
+
+	@Override
+	public Entidade obterPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		return AtividadeDAO.atividades.get( numero );
 	}
 
 }

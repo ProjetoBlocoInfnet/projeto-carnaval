@@ -33,7 +33,7 @@ public class ControlaQuesito extends HttpServlet {
     	if("salvar".equals(acao))
     	{
     		Quesito q = this.criarObjeto(request);
-    		return tabelaQuesitos.inserir(q);
+    		return tabelaQuesitos.cadastrar(q);
     	}
     	else if("consultar".equals(acao))
     	{

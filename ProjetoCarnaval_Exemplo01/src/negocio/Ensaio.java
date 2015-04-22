@@ -2,23 +2,43 @@ package negocio;
 
 import java.util.Date;
 
-public class Ensaio implements Entidade{
+public class Ensaio implements Entidade
+{
+	private Integer id;
+	private EscolaSamba escola;
+	private Date data;
 
-	public final EscolaSamba escola;
-	public final Date data;
-	
-	private String id;
-	
-	public String getId() {
-		return id;
-	}
-	
-	public void setId( String id ) {
-		this.id = id;
+	public Ensaio()
+	{
+		
 	}
 	
 	public Ensaio(EscolaSamba escola, Date data) {
 		this.escola = escola;
+		this.data = data;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId( Integer id ) {
+		this.id = id;
+	}
+
+	public EscolaSamba getEscola() {
+		return escola;
+	}
+
+	public void setEscola(EscolaSamba escola) {
+		this.escola = escola;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
 		this.data = data;
 	}
 }

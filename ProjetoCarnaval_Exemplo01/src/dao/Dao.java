@@ -6,11 +6,11 @@ import negocio.Entidade;
 
 public interface DAO
 {
-	Integer cadastrar(Entidade entidade);
+	boolean cadastrar(Entidade entidade);
 	
-	Integer alterar(Entidade entidade);
+	boolean alterar(Entidade entidade);
 	
-	Integer excluir(Entidade entidade);
+	boolean excluir(Entidade entidade);
 	
 	List<Entidade> obterTodos();
 	

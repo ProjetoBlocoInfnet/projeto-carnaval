@@ -1,33 +1,73 @@
 package dao;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import negocio.Entidade;
 import negocio.Jurado;
 
-public class JuradoDAO extends AbstractDAO
+public class JuradoDAO extends AbstractDAO implements DAO
 {
-	private Set<Jurado> jurados = new HashSet<Jurado>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
-
-	public boolean inserir(Jurado jurado)
-	{
-		return this.jurados.add(jurado); // ADD retorna boolean então satisfaz a checagem
-	}
-
-	public boolean alterar(Jurado quesito)
-	{
-		return true;
-	}
+	private static Map<Integer, Jurado> jurados = new HashMap<>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public Jurado obterPorNome(String nome)
 	{
-		for(Jurado j : jurados)
+		for(int i=0; i<JuradoDAO.jurados.size(); i++)
 		{
-			if(j.getNome().matches("(.*)" + nome + "(.*)"))
+			if(JuradoDAO.jurados.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
 			{
-				return j;
+				return JuradoDAO.jurados.get(i);
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean cadastrar(Entidade entidade) {
+		Jurado jurado = new Jurado("","");
+		if(entidade instanceof Jurado)
+		{
+			jurado = (Jurado) entidade;	
+		}
+		else
+		{
+			return false;
+		}
+
+		jurado.setId( JuradoDAO.jurados.size() );
+
+		if(JuradoDAO.jurados.put( jurado.getId(), jurado ) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean alterar(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean excluir(Entidade entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Entidade> obterTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entidade obterPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		return JuradoDAO.jurados.get(numero);
 	}
 }

@@ -39,11 +39,11 @@ public class CadastroEnsaio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EscolaSamba escola = EscolaSambaDAO.obtemPeloNome( request.getParameter( "escola" ));
+		EscolaSamba escola = new EscolaSambaDAO().obterPorNome( request.getParameter( "escola" ));
 		Date data = new Date();
 		Ensaio ensaio = new Ensaio( escola, data );
 		
-		String id = EnsaioDAO.grava( ensaio );
+		new EnsaioDAO().cadastrar( ensaio );
 	}
 
 }
