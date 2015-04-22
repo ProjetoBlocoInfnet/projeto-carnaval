@@ -9,11 +9,11 @@ import negocio.EscolaSamba;
 
 public class EscolaSambaDAO extends AbstractDAO
 {
-	private Set<EscolaSamba> escolasSamba = new HashSet<EscolaSamba>(); //TODO n„o estamos usando banco ainda. Por enquanto isso fica aqui.
+	private Set<EscolaSamba> escolasSamba = new HashSet<EscolaSamba>(); //TODO n√£o estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public static final Map< String, EscolaSamba > escolas = new HashMap<>();
 	
-	//sÛ pra debug
+	//s√≥ pra debug
 	static {
 		EscolaSamba salgueiro = new EscolaSamba( "salgueiro", "123" );
 		EscolaSamba viradouro = new EscolaSamba( "viradouro", "123" );
@@ -50,7 +50,7 @@ public class EscolaSambaDAO extends AbstractDAO
 
 	public boolean inserir(EscolaSamba escolaSamba)
 	{
-		return this.escolasSamba.add(escolaSamba); // ADD retorna boolean ent„o satisfaz a checagem
+		return this.escolasSamba.add(escolaSamba); // ADD retorna boolean ent√£o satisfaz a checagem
 	}
 
 	public boolean alterar(EscolaSamba quesito)
