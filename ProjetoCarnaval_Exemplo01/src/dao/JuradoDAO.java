@@ -7,11 +7,11 @@ import negocio.Jurado;
 
 public class JuradoDAO extends AbstractDAO
 {
-	private Set<Jurado> jurados = new HashSet<Jurado>(); //TODO n„o estamos usando banco ainda. Por enquanto isso fica aqui.
+	private Set<Jurado> jurados = new HashSet<Jurado>(); //TODO n√£o estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public boolean inserir(Jurado jurado)
 	{
-		return this.jurados.add(jurado); // ADD retorna boolean ent„o satisfaz a checagem
+		return this.jurados.add(jurado); // ADD retorna boolean ent√£o satisfaz a checagem
 	}
 
 	public boolean alterar(Jurado quesito)
