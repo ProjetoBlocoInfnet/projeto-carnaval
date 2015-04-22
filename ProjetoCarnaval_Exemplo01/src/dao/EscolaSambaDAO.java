@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,5 +114,15 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 	public Entidade obterPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		return escolas.get( numero );
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> escolasSamba = new ArrayList<>();
+		for(int i=0; i< EscolaSambaDAO.escolas.size(); i++ )
+		{
+			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
+		}
+		return escolasSamba;
 	}
 }

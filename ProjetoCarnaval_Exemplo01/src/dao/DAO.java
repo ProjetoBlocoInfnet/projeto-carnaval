@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Collection;
 import java.util.List;
 
 import negocio.Entidade;
@@ -14,5 +15,7 @@ public interface DAO
 	
 	List<Entidade> obterTodos();
 	
+	Collection<Entidade> obterTodosCollection();
+
 	Entidade obterPorId(Integer numero);
 }

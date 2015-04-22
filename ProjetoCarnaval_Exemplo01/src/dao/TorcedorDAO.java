@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +102,16 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> torcedor = new ArrayList<>();
+		for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
+		{
+			torcedor.add(TorcedorDAO.torcedores.get(i));
+		}
+		return torcedor;
 	}
 
 }

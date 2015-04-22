@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,6 @@ public class AtividadeDAO extends AbstractDAO implements DAO
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
 		List<Entidade> atividades = new ArrayList<>();
 		for(int i=0; i< AtividadeDAO.atividades.size(); i++ )
 		{
@@ -82,6 +82,16 @@ public class AtividadeDAO extends AbstractDAO implements DAO
 	public Entidade obterPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		return AtividadeDAO.atividades.get( numero );
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> atividades = new ArrayList<>();
+		for(int i=0; i< AtividadeDAO.atividades.size(); i++ )
+		{
+			atividades.add(AtividadeDAO.atividades.get(i));
+		}
+		return atividades;
 	}
 
 }

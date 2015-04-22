@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,5 +81,15 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 	public Entidade obterPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		return IntegranteDAO.integrantes.get( numero );
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> integrantes = new ArrayList<>();
+		for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
+		{
+			integrantes.add(IntegranteDAO.integrantes.get(i));
+		}
+		return integrantes;
 	}
 }

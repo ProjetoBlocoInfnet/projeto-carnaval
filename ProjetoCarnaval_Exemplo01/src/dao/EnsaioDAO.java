@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +91,16 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		// TODO Auto-generated method stub
 		return EnsaioDAO.ensaios.get(numero);
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> ensaios = new ArrayList<>();
+		for(int i=0; i< EnsaioDAO.ensaios.size(); i++ )
+		{
+			ensaios.add(EnsaioDAO.ensaios.get(i));
+		}
+		return ensaios;
 	}
 }

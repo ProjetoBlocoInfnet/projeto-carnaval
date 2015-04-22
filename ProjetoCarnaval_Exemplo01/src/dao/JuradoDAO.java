@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,5 +93,15 @@ public class JuradoDAO extends AbstractDAO implements DAO
 	public Entidade obterPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		return JuradoDAO.jurados.get(numero);
+	}
+
+	@Override
+	public Collection<Entidade> obterTodosCollection() {
+		List<Entidade> jurados = new ArrayList<>();
+		for(int i=0; i< JuradoDAO.jurados.size(); i++ )
+		{
+			jurados.add(JuradoDAO.jurados.get(i));
+		}
+		return jurados;
 	}
 }

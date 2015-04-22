@@ -1,7 +1,8 @@
-<%@ page import="controle.EscolaSambaDAO" %>
-<%@ page import="controle.TorcedorDAO" %>
+<%@ page import="dao.EscolaSambaDAO" %>
+<%@ page import="dao.TorcedorDAO" %>
 <%@ page import="negocio.EscolaSamba" %>
 <%@ page import="negocio.Torcedor" %>
+<%@ page import="negocio.Entidade" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	EscolaSamba escola = EscolaSambaDAO.obtemPorId( "0" );
+	EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
 %>
 <title>Escola de samba:<%=escola.getNome()%> </title>
 </head>
@@ -66,7 +67,8 @@
 	<section>
 	<h2>torcedores:</h2>
 		<%
-			for ( Torcedor t : TorcedorDAO.obtemTodos() ) {
+			for ( Entidade e : new TorcedorDAO().obterTodosCollection() ) {
+				Torcedor t = (Torcedor) e;
 				if ( t.getEscolaSamba() == escola ) {
 					out.println( "<li>" + t.getNome() + "</li>" );
 				}
