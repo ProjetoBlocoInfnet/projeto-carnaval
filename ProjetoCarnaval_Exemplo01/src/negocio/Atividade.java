@@ -2,7 +2,7 @@ package negocio;
 
 import enumerator.Acao;
 
-public class Atividade
+public class Atividade implements Entidade
 {	
 	private String id;
 	private EscolaSamba escolaSamba;

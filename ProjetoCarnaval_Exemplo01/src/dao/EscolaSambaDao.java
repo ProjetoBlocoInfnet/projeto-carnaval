@@ -7,7 +7,7 @@ import java.util.Set;
 
 import negocio.EscolaSamba;
 
-public class EscolaSambaDAO
+public class EscolaSambaDAO extends AbstractDAO
 {
 	private Set<EscolaSamba> escolasSamba = new HashSet<EscolaSamba>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
 

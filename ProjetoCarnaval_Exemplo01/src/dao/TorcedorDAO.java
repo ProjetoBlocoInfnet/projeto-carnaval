@@ -7,8 +7,8 @@ import java.util.Map;
 import negocio.EscolaSamba;
 import negocio.Torcedor;
 
-public class TorcedorDAO {
-
+public class TorcedorDAO extends AbstractDAO
+{
 	public static final Map<String, Torcedor> torcedores = new HashMap<>();
 	
 	static {

@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.Date;
 
-public class Ensaio {
+public class Ensaio implements Entidade{
 
 	public final EscolaSamba escola;
 	public final Date data;

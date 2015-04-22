@@ -1,6 +1,6 @@
 package negocio;
 
-public class Usuario {
+public class Usuario implements Entidade{
 
 	private String login;
 	private String senha;

@@ -1,6 +1,6 @@
 package negocio;
 
-public class Quesito
+public class Quesito implements Entidade
 {
 	private String nome;
 	private String descricao;

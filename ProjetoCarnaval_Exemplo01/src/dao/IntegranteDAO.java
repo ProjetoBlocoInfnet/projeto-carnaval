@@ -5,8 +5,8 @@ import java.util.Map;
 
 import negocio.Integrante;
 
-public class IntegranteDAO {
-
+public class IntegranteDAO extends AbstractDAO
+{
 	public static final Map< String, Integrante> integrantes = new HashMap<>();
 	
 	public static String gravar(Integrante integrante) {

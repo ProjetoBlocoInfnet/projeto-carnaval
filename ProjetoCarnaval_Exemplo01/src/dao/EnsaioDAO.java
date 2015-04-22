@@ -8,8 +8,8 @@ import java.util.Map;
 import negocio.Ensaio;
 import negocio.EscolaSamba;
 
-public class EnsaioDAO {
-	
+public class EnsaioDAO extends AbstractDAO
+{
 	public static final Map< String, Ensaio > ensaios = new HashMap<>();
 
 	static {
