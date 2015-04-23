@@ -68,9 +68,16 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
+		{
+			request.setAttribute("oSucesso","s");
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+		}
+		request.setAttribute("oAcao",request.getParameter("acao").toString());
+		request.getRequestDispatcher("CadastroQuesito.jsp").forward(request, response);
 	}
 
 	/**
