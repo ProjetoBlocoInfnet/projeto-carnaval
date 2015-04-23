@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Integrante</title>
+</head>
+<body>
+	<h1>Cadastro de Integrante</h1>
+	<section>
+		<form action="CadastroIntegrante" method="post">			
+			<h1>Escola</h1>
+			<fieldset>
+				<legend>Dados cadastrais</legend>		
+				<datalist id="sexos">
+					<option>
+					Masculino
+					</option>
+					<option>
+					Feminino
+					</option>
+				</datalist>
+
+				<datalist id="acao-integrante">
+					<option>
+					Carpinteiro				
+					</option>
+					<option>
+					Ala
+					</option>
+				</datalist>
+				
+					<ul>
+					
+						<li>
+					<label for="login">Login:</label>
+					<input name="login"/>
+						</li>
+						<li>
+					<label for="senha">Senha:</label>
+					<input name="senha"/>
+						</li>
+						<li>
+					<label for="nome">Nome:</label>
+					<input name="nome"/>
+						</li>
+						<li>
+					<label for="endereco">Endereço:</label>
+					<input name="endereco"/>
+						</li>
+						<li>
+					<label for="cpf">CPF:</label>
+					<input name="cpf"/>
+						</li>
+						<li>
+					<label for="cep">CEP:</label>
+					<input name="cep"/>
+						</li>
+						<li>
+					<label for="telefone">Telefone:</label>
+					<input name="telefone"/>
+						</li>
+						<li>
+					<label for="email">Email:</label>
+					<input name="email"/>
+						</li>
+						<li>
+					<label for="sexo">Sexo:</label>
+					<input name="sexo"/>
+						</li>
+
+					</ul>
+			</fieldset>
+			<input type="submit" />	
+		</form>
+	</section>
+	<footer>
+	<a href="principal.html">Voltar</a>
+	</footer>
+</body>
+</html>
