@@ -58,7 +58,11 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (TorcedorDAO.torcedores.replace(torcedor.getId(), torcedor) != null);
+		if (TorcedorDAO.torcedores.containsKey(torcedor.getId())) {
+			return TorcedorDAO.torcedores.put(torcedor.getId(), torcedor) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

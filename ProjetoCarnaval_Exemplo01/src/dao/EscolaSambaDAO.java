@@ -13,7 +13,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 {
 	private static Map< Integer, EscolaSamba > escolas = new HashMap<>();
 	
-	//Dados de teste. As variáveis estão privadas então não temos risco de acesso externo.
+	//Dados de teste. As variï¿½veis estï¿½o privadas entï¿½o nï¿½o temos risco de acesso externo.
 	private EscolaSamba salgueiro;
 	private EscolaSamba viradouro;
 	private EscolaSamba mangueira;
@@ -82,7 +82,11 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			return false;
 		}
 		
-		return (EscolaSambaDAO.escolas.replace(escolaSamba.getId(), escolaSamba) != null);
+		if (EscolaSambaDAO.escolas.containsKey(escolaSamba.getId())) {
+			return EscolaSambaDAO.escolas.put(escolaSamba.getId(), escolaSamba) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import negocio.Quesito;
 
 public class QuesitoDAO extends AbstractDAO implements DAO
 {
-	private static Map<Integer, Quesito> quesitos = new HashMap<>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
+	private static Map<Integer, Quesito> quesitos = new HashMap<>(); //TODO nï¿½o estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public Quesito obterPorNome(String nome)
 	{
@@ -61,7 +61,11 @@ public class QuesitoDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (QuesitoDAO.quesitos.replace(quesito.getId(), quesito) != null);
+		if (QuesitoDAO.quesitos.containsKey(quesito.getId())) {
+			return QuesitoDAO.quesitos.put(quesito.getId(), quesito) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

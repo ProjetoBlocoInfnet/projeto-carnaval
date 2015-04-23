@@ -15,7 +15,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 {
 	private static Map< Integer, Ensaio > ensaios = new HashMap<>();
 
-	//Dados de teste. As variáveis estão privadas então não temos risco de acesso externo.
+	//Dados de teste. As variï¿½veis estï¿½o privadas entï¿½o nï¿½o temos risco de acesso externo.
 	private EscolaSamba samba;
 	private Ensaio ensaio;
 	{
@@ -61,7 +61,11 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (EnsaioDAO.ensaios.replace(ensaio.getId(), ensaio) != null);
+		if (EnsaioDAO.ensaios.containsKey(ensaio.getId())) {
+			return EnsaioDAO.ensaios.put(ensaio.getId(), ensaio) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

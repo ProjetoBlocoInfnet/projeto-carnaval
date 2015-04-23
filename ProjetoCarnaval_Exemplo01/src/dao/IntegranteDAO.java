@@ -49,7 +49,11 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (IntegranteDAO.integrantes.replace(integrante.getId(), integrante) != null);
+		if (IntegranteDAO.integrantes.containsKey(integrante.getId())) {
+			return IntegranteDAO.integrantes.put(integrante.getId(), integrante) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

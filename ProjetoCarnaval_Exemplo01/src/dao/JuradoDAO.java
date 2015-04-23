@@ -11,7 +11,7 @@ import negocio.Jurado;
 
 public class JuradoDAO extends AbstractDAO implements DAO
 {
-	private static Map<Integer, Jurado> jurados = new HashMap<>(); //TODO não estamos usando banco ainda. Por enquanto isso fica aqui.
+	private static Map<Integer, Jurado> jurados = new HashMap<>(); //TODO nï¿½o estamos usando banco ainda. Por enquanto isso fica aqui.
 
 	public Jurado obterPorNome(String nome)
 	{
@@ -61,7 +61,11 @@ public class JuradoDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (JuradoDAO.jurados.replace(jurado.getId(), jurado) != null);
+		if (JuradoDAO.jurados.containsKey(jurado.getId())) {
+			return JuradoDAO.jurados.put(jurado.getId(), jurado) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
