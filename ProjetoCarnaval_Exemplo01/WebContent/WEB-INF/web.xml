@@ -84,4 +84,14 @@
     <servlet-name>ControlaQuesito</servlet-name>
     <url-pattern>/ControlaQuesito</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControlaTorcedor</display-name>
+    <servlet-name>ControlaTorcedor</servlet-name>
+    <servlet-class>controle.ControlaTorcedor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlaTorcedor</servlet-name>
+    <url-pattern>/ControlaTorcedor</url-pattern>
+  </servlet-mapping>
 </web-app>

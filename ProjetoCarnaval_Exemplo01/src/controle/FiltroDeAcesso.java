@@ -37,8 +37,10 @@ public class FiltroDeAcesso implements Filter{
 				       		 
 	    Usuario usuario = getUsuario(req);
          
-        if(usuario == null && !resource.equals(loginURI)){
-        	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());        	      	
+	    if(usuario == null && "/CadastroTorcedor.jsp".equals(resource)){
+        	System.out.println("Possível torcedor acessando a URI "  + req.getRequestURI());
+        }else if(usuario == null && !resource.equals(loginURI)){
+        	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());      	
         	request.getRequestDispatcher("index.jsp").forward(request, response);
         }else if(usuario == null && resource.equals(loginURI)){
         	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());
