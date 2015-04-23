@@ -11,24 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import negocio.EscolaSamba;
 import dao.EscolaSambaDAO;
 
-/**
- * Servlet implementation class ControlaEscolaSamba
- */
+
 public class ControlaEscolaSamba extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public ControlaEscolaSamba() {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
     private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
 
     protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
     {
-		//TODO Emmanuel Aranha - Fazer as opções de salvar, alterar e excluir
+	
     	
     	if("salvar".equals(acao))
     	{
@@ -70,17 +68,9 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO Emmanuel Aranha - Salva e continua na tela de manter
-		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
-		{
-			request.setAttribute("oSucesso","s");
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-		}
-		request.setAttribute("oAcao",request.getParameter("acao").toString());
-		request.getRequestDispatcher("CadastroQuesito.jsp").forward(request, response);
+		
+		
+		
 	}
 
 	/**

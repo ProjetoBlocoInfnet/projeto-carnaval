@@ -1,10 +1,13 @@
 package negocio;
 
+import enumerator.Perfil;
+
 public class Usuario implements Entidade{
 
 	private String login;
 	private String senha;
 	private Integer id;
+	private Perfil perfil;
 	
 	public void setId( Integer i ) {
 		this.id = i;
@@ -36,5 +39,13 @@ public class Usuario implements Entidade{
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 }

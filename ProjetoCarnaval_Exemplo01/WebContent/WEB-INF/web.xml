@@ -2,18 +2,27 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>Carnaval</display-name>
   <welcome-file-list>
-    <welcome-file>ControlaAcesso</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>ControlaAcesso</display-name>
-    <servlet-name>ControlaAcesso</servlet-name>
-    <servlet-class>controle.ControlaAcesso</servlet-class>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>controle.Login</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ControlaAcesso</servlet-name>
-    <url-pattern>/ControlaAcesso</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>controle.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
