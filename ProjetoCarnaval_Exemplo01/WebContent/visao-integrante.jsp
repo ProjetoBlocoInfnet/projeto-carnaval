@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	EscolaSamba escola = EscolaSambaDAO.obtemPorId( "0" );
+	EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
 %>
 <title>Escola de samba:<%=escola.getNome()%> </title>
 </head>
@@ -70,9 +70,9 @@
 	<hr/>
 	<h2>torcedores:</h2>
 		<%
-			for ( Torcedor t : TorcedorDAO.obtemTodos() ) {
-				if ( t.getEscolaSamba() == escola ) {
-					out.println( "<li>" + t.getNome() + "</li>" );
+			for ( negocio.Entidade t : new TorcedorDAO().obterTodos() ) {
+				if ( ( (Torcedor) t).getEscolaSamba() == escola ) {
+					out.println( "<li>" + ( (Torcedor)t).getNome() + "</li>" );
 				}
 			}
 		%>
@@ -81,9 +81,9 @@
 	<hr/>
 	<h2>Ensaios:</h2>
 		<%
-			for ( Ensaio e : EnsaioDAO.obtemTodos() ) {
-				if ( e.escola == escola ) {
-					out.println( "<li>" + e.data + "</li>" );
+			for ( negocio.Entidade e : new EnsaioDAO().obterTodos() ) {
+				if ( ((Ensaio)e).getEscola() == escola ) {
+					out.println( "<li>" + ((Ensaio)e).getData() + "</li>" );
 				}
 			}
 		%>
