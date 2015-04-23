@@ -16,7 +16,7 @@
 	%>
 	<form action="ControlaAcesso" method="get">
 		<input type="hidden" name="tela" value="main.jsp">
-		<input type="submit" value="Exibir Usuário Logado">
+		<input type="submit" value="Exibir UsuÃ¡rio Logado">
 		<hr>
 		<h3><%=user != null ? user.obterMensagemAcesso() : ""%></h3>	
 	</form>
