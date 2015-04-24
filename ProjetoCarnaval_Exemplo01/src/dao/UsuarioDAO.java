@@ -12,9 +12,9 @@ import negocio.Usuario;
 import enumerator.Acao;
 import enumerator.Perfil;
 
-public class UsuarioDAO {
+public class UsuarioDAO extends AbstractDAO{
 	
-	Set<Usuario> setUsuario = new HashSet<Usuario>();
+	private static Set<Usuario> setUsuario = new HashSet<Usuario>();
 	{
 		Administrador admin = new Administrador("admin","123456");
 		admin.setPerfil(Perfil.ADMINISTRADOR);
