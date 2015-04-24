@@ -30,7 +30,7 @@ public class UsuarioDAO {
 		escola.setNome("Escola de Samba exemplo");
 		new EscolaSambaDAO().cadastrar( escola );
 		
-		torcedor.setEscolaSamba( escola );
+		torcedor.setEscolaSamba( (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 ) );
 		
 
 		Integrante integrante = new Integrante("integrante","123456");
@@ -39,7 +39,7 @@ public class UsuarioDAO {
 		new IntegranteDAO().cadastrar( integrante );
 		
 		Atividade atividade = new Atividade();
-		atividade.setEscolaSamba( escola );
+		atividade.setEscolaSamba( (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 ) );
 		atividade.setAcao( Acao.carpinteiro );
 		integrante.atividades.add( atividade );
 		new AtividadeDAO().cadastrar( atividade );
