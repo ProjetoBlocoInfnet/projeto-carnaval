@@ -40,7 +40,8 @@ public class CadastroIntegrante extends HttpServlet {
 		integrante.setCep( request.getParameter( "cep" ) );
 		integrante.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
 		
-		new IntegranteDAO().cadastrar( integrante );		
+		new IntegranteDAO().cadastrar( integrante );
+		request.getRequestDispatcher("indexEscolaSamba.jsp").forward(request, response);
 	}
 
 }
