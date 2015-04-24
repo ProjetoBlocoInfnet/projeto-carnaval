@@ -77,7 +77,7 @@
 		%>
 		</ul>
 	</section>
-	
+	<hr />
 	<a href="#" onclick="window.history.back()">Voltar</a>
 </body>
 </html>
