@@ -31,8 +31,8 @@
 		  </div>
 	</form>	
 	<div class="alert alert-info" role="alert">
-	<strong>Usuário: </strong><%=request.getAttribute("pessoaLogado") %><br>
-	<strong>Perfil: </strong><%=request.getAttribute("pessoaPerfil") %><br>
+	<strong>Usuário: </strong><%=request.getAttribute("usuarioLogado") %><br>
+	<strong>Perfil: </strong><%=request.getAttribute("usuarioPerfil") %><br>
 	</div>
 	<hr/>
 	<br>

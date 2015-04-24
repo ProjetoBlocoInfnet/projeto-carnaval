@@ -33,13 +33,13 @@ public class Login extends HttpServlet {
 		
 		if (usuario == null){
 			System.out.println("usuário inexistente");
-			request.setAttribute("resultado", "Usuário inexistente");
+			request.setAttribute("resultado", "Usu�rio inexistente");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{				
 			session.setAttribute("usuario", usuario);
 			request.setAttribute("usuarioLogado", usuario.getLogin());
-			request.setAttribute("usuarioPerfil", usuario.getPerfil());
+			request.setAttribute("usuarioPerfil", usuario.getPerfil().nomeBonito);
 			
 			request.getRequestDispatcher( usuario.getPerfil().indexPage ).forward(request, response);
 		}
