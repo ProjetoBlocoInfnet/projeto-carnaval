@@ -12,7 +12,7 @@ import negocio.Usuario;
 import enumerator.Acao;
 import enumerator.Perfil;
 
-public class UsuarioDAO {
+public class UsuarioDAO extends AbstractDAO{
 	
 	private static Set<Usuario> setUsuario = new HashSet<Usuario>();
 	{
