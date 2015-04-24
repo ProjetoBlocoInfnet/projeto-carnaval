@@ -46,11 +46,6 @@ Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
 	</div>	
 	<hr/>
 	<br>
-	<ul class="nav nav-tabs">
-  		<li role="presentation"><a href="ControlaEscolaSamba">Minhas Escolas</a></li>
-  		<li role="presentation"><a href="ControlaQuesito">Ensaios</a></li>
-	</ul>
-	<br><br>
 	
 	<nav>
 	<ul class="nav nav-tabs">
