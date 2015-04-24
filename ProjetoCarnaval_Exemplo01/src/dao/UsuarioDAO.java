@@ -14,7 +14,7 @@ import enumerator.Perfil;
 
 public class UsuarioDAO {
 	
-	Set<Usuario> setUsuario = new HashSet<Usuario>();
+	private static Set<Usuario> setUsuario = new HashSet<Usuario>();
 	{
 		Administrador admin = new Administrador("admin","123456");
 		admin.setPerfil(Perfil.ADMINISTRADOR);
