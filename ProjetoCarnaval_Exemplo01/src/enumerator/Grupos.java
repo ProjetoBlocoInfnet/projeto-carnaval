@@ -14,4 +14,15 @@ public enum Grupos
 	Grupos( String nomeBonito ) {
 		this.nomeBonito = nomeBonito;
 	}
+	
+	public static Grupos from(String valor) {
+
+		for (Grupos g : Grupos.values()) {
+			if (g.nomeBonito.equalsIgnoreCase(valor)) {
+				return g;
+			}
+		}
+
+		return null;
+	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.Jurado;
+import negocio.Pessoa.Sexos;
 import dao.JuradoDAO;
 
 /**
@@ -56,7 +57,7 @@ public class ControlaJurado extends HttpServlet {
     	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
-    	//j.setSexo(sexo);
+    	j.setSexo(Sexos.from(request.getParameter("sexo")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
@@ -69,7 +70,6 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		if(this.mantemJurado(request.getParameter("acao").toString(), request))
 		{
 			request.setAttribute("oSucesso","s");
@@ -79,14 +79,23 @@ public class ControlaJurado extends HttpServlet {
 			request.setAttribute("oSucesso","n");
 		}
 		request.setAttribute("oAcao",request.getParameter("acao").toString());
-		request.getRequestDispatcher("CadastroQuesito.jsp").forward(request, response);
+		request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		if(this.mantemJurado(request.getParameter("acao").toString(), request))
+		{
+			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+			request.setAttribute("oAcao",request.getParameter("acao").toString());
+			request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
+		}
 	}
 
 }
