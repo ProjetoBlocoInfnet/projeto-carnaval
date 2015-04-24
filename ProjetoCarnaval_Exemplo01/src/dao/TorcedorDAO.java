@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import negocio.Entidade;
-import negocio.EscolaSamba;
 import negocio.Torcedor;
 
 public class TorcedorDAO extends AbstractDAO implements DAO
@@ -36,6 +35,7 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 		torcedor.setId( TorcedorDAO.torcedores.size() );
 
+		//TODO Se estiverem tendo problemas com o cadastrar, coloquem isso aqui
 		TorcedorDAO.torcedores.put( torcedor.getId(), torcedor );
 		if(torcedor.getNome().equals(TorcedorDAO.torcedores.get(torcedor.getId()).getNome()))
 		{
@@ -89,7 +89,6 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		// TODO Auto-generated method stub
 		return TorcedorDAO.torcedores.get(numero);
 	}
 	
