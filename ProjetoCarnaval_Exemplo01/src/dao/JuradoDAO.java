@@ -13,6 +13,15 @@ public class JuradoDAO extends AbstractDAO implements DAO
 {
 	private static Map<Integer, Jurado> jurados = new HashMap<>(); //TODO nï¿½o estamos usando banco ainda. Por enquanto isso fica aqui.
 
+	{
+		Jurado j = new Jurado("","");
+		j.setNome("Ricardo");
+		JuradoDAO.jurados.put(0, j);
+		j = new Jurado("","");
+		j.setNome("Lúcio");
+		JuradoDAO.jurados.put(1, j);
+	}
+	
 	public Jurado obterPorNome(String nome)
 	{
 		for(int i=0; i<JuradoDAO.jurados.size(); i++)

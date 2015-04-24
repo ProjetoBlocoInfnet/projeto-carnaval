@@ -3,11 +3,16 @@ package dao;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import enumerator.Grupos;
 import negocio.Desfile;
 import negocio.Entidade;
+import negocio.EscolaSamba;
+import negocio.Jurado;
 
 public class DesfileDAO extends AbstractDAO implements DAO {
 
@@ -15,7 +20,31 @@ public class DesfileDAO extends AbstractDAO implements DAO {
 	
 	{
 		Desfile d = new Desfile();
+		d.setId(0);
+		d.setData(new java.sql.Date(15000));
+		Set<EscolaSamba> escolas = new HashSet<EscolaSamba>();
+		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(0));
+		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(1));
+		d.setEscolasSamba(escolas);
+		d.setGrupo(Grupos.GrupoEspecial);
+		Set<Jurado> jurados = new HashSet<Jurado>();
+		jurados.add((Jurado) new JuradoDAO().obterPorId(0));
+		jurados.add((Jurado) new JuradoDAO().obterPorId(1));
+		d.setJurados(jurados);
+		DesfileDAO.desfiles.put(0, d);
 		
+		d = new Desfile();
+		d.setId(0);
+		d.setData(new java.sql.Date(17000));
+		escolas = new HashSet<EscolaSamba>();
+		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(1));
+		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(2));
+		d.setEscolasSamba(escolas);
+		d.setGrupo(Grupos.GrupoD);
+		jurados = new HashSet<Jurado>();
+		jurados.add((Jurado) new JuradoDAO().obterPorId(1));
+		d.setJurados(jurados);
+		DesfileDAO.desfiles.put(1, d);
 	}
 	
 	@Override
