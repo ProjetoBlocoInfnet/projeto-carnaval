@@ -57,7 +57,7 @@ public class ControlaJurado extends HttpServlet {
     	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
-    	j.setSexo(Sexos.from(request.getParameter("sexo")));
+    	j.setSexo(Sexos.from(request.getParameter("sexos")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());

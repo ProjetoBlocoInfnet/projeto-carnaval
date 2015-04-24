@@ -57,7 +57,7 @@ public class ControlaEscolaSamba extends HttpServlet {
     	e.setEnderecoBarracao(request.getParameter("enderecoBarracao").toString());
     	e.setEnderecoQuadra(request.getParameter("enderecoQuadra").toString());
     	e.setFiliacao(request.getParameter("filiacao").toString());
-    	e.setGrupoAtual(Grupos.from(request.getParameter("grupo")));
+    	e.setGrupoAtual(Grupos.from(request.getParameter("grupos")));
     	e.setLema(request.getParameter("lema").toString());
     	e.setTelefone(request.getParameter("nome").toString());
     	return e;

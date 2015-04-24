@@ -7,7 +7,7 @@ public enum Grupos
 	GrupoB( "Grupo B"), 
 	GrupoC( "Grupo C"), 
 	GrupoD( "Grupo D"), 
-	GrupoAvaliacao( "Grupo AvaliaÃ§Ã£o" );
+	GrupoAvaliacao( "Grupo Avaliação" );
 	
 	public final String nomeBonito;
 	

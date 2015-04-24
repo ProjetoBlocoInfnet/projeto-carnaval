@@ -60,14 +60,16 @@ if(request.getAttribute("oSucesso") != null)
 		
 		<h3>Filiação</h3><input type="text" name="filiacao">
 
-		<h3>Grupo Atual</h3><select name="cbGrupoAtual">      
-	        <option value="GrupoEspecial">Grupo Especial</option>
-	        <option value="SerieA">Série A</option>
-	        <option value="GrupoB">Série B</option>
-	        <option value="GrupoC">Série C</option>
-	        <option value="GrupoD">Série D</option>
-	        <option value="GrupoAvaliacao">Grupo de Avaliação</option>      
-		</select>
+		<h3>Grupo Atual</h3>
+		<input name="grupos" list="grupos">
+ 		<datalist id="grupos">
+			<option value="Grupo Especial">
+			<option value="Série A">
+			<option value="Grupo B">
+			<option value="Grupo C">
+			<option value="Grupo D">
+			<option value="Grupo Avaliação">
+		</datalist>
 
 		<h3>Email</h3><input type="text" name="email">
 		
