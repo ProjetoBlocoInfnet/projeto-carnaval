@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import enumerator.Grupos;
 import negocio.Entidade;
 import negocio.EscolaSamba;
 
@@ -28,6 +29,8 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		this.salgueiro.setId( 0 );
 		this.viradouro.setId( 1 );
 		this.mangueira.setId( 2 );
+		
+		salgueiro.setGrupoAtual( Grupos.GrupoEspecial );
 		
 		EscolaSambaDAO.escolas.put( this.salgueiro.getId(),  this.salgueiro);
 		EscolaSambaDAO.escolas.put( this.viradouro.getId(),  this.viradouro);
