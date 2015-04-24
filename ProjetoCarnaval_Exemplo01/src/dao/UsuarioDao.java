@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import negocio.Administrador;
+import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Torcedor;
@@ -34,7 +35,10 @@ public class UsuarioDao {
 		setUsuario.add(integrante);
 		setUsuario.add(torcedor);
 		setUsuario.add(escola);
-		
+		for(Entidade e : new TorcedorDAO().obterTodos()) //Rataria pra aceitar os usuários cadastrados no DAO Fake
+		{
+			setUsuario.add((Torcedor) e);
+		}
 	}
 	
 	public Usuario obterUsuario(String login, String senha){

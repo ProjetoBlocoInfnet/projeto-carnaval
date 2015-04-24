@@ -14,13 +14,13 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 {
 	private static Map<Integer, Torcedor> torcedores = new HashMap<>();
 	
-	{
+	/*{
 		Torcedor joaozinho = new Torcedor("joaozinho", "senha123");
 		EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId(0);
 		joaozinho.setNome("Joaozinho das couves");
 		joaozinho.setEscolaSamba( escola );
-		cadastrar(joaozinho);
-	}
+		TorcedorDAO.torcedores.put( 0, joaozinho );
+	}*/
 
 	@Override
 	public boolean cadastrar(Entidade entidade) {
@@ -36,7 +36,8 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 		torcedor.setId( TorcedorDAO.torcedores.size() );
 
-		if(TorcedorDAO.torcedores.put( torcedor.getId(), torcedor ) != null)
+		TorcedorDAO.torcedores.put( torcedor.getId(), torcedor );
+		if(torcedor.getNome().equals(TorcedorDAO.torcedores.get(torcedor.getId()).getNome()))
 		{
 			return true;
 		}

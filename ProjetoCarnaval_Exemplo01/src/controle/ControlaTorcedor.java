@@ -1,7 +1,6 @@
 package controle;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.EscolaSambaDAO;
 import dao.TorcedorDAO;
-import negocio.EscolaSamba;
+import enumerator.Perfil;
 import negocio.Torcedor;
 import negocio.Pessoa.Sexos;
 
@@ -59,7 +58,8 @@ public class ControlaTorcedor extends HttpServlet {
 		t.setCpf( request.getParameter( "cpf" ) );
 		t.setEndereco( request.getParameter( "endereco" ) );
 		t.setCep( request.getParameter( "cep" ) );
-		t.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
+		t.setSexo( Sexos.from( request.getParameter( "sexos" ) ) );
+		t.setPerfil(Perfil.TORCEDOR);
 		t.setEscolaSamba(new EscolaSambaDAO().obterPorNome(request.getParameter( "escolaSamba" )));
     	return t;
     }
@@ -78,13 +78,13 @@ public class ControlaTorcedor extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(this.mantemTorcedor(request.getParameter("acao").toString(), request))
 		{
-			request.setAttribute("oSucesso","s");
+			System.out.print(new TorcedorDAO().obterTodos().toString()); //Debug
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else
 		{
 			request.setAttribute("oSucesso","n");
+			request.getRequestDispatcher("CadastroTorcedor.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("indexTorcedor.jsp").forward(request, response);
 	}
-
 }
