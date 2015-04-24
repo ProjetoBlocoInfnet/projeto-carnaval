@@ -103,11 +103,35 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		if(request.getParameter("acao") != null){
+			
+			String action = request.getParameter("acao");
+			Integer id = Integer.valueOf(request.getParameter("idEscola")); 
+			
+			Entidade entidade = tabelaEscolaSamba.obterPorId(id);
+			
+			switch (action) {
+			case "alterar":
+				
+				break;
+			case "excluir":
+				if(tabelaEscolaSamba.excluir(entidade)){
+					request.setAttribute("resultado_ok", "Escola de Samba excluída com sucesso!");
+				}else{
+					request.setAttribute("resultado_error", "Erro ao excluir a Escola de Samba!");
+				}
+				break;
+			default:
+				break;
+			}
+			
+			
+		}
 		List<Entidade> listaEscolas = tabelaEscolaSamba.obterTodos();
 		request.setAttribute("listaEscola", listaEscolas);
-	
+		
 		request.getRequestDispatcher("/escolaSamba/index.jsp").forward(request, response);
+		
 		
 	}
 

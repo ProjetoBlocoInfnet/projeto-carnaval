@@ -100,7 +100,10 @@ if(request.getAttribute("listaEscola") != null){
 	  			<td><%=escola.getEmail() %></td>  	
 	  			<td><%=escola.getCnpj() %></td> 
 	  			<td><%= escola.getGrupoAtual()%></td> 		
-	  			<td><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> | <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+	  			<td>
+	  				<a href="ControlaEscolaSamba?idEscola=<%=escola.getId()%>&acao=alterar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> | 
+	  				<a href="ControlaEscolaSamba?idEscola=<%=escola.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+	  			</td>
 	  		</tr>
   		<% } %>
   		</tbody>
