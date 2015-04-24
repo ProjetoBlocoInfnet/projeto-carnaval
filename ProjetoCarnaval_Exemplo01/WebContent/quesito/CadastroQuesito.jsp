@@ -1,5 +1,4 @@
 <%@ page import="negocio.Usuario" %>
-<%@ page import="enumerator.Grupos" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,12 +20,16 @@
 	
 </head>
 <body>
-<% Usuario usuario = (Usuario) session.getAttribute("usuario"); %>
+
+<%
+Usuario usuario = (Usuario) session.getAttribute("usuario");
+%>
 
 <div class="container">
 	
 	<div>
 	<h1>Área do Admnistrador</h1>
+	
 	<form action="Logout" method="post">
 		  <div class="form-group">
 		      <button type="submit" class="btn btn-primary">Logout</button>
@@ -38,13 +41,38 @@
 	</div>	
 	<hr/>
 	<br>
-	<ul class="nav nav-tabs">
-  		<li role="presentation"><a href="ControlaEscolaSamba">Escola de Samba</a></li>
-  		<li role="presentation"><a href="ControlaQuesito">Quesitos</a></li>
-  		<li role="presentation"><a href="ControlaJurado">Jurados</a></li>
-	</ul>
+	<form action="ControlaEscolaSamba" method="get">
+		<input type="submit" class="btn btn-info" value="Voltar">
+	</form>
 	<br><br>
 	
+	<hr>
+	<form class="form-horizontal" action="ControlaQuesito" method="post" id="form-escolaSamba">
+		
+		<input type="hidden" name="action" value="cadastrar">
+		  
+		  <div class="form-group">
+		    <label for="nome" class="col-sm-2 control-label">Nome</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="descricao" class="col-sm-2 control-label">Descrição</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="descricao" class="form-control" id="descricao" placeholder="Descrição">
+		    </div>
+		  </div> 
+		  
+	  		
+	  	<br>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-primary">Cadastrar Quesito</button>
+		    </div>
+		  </div>
+	</form>
 	
 </div>
 

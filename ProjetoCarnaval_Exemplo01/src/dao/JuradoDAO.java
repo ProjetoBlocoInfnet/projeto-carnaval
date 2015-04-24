@@ -24,6 +24,20 @@ public class JuradoDAO extends AbstractDAO implements DAO
 		}
 		return null;
 	}
+	
+	public List<Entidade> obterListaPorNome(String nome)
+	{
+		List<Entidade> listJurados = new ArrayList<>();
+		
+		for(int i=0; i< JuradoDAO.jurados.size(); i++)
+		{
+			if(JuradoDAO.jurados.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
+			{
+				listJurados.add(JuradoDAO.jurados.get(i));
+			}
+		}
+		return listJurados;
+	}
 
 	@Override
 	public boolean cadastrar(Entidade entidade) {
