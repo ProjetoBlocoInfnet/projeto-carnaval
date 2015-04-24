@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import enumerator.Grupos;
@@ -10,10 +11,12 @@ public class EscolaSamba extends Usuario
 	public EscolaSamba(String login, String senha) {
 		super(login, senha);	
 	}
+
+	private final Set<String> cor = new HashSet<>();
+	
 	private String nome;
 	private String enderecoQuadra;
 	private String enderecoBarracao;
-	private Set<String> cor;
 	private Date dataFundacao;
 	private String lema;
 	private String filiacao;
@@ -79,9 +82,13 @@ public class EscolaSamba extends Usuario
 	public Set<String> getCor() {
 		return cor;
 	}
+	
 	public void setCor(Set<String> cor) {
-		this.cor = cor;
+		
+		this.cor.clear();
+		this.cor.addAll(cor);
 	}
+	
 	public Date getDataFundacao() {
 		return dataFundacao;
 	}
