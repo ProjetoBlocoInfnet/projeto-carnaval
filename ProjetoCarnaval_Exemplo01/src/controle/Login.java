@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Usuario;
-import dao.UsuarioDao;
+import dao.UsuarioDAO;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
 		
 		session = request.getSession();
 		
-		Usuario usuario = (Usuario) new UsuarioDao().obterUsuario(login,senha);
+		Usuario usuario = (Usuario) new UsuarioDAO().obterUsuario(login,senha);
 		
 		
 		if (usuario == null){
