@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
+	EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId( Integer.decode( request.getParameter("idEscola" ) ) );
 %>
 <title>Escola de samba:<%=escola.getNome()%> </title>
 </head>
@@ -64,16 +64,20 @@
 		</ul>
 	</fieldset>
 	
-	<section>
+	<section id = "torcedores">
 	<h2>torcedores:</h2>
+	<ul>
 		<%
 			for ( Entidade e : new TorcedorDAO().obterTodosCollection() ) {
 				Torcedor t = (Torcedor) e;
 				if ( t.getEscolaSamba() == escola ) {
-					out.println( "<li>" + t.getNome() + "</li>" );
+					out.println( "<li><a href='ConsultaTorcedor?idTorcedor=" + t.getId() + "'>" + t.getNome() + "</a></li>" );
 				}
 			}
 		%>
+		</ul>
 	</section>
+	
+	<a href="#" onclick="window.history.back()">Voltar</a>
 </body>
 </html>
