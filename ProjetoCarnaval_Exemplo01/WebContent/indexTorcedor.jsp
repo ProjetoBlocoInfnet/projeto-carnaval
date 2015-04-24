@@ -1,3 +1,4 @@
+<%@ page import="negocio.Entidade" %>
 <%@ page import="negocio.Usuario" %>
 
 <%@ page import="negocio.Torcedor" %>
@@ -93,6 +94,16 @@
 			</div>
 			
 			<div class="tab-pane" id = "torcedores">
+				<ul>
+				<%
+					Torcedor t;
+				
+					for ( Entidade e : new TorcedorDAO().obterTodos() ) {
+						t = (Torcedor)e;
+						out.println( "<li>" + t.getNome() + "</li>" );
+					}
+				%>
+				</ul>
 			</div>
 			
 		</div>
