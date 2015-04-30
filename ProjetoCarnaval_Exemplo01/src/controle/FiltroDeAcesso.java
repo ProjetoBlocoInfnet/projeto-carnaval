@@ -23,7 +23,7 @@ public class FiltroDeAcesso implements Filter{
 	@Override
 	public void init(FilterConfig config) throws ServletException {		
 		this.context = config; 
-       System.out.println("Filtro de AutenticaÃ§Ã£o inicializado");
+       System.out.println("Filtro de Autenticação inicializado");
 	}
 
 	@Override
@@ -37,8 +37,14 @@ public class FiltroDeAcesso implements Filter{
 				       		 
 	    Usuario usuario = getUsuario(req);
          
-        if(usuario == null && !resource.equals(loginURI)){
-        	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());        	      	
+	    if(usuario == null && "/CadastroTorcedor.jsp".equals(resource)){ //Necessário para que o torcedor possa fazer seu cadastro
+        	System.out.println("Possível torcedor acessando a URI "  + req.getRequestURI());
+        	request.getRequestDispatcher("CadastroTorcedor.jsp").forward(request, response);
+        }else if(usuario == null && "/ControlaTorcedor".equals(resource)){ //Necessário para que o torcedor possa fazer seu cadastro
+        	System.out.println("Possível torcedor acessando a URI "  + req.getRequestURI());
+        	request.getRequestDispatcher("ControlaTorcedor").forward(request, response);
+        }else if(usuario == null && !resource.equals(loginURI)){
+        	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());      	
         	request.getRequestDispatcher("index.jsp").forward(request, response);
         }else if(usuario == null && resource.equals(loginURI)){
         	System.out.println("Usuario deslogado acessando a URI "  + req.getRequestURI());

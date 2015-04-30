@@ -7,11 +7,22 @@ public enum Grupos
 	GrupoB( "Grupo B"), 
 	GrupoC( "Grupo C"), 
 	GrupoD( "Grupo D"), 
-	GrupoAvaliacao( "Grupo AvaliaÃ§Ã£o" );
+	GrupoAvaliacao( "Grupo Avaliação" );
 	
 	public final String nomeBonito;
 	
 	Grupos( String nomeBonito ) {
 		this.nomeBonito = nomeBonito;
+	}
+	
+	public static Grupos from(String valor) {
+
+		for (Grupos g : Grupos.values()) {
+			if (g.nomeBonito.equalsIgnoreCase(valor)) {
+				return g;
+			}
+		}
+
+		return null;
 	}
 }

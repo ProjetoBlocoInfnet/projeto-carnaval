@@ -7,20 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 import negocio.Entidade;
-import negocio.EscolaSamba;
 import negocio.Torcedor;
 
 public class TorcedorDAO extends AbstractDAO implements DAO
 {
 	private static Map<Integer, Torcedor> torcedores = new HashMap<>();
 	
-	{
+	/*{
 		Torcedor joaozinho = new Torcedor("joaozinho", "senha123");
 		EscolaSamba escola = (EscolaSamba) new EscolaSambaDAO().obterPorId(0);
 		joaozinho.setNome("Joaozinho das couves");
 		joaozinho.setEscolaSamba( escola );
-		cadastrar(joaozinho);
-	}
+		TorcedorDAO.torcedores.put( 0, joaozinho );
+	}*/
 
 	@Override
 	public boolean cadastrar(Entidade entidade) {
@@ -36,7 +35,9 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 		torcedor.setId( TorcedorDAO.torcedores.size() );
 
-		if(TorcedorDAO.torcedores.put( torcedor.getId(), torcedor ) != null)
+		//TODO Se estiverem tendo problemas com o cadastrar, coloquem isso aqui
+		TorcedorDAO.torcedores.put( torcedor.getId(), torcedor );
+		if(torcedor.getNome().equals(TorcedorDAO.torcedores.get(torcedor.getId()).getNome()))
 		{
 			return true;
 		}
@@ -92,7 +93,6 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		// TODO Auto-generated method stub
 		return TorcedorDAO.torcedores.get(numero);
 	}
 	

@@ -1,13 +1,16 @@
 package controle;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import negocio.Entidade;
 import negocio.Jurado;
+import negocio.Pessoa.Sexos;
 import dao.JuradoDAO;
 
 /**
@@ -28,7 +31,7 @@ public class ControlaJurado extends HttpServlet {
 
     protected boolean mantemJurado(String acao, HttpServletRequest request)
     {
-		//TODO Emmanuel Aranha - Fazer as opções de salvar, alterar e excluir
+		//TODO Emmanuel Aranha - Fazer as opï¿½ï¿½es de salvar, alterar e excluir
     	
     	if("salvar".equals(acao))
     	{
@@ -51,12 +54,16 @@ public class ControlaJurado extends HttpServlet {
     }
 
     protected Jurado criarObjeto(HttpServletRequest request)
-    {
-    	Jurado j = new Jurado(request.getParameter("login").toString(),request.getParameter("senha").toString());
+    {	
+    	String login = request.getParameter("nome").trim();
+    	login = login.replace(" ", "");
+    	String senha = "123456";
+    	
+    	Jurado j = new Jurado(login,senha);
     	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
-    	//j.setSexo(sexo);
+    	j.setSexo(Sexos.from(request.getParameter("sexos")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
@@ -69,7 +76,7 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+/*
 		if(this.mantemJurado(request.getParameter("acao").toString(), request))
 		{
 			request.setAttribute("oSucesso","s");
@@ -79,14 +86,67 @@ public class ControlaJurado extends HttpServlet {
 			request.setAttribute("oSucesso","n");
 		}
 		request.setAttribute("oAcao",request.getParameter("acao").toString());
-		request.getRequestDispatcher("CadastroQuesito.jsp").forward(request, response);
+		request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
+*/
+		
+		List<Entidade> listaJurados = tabelaJurados.obterTodos();
+		request.setAttribute("listaJurado", listaJurados);
+	
+		request.getRequestDispatcher("/jurado/index.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+/*
+		if(this.mantemJurado(request.getParameter("acao").toString(), request))
+		{
+			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+			request.setAttribute("oAcao",request.getParameter("acao").toString());
+			request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
+*/
+		
+		String action = request.getParameter("action");
+		
+		switch (action) {
+		case "telaCadastro":
+			request.getRequestDispatcher("/jurado/CadastroJurado.jsp").forward(request, response);
+			break;
+		case "cadastrar":
+			if(mantemJurado("salvar",request)){
+				request.setAttribute("resultado_ok", "Jurado Cadastrado com sucesso!");
+			}else{
+				request.setAttribute("resultado_error", "Erro ao cadastrar o Jurado!");
+			}
+			doGet(request, response);
+			break;
+		case "consultar":
+			if(request.getParameter("nome") !=null){
+				
+				List<Entidade> listaJurados  = tabelaJurados.obterListaPorNome(request.getParameter("nome").toString());
+				if(listaJurados.size()> 0){
+					
+					request.setAttribute("listaJurado", listaJurados);
+					request.getRequestDispatcher("/jurado/index.jsp").forward(request, response);
+				}else{
+					request.setAttribute("resultado_error", "Nenhum jurado foi encontrado");
+					doGet(request, response);
+				}
+			
+			}else{
+				request.setAttribute("resultado_error", "Por favor, digite o jurado a ser consultado");
+				doGet(request, response);
+			}
+			
+			break;
+		default:
+			break;
+		}
 	}
 
 }
