@@ -102,7 +102,6 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		if(request.getParameter("acao") != null){
 			
 			String action = request.getParameter("acao");
@@ -131,8 +130,6 @@ public class ControlaEscolaSamba extends HttpServlet {
 		request.setAttribute("listaEscola", listaEscolas);
 		
 		request.getRequestDispatcher("/escolaSamba/index.jsp").forward(request, response);
-		
-		
 	}
 
 	/**
