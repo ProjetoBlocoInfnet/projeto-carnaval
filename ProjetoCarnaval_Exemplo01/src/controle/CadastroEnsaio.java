@@ -44,6 +44,7 @@ public class CadastroEnsaio extends HttpServlet {
 		Ensaio ensaio = new Ensaio( escola, data );
 		
 		new EnsaioDAO().cadastrar( ensaio );
+		request.getRequestDispatcher("indexEscolaSamba.jsp").forward(request, response);
 	}
 
 }

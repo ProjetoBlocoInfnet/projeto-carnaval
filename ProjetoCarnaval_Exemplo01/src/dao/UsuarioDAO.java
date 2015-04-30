@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import negocio.Administrador;
+import negocio.Entidade;
 import negocio.Atividade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
@@ -12,9 +13,9 @@ import negocio.Usuario;
 import enumerator.Acao;
 import enumerator.Perfil;
 
-public class UsuarioDAO {
+public class UsuarioDAO extends AbstractDAO{
 	
-	Set<Usuario> setUsuario = new HashSet<Usuario>();
+	private static Set<Usuario> setUsuario = new HashSet<Usuario>();
 	{
 		Administrador admin = new Administrador("admin","123456");
 		admin.setPerfil(Perfil.ADMINISTRADOR);
@@ -48,7 +49,10 @@ public class UsuarioDAO {
 		setUsuario.add(integrante);
 		setUsuario.add(torcedor);;
 		setUsuario.add(escola);
-		
+		for(Entidade e : new TorcedorDAO().obterTodos()) //Rataria pra aceitar os usuários cadastrados no DAO Fake
+		{
+			setUsuario.add((Torcedor) e);
+		}
 	}
 	
 	public Usuario obterUsuario(String login, String senha){

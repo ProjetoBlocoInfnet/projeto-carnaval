@@ -24,6 +24,20 @@ public class QuesitoDAO extends AbstractDAO implements DAO
 		}
 		return null;
 	}
+	
+	public List<Entidade> obterListaPorNome(String nome)
+	{
+		List<Entidade> listQuesitos = new ArrayList<>();
+		
+		for(int i=0; i< QuesitoDAO.quesitos.size(); i++)
+		{
+			if(QuesitoDAO.quesitos.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
+			{
+				listQuesitos.add(QuesitoDAO.quesitos.get(i));
+			}
+		}
+		return listQuesitos;
+	}
 
 	@Override
 	public boolean cadastrar(Entidade entidade) {

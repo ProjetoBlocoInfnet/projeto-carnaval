@@ -28,32 +28,25 @@
 	 </script>
 </head>
 <body>
-
+<%
+Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
+%>
 <div class="container">
 	
 	<div>
-	<h1>Área do integrante</h1>
-	</div>	
-	<form action="Logout" method="post">	
+	<h1>Área do Admnistrador</h1>
+	<form action="Logout" method="post">
 		  <div class="form-group">
 		      <button type="submit" class="btn btn-primary">Logout</button>
 		  </div>
-	</form>	
+	</form>
 	<div class="alert alert-info" role="alert">
-	<%
-		Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
-	%>
-	<strong>Usuário: </strong>
-	
-	<% 
-		out.println( usuario.getLogin() ); 
-	%>
-	
-	<br/>
-	<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito%><br/>
-	</div>		
+	<strong>Usuário: </strong><%=usuario.getLogin() %><br>
+	<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito %><br>
+	</div>	
 	<hr/>
-	<br/>
+	<br>
+	
 	<nav>
 	<ul class="nav nav-tabs">
   		<li><a data-toggle = "tab" href="#escolas">Minhas escolas</a></li>
