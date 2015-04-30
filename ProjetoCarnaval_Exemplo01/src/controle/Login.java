@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Usuario;
-import dao.UsuarioDao;
+import dao.UsuarioDAO;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5480054916620773263L;
+	
 	private HttpSession session = null;
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,40 +28,17 @@ public class Login extends HttpServlet {
 		
 		session = request.getSession();
 		
-		Usuario usuario = (Usuario) new UsuarioDao().obterUsuario(login,senha);
+		Usuario usuario = (Usuario) new UsuarioDAO().obterUsuario(login,senha);
 		
 		
 		if (usuario == null){
 			System.out.println("usuário inexistente");
-			request.setAttribute("resultado", "Usuário inexistente");
+			request.setAttribute("resultado", "Usu�rio inexistente");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{				
-			session.setAttribute("usuario", usuario);
-			request.setAttribute("usuarioLogado", usuario.getLogin());
-			request.setAttribute("usuarioPerfil", usuario.getPerfil());
-			switch (usuario.getPerfil()) {
-			case ADMINISTRADOR:				
-				request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
-				break;
-			case ESCOLASAMBA:		
-				request.getRequestDispatcher("indexEscolaSamba.jsp").forward(request, response);
-				break; 	
-			case INTEGRANTE:				
-				request.getRequestDispatcher("indexIntegrante.jsp").forward(request, response);
-				break;
-			case TORCEDOR:
-				request.getRequestDispatcher("indexTorcedor.jsp").forward(request, response);
-				break;
-			default:
-				break;
-			}
-							
+			session.setAttribute("usuario", usuario);			
+			request.getRequestDispatcher( usuario.getPerfil().indexPage ).forward(request, response);
 		}
 	}
-
-	
-	
-	
-
 }

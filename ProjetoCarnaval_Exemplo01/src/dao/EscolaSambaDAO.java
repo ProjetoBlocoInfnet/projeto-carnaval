@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import enumerator.Grupos;
 import negocio.Entidade;
 import negocio.EscolaSamba;
 
@@ -13,7 +14,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 {
 	private static Map< Integer, EscolaSamba > escolas = new HashMap<>();
 	
-	//Dados de teste. As variáveis estão privadas então não temos risco de acesso externo.
+	//Dados de teste. As variï¿½veis estï¿½o privadas entï¿½o nï¿½o temos risco de acesso externo.
 	private EscolaSamba salgueiro;
 	private EscolaSamba viradouro;
 	private EscolaSamba mangueira;
@@ -23,11 +24,33 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		this.mangueira = new EscolaSamba( "mangueira", "123" );
 		
 		this.salgueiro.setNome( "Salgueiro" );
-		this.viradouro.setNome( "Viradouro" );
-		this.mangueira.setNome( "Mangueira" );
+		this.salgueiro.setCnpj("123.344.456/123-12");
+		this.salgueiro.setEnderecoBarracao("endereco Barracao");
+		this.salgueiro.setEnderecoQuadra("Endereco Quadra");
+		this.salgueiro.setGrupoAtual(Grupos.GrupoEspecial);
+		this.salgueiro.setTelefone("2222-2222");
+		this.salgueiro.setEmail("@gmail.com");
 		this.salgueiro.setId( 0 );
+		
+		this.viradouro.setNome( "Viradouro" );
+		this.viradouro.setCnpj("123.344.456/123-12");
+		this.viradouro.setEnderecoBarracao("endereco Barracao");
+		this.viradouro.setEnderecoQuadra("Endereco Quadra");
+		this.viradouro.setGrupoAtual(Grupos.GrupoEspecial);
+		this.viradouro.setTelefone("2222-2222");
+		this.viradouro.setEmail("@gmail.com");
 		this.viradouro.setId( 1 );
+		
+		this.mangueira.setNome( "Mangueira" );
+		this.mangueira.setCnpj("123.344.456/123-12");
+		this.mangueira.setEnderecoBarracao("endereco Barracao");
+		this.mangueira.setEnderecoQuadra("Endereco Quadra");
+		this.mangueira.setGrupoAtual(Grupos.GrupoEspecial);
+		this.mangueira.setTelefone("2222-2222");
+		this.mangueira.setEmail("@gmail.com");
 		this.mangueira.setId( 2 );
+		
+		
 		
 		EscolaSambaDAO.escolas.put( this.salgueiro.getId(),  this.salgueiro);
 		EscolaSambaDAO.escolas.put( this.viradouro.getId(),  this.viradouro);
@@ -44,6 +67,20 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			}
 		}
 		return null;
+	}
+	
+	public List<Entidade> obterListaPorNome(String nome)
+	{
+		List<Entidade> escolasSamba = new ArrayList<>();
+		
+		for(int i=0; i< EscolaSambaDAO.escolas.size(); i++)
+		{
+			if(EscolaSambaDAO.escolas.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
+			{
+				escolasSamba.add(EscolaSambaDAO.escolas.get(i));
+			}
+		}
+		return escolasSamba;
 	}
 
 	@Override
@@ -82,7 +119,11 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			return false;
 		}
 		
-		return (EscolaSambaDAO.escolas.replace(escolaSamba.getId(), escolaSamba) != null);
+		if (EscolaSambaDAO.escolas.containsKey(escolaSamba.getId())) {
+			return EscolaSambaDAO.escolas.put(escolaSamba.getId(), escolaSamba) != null;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
