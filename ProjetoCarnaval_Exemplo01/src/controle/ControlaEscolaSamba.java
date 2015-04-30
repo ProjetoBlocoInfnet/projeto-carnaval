@@ -30,8 +30,6 @@ public class ControlaEscolaSamba extends HttpServlet {
 
     protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
     {
-	
-    	
     	if("salvar".equals(acao))
     	{
     		EscolaSamba e = this.criarObjeto(request);
@@ -66,8 +64,9 @@ public class ControlaEscolaSamba extends HttpServlet {
     	e.setEnderecoBarracao(request.getParameter("enderecoBarracao").toString());
     	e.setEnderecoQuadra(request.getParameter("enderecoQuadra").toString());
     	e.setFiliacao(request.getParameter("filiacao").toString());
+    	e.setGrupoAtual(Grupos.from(request.getParameter("grupos")));
     	
-    	String grupo = request.getParameter("grupoAtual");
+/*    	String grupo = request.getParameter("grupoAtual");
     	switch (grupo) {
 		case "GrupoEspecial":
 			e.setGrupoAtual(Grupos.GrupoEspecial);
@@ -90,7 +89,7 @@ public class ControlaEscolaSamba extends HttpServlet {
 		default:
 			break;
 		}
-    	
+ */   	
     	
     	e.setLema(request.getParameter("lema").toString());
     	e.setTelefone(request.getParameter("telefone").toString());
@@ -102,6 +101,18 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
+		{
+			request.setAttribute("oSucesso","s");
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+		}
+		request.setAttribute("oAcao",request.getParameter("acao").toString());
+		request.getRequestDispatcher("CadastroEscolaSamba.jsp").forward(request, response);
+*/
 		if(request.getParameter("acao") != null){
 			
 			String action = request.getParameter("acao");
@@ -136,6 +147,18 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
+		{
+			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+			request.setAttribute("oAcao",request.getParameter("acao").toString());
+			request.getRequestDispatcher("CadastroEscolaSamba.jsp").forward(request, response);
+		}
+*/
 		
 		String action = request.getParameter("action");
 		
@@ -175,6 +198,7 @@ public class ControlaEscolaSamba extends HttpServlet {
 		}
 		
 		
+
 	}
 
 }

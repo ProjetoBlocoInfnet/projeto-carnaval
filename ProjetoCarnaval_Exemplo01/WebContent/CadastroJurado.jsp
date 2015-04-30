@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro de Jurado</title>
 </head>
 <body>
 <%
@@ -43,12 +43,25 @@ if(request.getAttribute("oSucesso") != null)
 	
 		<input type="hidden" name="acao" value="<%=oAcao%>">
 
-		<h3>Login</h3><input type="text" name="login">
-
-		<h3>Senha</h3><input type="text" name="senha">
-
 		<h3>Nome</h3><input type="text" name="nome">
+
+		<h3>CPF</h3><input type="text" name="cpf">
+
+		<h3>Sexo</h3>
+		<input name="sexos" list="sexos">
+ 		<datalist id="sexos">
+			<option value="Masculino">
+			<option value="Feminino">
+		</datalist>
+
+		<h3>Endereço</h3><input type="text" name="endereco">
+
+		<h3>cep</h3><input type="text" name="cep">
 		
+		<h3>Email</h3><input type="text" name="email">
+		
+		<h3>Telefone</h3><input type="text" name="telefone">
+
 		<br/>
 		<br/>
 

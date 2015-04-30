@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import negocio.Entidade;
 import negocio.Jurado;
+import negocio.Pessoa.Sexos;
 import dao.JuradoDAO;
 
 /**
@@ -62,7 +63,7 @@ public class ControlaJurado extends HttpServlet {
     	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
-    	//j.setSexo(sexo);
+    	j.setSexo(Sexos.from(request.getParameter("sexos")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
@@ -75,6 +76,18 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+		if(this.mantemJurado(request.getParameter("acao").toString(), request))
+		{
+			request.setAttribute("oSucesso","s");
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+		}
+		request.setAttribute("oAcao",request.getParameter("acao").toString());
+		request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
+*/
 		
 		List<Entidade> listaJurados = tabelaJurados.obterTodos();
 		request.setAttribute("listaJurado", listaJurados);
@@ -86,6 +99,17 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*
+		if(this.mantemJurado(request.getParameter("acao").toString(), request))
+		{
+			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("oSucesso","n");
+			request.setAttribute("oAcao",request.getParameter("acao").toString());
+			request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
+*/
 		
 		String action = request.getParameter("action");
 		
