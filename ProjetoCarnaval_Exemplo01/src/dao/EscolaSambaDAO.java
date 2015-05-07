@@ -135,17 +135,20 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		Connection c = getConnection();
 		String sqlUsuario = "insert into usuario (usuario,senha)values(?,?);";
 		String sqlIdUsuario = "select * from usuario where usuario = ? and senha = ?;";
-		String sqlUsuarioPerfil = "insert re_usuario_perfil (usuario_id_usuario,perfil_id_perfil)values(?,?);";
+		String sqlUsuarioPerfil = "insert into re_usuario_perfil (usuario_id_usuario,perfil_id_perfil)values(?,?);";
 		String sqlEscolaSamba = "insert into escola_samba (usuario_id_usuario,nome,endereco_quadra, endereco_barracao, data_fundacao, lema, filiacao, grupos_id_grupo, email, telefone, cnpj)values(?,?,?,?,?,?,?,?,?,?,?);";
 		try {
-			c.setAutoCommit(false);
+			c.setAutoCommit(false); //caso tudo dê errado, isso permite que eu dê rollback nos inserts
 			pstmt = c.prepareStatement(sqlUsuario);
 			pstmt.setString(1, escolaSamba.getLogin());
 			pstmt.setString(2, escolaSamba.getSenha());
 			pstmt.execute();
 			//Como o commit dessa operação só pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
+			//Porque estou na mesma transação da inserção na tabela usuario. Eu não conseguiria pegar via UsuarioDAO.
 			Integer id_usuario = 0;
 			pstmt = c.prepareStatement(sqlIdUsuario);
+			pstmt.setString(1, escolaSamba.getLogin());
+			pstmt.setString(2, escolaSamba.getSenha());
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				id_usuario = rs.getInt("id_usuario");
