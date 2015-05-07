@@ -179,7 +179,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		Ensaio en = new Ensaio();
+		Ensaio en = null;
 		Connection c = getConnection();
 		String sql = "Select * from ensaio where id_ensaio = ?;";
 		try {

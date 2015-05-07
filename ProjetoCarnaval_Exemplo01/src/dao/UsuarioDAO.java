@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +17,12 @@ import negocio.Usuario;
 import enumerator.Acao;
 import enumerator.Perfil;
 
-public class UsuarioDAO extends AbstractDAO{
+public class UsuarioDAO extends AbstractDAO
+{
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 	
-	private static Set<Usuario> setUsuario = new HashSet<Usuario>();
+	/*private static Set<Usuario> setUsuario = new HashSet<Usuario>();
 	{
 		Administrador admin = new Administrador("admin","123456");
 		admin.setPerfil(Perfil.ADMINISTRADOR);
@@ -54,17 +61,35 @@ public class UsuarioDAO extends AbstractDAO{
 			setUsuario.add((Torcedor) e);
 		}
 	}
-	
+	*/
 	public Usuario obterUsuario(String login, String senha){
 		
-		for (Usuario usuario: setUsuario) {
+		/*for (Usuario usuario: setUsuario) {
 							
 			if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)){
 				return usuario;
 			}
+		}*/
+		
+		Usuario u = null;
+		
+		Connection c = getConnection();
+		String sql = "select usuario, senha, nome_perfil from usuario join (re_usuario_perfil, perfil) on (usuario.id_usuario = re_usuario_perfil.usuario_id_usuario and re_usuario_perfil.perfil_id_perfil = perfil.id_perfil) where usuario.usuario = ? and usuario.senha = ?";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, login);
+			pstmt.setString(1, senha);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				u = new Usuario(rs.getString("usuario"),rs.getString("senha"));
+				u.setPerfil(Perfil.valueOf(rs.getString("nome_perfil")));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
 		}
 		
-		return null;
+		return u;
 	}
 
 }
