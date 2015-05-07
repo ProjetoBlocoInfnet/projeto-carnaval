@@ -104,7 +104,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		}*/
 		
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where nome = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where nome like ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, "%" + nome + "%");

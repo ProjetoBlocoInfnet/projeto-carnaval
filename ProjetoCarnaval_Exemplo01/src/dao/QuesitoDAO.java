@@ -59,7 +59,7 @@ public class QuesitoDAO extends AbstractDAO implements DAO
 		}
 		return listQuesitos;*/
 		Connection c = getConnection();
-		String sql = "Select * from quesito where nome_quesito = ?;";
+		String sql = "Select * from quesito where nome_quesito like ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, "%" + nome + "%");
