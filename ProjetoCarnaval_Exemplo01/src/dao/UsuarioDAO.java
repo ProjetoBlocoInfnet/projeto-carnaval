@@ -73,7 +73,7 @@ public class UsuarioDAO extends AbstractDAO
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				u = new Usuario(rs.getString("usuario"),rs.getString("senha"));
-				u.setPerfil(Perfil.valueOf(rs.getString("nome_perfil")));
+				u.setPerfil(Perfil.from(rs.getString("nome_perfil")));
 			}
 		} catch (SQLException e) {
 		}finally{

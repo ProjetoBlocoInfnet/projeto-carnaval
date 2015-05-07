@@ -14,4 +14,19 @@ public enum Perfil {
 		this.indexPage = indexPage;
 		this.nomeBonito = nomeBonito;
 	}
+	
+	public static Perfil from(String valor) {
+
+		for (Perfil p : Perfil.values()) {
+			if (p.nomeBonito.equalsIgnoreCase(valor)) {
+				return p;
+			}
+
+			if (p.indexPage.equalsIgnoreCase(valor)) {
+				return p;
+			}
+		}
+
+		return null;
+	}
 }
