@@ -78,7 +78,8 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (TorcedorDAO.torcedores.remove(torcedor.getId()) != null);
+		//return (TorcedorDAO.torcedores.remove(torcedor.getId()) != null);
+		return new UsuarioDAO().excluirUsuario(torcedor.getLogin(), torcedor.getSenha());
 	}
 
 	@Override
@@ -110,12 +111,13 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		List<Entidade> torcedor = new ArrayList<>();
+		/*List<Entidade> torcedor = new ArrayList<>();
 		for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
 		{
 			torcedor.add(TorcedorDAO.torcedores.get(i));
 		}
-		return torcedor;
+		return torcedor;*/
+		return this.obterTodos();
 	}
 
 }

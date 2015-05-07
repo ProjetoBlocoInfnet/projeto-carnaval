@@ -68,7 +68,13 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (IntegranteDAO.integrantes.remove(integrante.getId()) != null);
+		/*
+		 * A escola de samba ainda deve existir no banco por motivos de histórico
+		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * 
+		 */
+		return new UsuarioDAO().excluirUsuario(integrante.getLogin(), integrante.getSenha());
+		//return (IntegranteDAO.integrantes.remove(integrante.getId()) != null);
 	}
 
 	@Override
@@ -89,11 +95,12 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		List<Entidade> integrantes = new ArrayList<>();
+		/*List<Entidade> integrantes = new ArrayList<>();
 		for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
 		{
 			integrantes.add(IntegranteDAO.integrantes.get(i));
 		}
-		return integrantes;
+		return integrantes;*/
+		return this.obterTodos();
 	}
 }

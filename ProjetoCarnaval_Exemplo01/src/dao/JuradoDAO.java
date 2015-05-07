@@ -103,7 +103,13 @@ public class JuradoDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (JuradoDAO.jurados.remove(jurado.getId()) != null);
+		/*
+		 * O jurado ainda deve existir no banco por motivos de histórico
+		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * 
+		 */
+		//return (JuradoDAO.jurados.remove(jurado.getId()) != null);
+		return new UsuarioDAO().excluirUsuario(jurado.getLogin(), jurado.getSenha());
 	}
 
 	@Override
@@ -124,11 +130,12 @@ public class JuradoDAO extends AbstractDAO implements DAO
 
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		List<Entidade> jurados = new ArrayList<>();
+		/*List<Entidade> jurados = new ArrayList<>();
 		for(int i=0; i< JuradoDAO.jurados.size(); i++ )
 		{
 			jurados.add(JuradoDAO.jurados.get(i));
 		}
-		return jurados;
+		return jurados;*/
+		return this.obterTodos();
 	}
 }

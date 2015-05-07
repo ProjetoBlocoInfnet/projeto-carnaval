@@ -75,11 +75,12 @@ public class AtividadeDAO extends AbstractDAO implements DAO {
 
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		List<Entidade> atividades = new ArrayList<>();
+		/*List<Entidade> atividades = new ArrayList<>();
 		for (int i = 0; i < AtividadeDAO.atividades.size(); i++) {
 			atividades.add(AtividadeDAO.atividades.get(i));
 		}
-		return atividades;
+		return atividades;*/
+		return this.obterTodos();
 	}
 
 }
