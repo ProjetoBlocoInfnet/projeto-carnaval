@@ -2,15 +2,17 @@ package enumerator;
 
 public enum Perfil {
 
-	ADMINISTRADOR( "indexAdmin.jsp", "Administrador" ),
-	TORCEDOR( "indexTorcedor.jsp", "Torcedor" ),
-	INTEGRANTE( "indexIntegrante.jsp", "Integrante" ),
-	ESCOLASAMBA( "indexEscolaSamba.jsp", "Escola de samba" );
+	ADMINISTRADOR(1,  "indexAdmin.jsp", "Administrador" ),
+	TORCEDOR( 4, "indexTorcedor.jsp", "Torcedor" ),
+	INTEGRANTE( 3, "indexIntegrante.jsp", "Integrante" ),
+	ESCOLASAMBA( 2, "indexEscolaSamba.jsp", "Escola de samba" );
 
+	public final Integer id;
 	public final String indexPage;
 	public final String nomeBonito;
 
-	Perfil( String indexPage, String nomeBonito ) {
+	Perfil( Integer id, String indexPage, String nomeBonito ) {
+		this.id = id;
 		this.indexPage = indexPage;
 		this.nomeBonito = nomeBonito;
 	}
@@ -23,6 +25,17 @@ public enum Perfil {
 			}
 
 			if (p.indexPage.equalsIgnoreCase(valor)) {
+				return p;
+			}
+		}
+
+		return null;
+	}
+	
+	public static Perfil from(Integer valor) {
+
+		for (Perfil p : Perfil.values()) {
+			if (p.id == valor) {
 				return p;
 			}
 		}
