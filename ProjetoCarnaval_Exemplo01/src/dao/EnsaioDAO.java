@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import negocio.Ensaio;
 import negocio.Entidade;
@@ -199,13 +196,8 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	}
 
 	@Override
-	public Collection<Entidade> obterTodosCollection() {
-		//List<Entidade> ensaios = new ArrayList<>();
-		List<Entidade> ensaios = this.obterTodos();
-		for(int i=0; i< ensaios.size(); i++ )
-		{
-			ensaios.add(ensaios.get(i));
-		}
-		return ensaios;
+	public Collection<Entidade> obterTodosCollection()
+	{
+		return this.obterTodos();
 	}
 }

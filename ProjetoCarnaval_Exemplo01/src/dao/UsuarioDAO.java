@@ -4,17 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
 
-import negocio.Administrador;
-import negocio.Entidade;
-import negocio.Atividade;
-import negocio.EscolaSamba;
-import negocio.Integrante;
-import negocio.Torcedor;
 import negocio.Usuario;
-import enumerator.Acao;
 import enumerator.Perfil;
 
 public class UsuarioDAO extends AbstractDAO
