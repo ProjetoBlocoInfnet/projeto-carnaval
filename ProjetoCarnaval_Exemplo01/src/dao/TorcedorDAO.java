@@ -78,6 +78,11 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
+		/*
+		 * O torcedor ainda deve existir no banco por motivos de histórico
+		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * 
+		 */
 		//return (TorcedorDAO.torcedores.remove(torcedor.getId()) != null);
 		return new UsuarioDAO().excluirUsuario(torcedor.getLogin(), torcedor.getSenha());
 	}

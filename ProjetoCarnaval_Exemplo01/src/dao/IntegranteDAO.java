@@ -69,7 +69,7 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		}
 
 		/*
-		 * A escola de samba ainda deve existir no banco por motivos de histórico
+		 * O integrante ainda deve existir no banco por motivos de histórico
 		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
 		 * 
 		 */
