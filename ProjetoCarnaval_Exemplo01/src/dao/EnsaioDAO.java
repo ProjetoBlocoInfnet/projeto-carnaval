@@ -20,7 +20,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private static Map< Integer, Ensaio > ensaios = new HashMap<>();
+	/*private static Map< Integer, Ensaio > ensaios = new HashMap<>();
 
 	//Dados de teste. As vari�veis est�o privadas ent�o n�o temos risco de acesso externo.
 	private EscolaSamba samba;
@@ -29,7 +29,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	this.samba = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
 	this.ensaio = new Ensaio( this.samba, new Date());
 	this.cadastrar( this.ensaio );
-	}
+	}*/
 
 	@Override
 	public boolean cadastrar(Entidade entidade)
@@ -202,9 +202,9 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	public Collection<Entidade> obterTodosCollection() {
 		//List<Entidade> ensaios = new ArrayList<>();
 		List<Entidade> ensaios = this.obterTodos();
-		for(int i=0; i< EnsaioDAO.ensaios.size(); i++ )
+		for(int i=0; i< ensaios.size(); i++ )
 		{
-			ensaios.add(EnsaioDAO.ensaios.get(i));
+			ensaios.add(ensaios.get(i));
 		}
 		return ensaios;
 	}
