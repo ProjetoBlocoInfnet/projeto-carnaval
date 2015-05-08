@@ -6,20 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import enumerator.Perfil;
 import negocio.Entidade;
 import negocio.Integrante;
+import negocio.Pessoa.Sexos;
 
 public class IntegranteDAO extends AbstractDAO implements DAO
 {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	private static Map< Integer, Integrante> integrantes = new HashMap<>();
+//	private static Map< Integer, Integrante> integrantes = new HashMap<>();
 	
 	@Override
 	public boolean cadastrar(Entidade entidade) {
@@ -119,11 +118,39 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		if (IntegranteDAO.integrantes.containsKey(integrante.getId())) {
+		Connection c = getConnection();
+		String sqlUpdate = "update pessoa set nome = ?, endereco = ?, cpf = ?, cep = ?, telefone = ?, email = ?, sexo = ? where id_pessoa in (select id_pessoa from pessoa join (integrante) on (pessoa.id_pessoa = integrante.pessoa_id_pessoa) where id_integrante = ?);";
+		try {
+			c.setAutoCommit(false);
+			pstmt = c.prepareStatement(sqlUpdate);
+			pstmt.setString(1, integrante.getNome());
+			pstmt.setString(2, integrante.getEndereco());
+			pstmt.setString(3, integrante.getCpf());
+			pstmt.setString(4, integrante.getCep());
+			pstmt.setString(5, integrante.getTelefone());
+			pstmt.setString(6, integrante.getEmail());
+			pstmt.setString(7, integrante.getSexo().sigla);
+			pstmt.setInt(8, integrante.getId());
+			pstmt.execute();
+			pstmt.close();
+			c.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally{
+			closeConnection(c);
+		}
+		return true;
+		
+/*		if (IntegranteDAO.integrantes.containsKey(integrante.getId())) {
 			return IntegranteDAO.integrantes.put(integrante.getId(), integrante) != null;
 		} else {
 			return false;
-		}
+		}*/
 	}
 
 	@Override
@@ -150,17 +177,58 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 	@Override
 	public List<Entidade> obterTodos() {
 		List<Entidade> integrantes = new ArrayList<>();
-		for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
+		/*for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
 		{
 			integrantes.add(IntegranteDAO.integrantes.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where usuario.ativo = true;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				integrantes.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
 		}
 		return integrantes;
 	}
 
+	private Integrante resultSet2Object(ResultSet rs) throws SQLException
+	{
+		Integrante i = new Integrante(rs.getString("usuario"),rs.getString("senha"));
+		i.setId(rs.getInt("id_integrante"));
+		i.setNome(rs.getString("nome"));
+		i.setEndereco(rs.getString("endereco"));
+		i.setCpf(rs.getString("cpf"));
+		i.setCep(rs.getString("cep"));
+		i.setSexo(Sexos.from(rs.getString("sexo")));
+		i.setEmail(rs.getString("email"));
+		i.setTelefone(rs.getString("telefone"));
+		return i;
+	}
+	
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		// TODO Auto-generated method stub
-		return IntegranteDAO.integrantes.get( numero );
+		//return IntegranteDAO.integrantes.get( numero );
+		Integrante i = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				i = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return i;
 	}
 
 	@Override
