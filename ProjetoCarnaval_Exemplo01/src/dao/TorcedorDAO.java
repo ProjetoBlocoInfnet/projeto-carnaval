@@ -297,10 +297,10 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		return null;*/
 		Torcedor t = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true and nome = ?;";
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true and nome like ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
-			pstmt.setString(1, nome);
+			pstmt.setString(1, "%" + nome + "%");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				t = this.resultSet2Object(rs);
