@@ -273,7 +273,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
 		}*/
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba);";
 		try {
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -287,6 +287,27 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return escolasSamba;
 	}
 
+	public List<Entidade> obterTodosAtivos() {
+		List<Entidade> escolasSamba = new ArrayList<>();
+		/*for(int i=0; i< EscolaSambaDAO.escolas.size(); i++ )
+		{
+			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				escolasSamba.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return escolasSamba;
+	}
+	
 	private EscolaSamba resultSet2Object(ResultSet rs) throws SQLException
 	{
 		EscolaSamba e = new EscolaSamba(rs.getString("usuario"),rs.getString("senha"));
@@ -310,7 +331,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		//return escolas.get( numero );
 		EscolaSamba es = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where id_escola_samba = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
@@ -326,6 +347,27 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return es;
 	}
 
+	public Entidade obterAtivoPorId(Integer numero) {
+		// TODO Auto-generated method stub
+		//return escolas.get( numero );
+		EscolaSamba es = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				es = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return es;
+	}
+	
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
 		/*List<Entidade> escolasSamba = new ArrayList<>();

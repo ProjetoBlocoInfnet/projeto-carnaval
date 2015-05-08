@@ -130,11 +130,39 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		if (TorcedorDAO.torcedores.containsKey(torcedor.getId())) {
+		/*if (TorcedorDAO.torcedores.containsKey(torcedor.getId())) {
 			return TorcedorDAO.torcedores.put(torcedor.getId(), torcedor) != null;
 		} else {
 			return false;
+		}*/
+		Connection c = getConnection();
+		String sqlUpdate = "update pessoa set nome = ?, endereco = ?, cpf = ?, cep = ?, telefone = ?, email = ?, sexo = ? where id_pessoa in (select id_pessoa from pessoa join (torcedor) on (pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where id_torcedor = ?);";
+		try {
+			c.setAutoCommit(false);
+			pstmt = c.prepareStatement(sqlUpdate);
+			pstmt.setString(1, torcedor.getNome());
+			pstmt.setString(2, torcedor.getEndereco());
+			pstmt.setString(3, torcedor.getCpf());
+			pstmt.setString(4, torcedor.getCep());
+			pstmt.setString(5, torcedor.getTelefone());
+			pstmt.setString(6, torcedor.getEmail());
+			pstmt.setString(7, torcedor.getSexo().sigla);
+			pstmt.setInt(8, torcedor.getId());
+			pstmt.execute();
+			pstmt.close();
+			c.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally{
+			closeConnection(c);
 		}
+		return true;
+		
 	}
 
 	@Override
