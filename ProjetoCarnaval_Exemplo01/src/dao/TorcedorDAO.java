@@ -6,20 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import enumerator.Perfil;
 import negocio.Entidade;
+import negocio.EscolaSamba;
 import negocio.Torcedor;
+import negocio.Pessoa.Sexos;
 
 public class TorcedorDAO extends AbstractDAO implements DAO
 {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	private static Map<Integer, Torcedor> torcedores = new HashMap<>();
+//	private static Map<Integer, Torcedor> torcedores = new HashMap<>();
 	
 	/*{
 		Torcedor joaozinho = new Torcedor("joaozinho", "senha123");
@@ -41,7 +41,7 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		torcedor.setId( TorcedorDAO.torcedores.size() );
+//		torcedor.setId( TorcedorDAO.torcedores.size() );
 
 		//TODO Se estiverem tendo problemas com o cadastrar, coloquem isso aqui
 		/*TorcedorDAO.torcedores.put( torcedor.getId(), torcedor );
@@ -188,29 +188,129 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 
 	@Override
 	public List<Entidade> obterTodos() {
-		List<Entidade> torcedor = new ArrayList<>();
-		for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
+		List<Entidade> torcedores = new ArrayList<>();
+		/*for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
 		{
 			torcedor.add(TorcedorDAO.torcedores.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa);";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				torcedores.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
 		}
-		return torcedor;
+		return torcedores;
 	}
 
+	public List<Entidade> obterTodosAtivos() {
+		List<Entidade> torcedores = new ArrayList<>();
+		/*for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
+		{
+			torcedor.add(TorcedorDAO.torcedores.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				torcedores.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return torcedores;
+	}
+	
+	private Torcedor resultSet2Object(ResultSet rs) throws SQLException
+	{
+		Torcedor t = new Torcedor(rs.getString("usuario"),rs.getString("senha"));
+		t.setId(rs.getInt("id_integrante"));
+		t.setNome(rs.getString("nome"));
+		t.setEndereco(rs.getString("endereco"));
+		t.setCpf(rs.getString("cpf"));
+		t.setCep(rs.getString("cep"));
+		t.setSexo(Sexos.from(rs.getString("sexo")));
+		t.setEmail(rs.getString("email"));
+		t.setTelefone(rs.getString("telefone"));
+		t.setEscolaSamba((EscolaSamba) new EscolaSambaDAO().obterPorId(rs.getInt("escola_samba_id_escola_samba")));
+		return t;
+	}
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		return TorcedorDAO.torcedores.get(numero);
+		//return TorcedorDAO.torcedores.get(numero);
+		Torcedor t = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where id_torcedor = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				t = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return t;
 	}
+
+	public Entidade obterAtivoPorId(Integer numero) {
+		//return TorcedorDAO.torcedores.get(numero);
+		Torcedor t = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true and id_torcedor = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				t = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return t;
+	}
+
 	
 	public Torcedor obterPorNome(String nome)
 	{
-		for(int i=0; i<TorcedorDAO.torcedores.size(); i++)
+		/*for(int i=0; i<TorcedorDAO.torcedores.size(); i++)
 		{
 			if(TorcedorDAO.torcedores.get(i).getNome().toLowerCase().matches("(.*)" + nome.toLowerCase() + "(.*)"))
 			{
 				return TorcedorDAO.torcedores.get(i);
 			}
 		}
-		return null;
+		return null;*/
+		Torcedor t = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true and nome = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, nome);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				t = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return t;
 	}
 
 	@Override

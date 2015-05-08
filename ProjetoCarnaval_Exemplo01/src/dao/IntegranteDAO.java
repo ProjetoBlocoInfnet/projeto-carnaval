@@ -182,6 +182,27 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 			integrantes.add(IntegranteDAO.integrantes.get(i));
 		}*/
 		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa);";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				integrantes.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return integrantes;
+	}
+
+	public List<Entidade> obterTodosAtivos() {
+		List<Entidade> integrantes = new ArrayList<>();
+		/*for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )
+		{
+			integrantes.add(IntegranteDAO.integrantes.get(i));
+		}*/
+		Connection c = getConnection();
 		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where usuario.ativo = true;";
 		try {
 			pstmt = c.prepareStatement(sql);
@@ -196,6 +217,7 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		return integrantes;
 	}
 
+	
 	private Integrante resultSet2Object(ResultSet rs) throws SQLException
 	{
 		Integrante i = new Integrante(rs.getString("usuario"),rs.getString("senha"));
@@ -215,7 +237,7 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		//return IntegranteDAO.integrantes.get( numero );
 		Integrante i = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where id_integrante = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
@@ -231,6 +253,27 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		return i;
 	}
 
+	public Entidade obterAtivoPorId(Integer numero) {
+		//return IntegranteDAO.integrantes.get( numero );
+		Integrante i = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where usuario.ativo = true and id_integrante = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				i = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return i;
+	}
+
+	
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
 		/*List<Entidade> integrantes = new ArrayList<>();
