@@ -1,11 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import negocio.Ensaio;
 import negocio.Entidade;
@@ -13,7 +14,10 @@ import negocio.EscolaSamba;
 
 public class EnsaioDAO extends AbstractDAO implements DAO
 {
-	private static Map< Integer, Ensaio > ensaios = new HashMap<>();
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	/*private static Map< Integer, Ensaio > ensaios = new HashMap<>();
 
 	//Dados de teste. As vari�veis est�o privadas ent�o n�o temos risco de acesso externo.
 	private EscolaSamba samba;
@@ -22,7 +26,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	this.samba = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
 	this.ensaio = new Ensaio( this.samba, new Date());
 	this.cadastrar( this.ensaio );
-	}
+	}*/
 
 	@Override
 	public boolean cadastrar(Entidade entidade)
@@ -37,7 +41,21 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		ensaio.setId( EnsaioDAO.ensaios.size() );
+		Connection c = getConnection();
+		String sql = "insert into ensaio(escola_samba_id_escola_samba,data_ensaio)values(?,?);";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, ensaio.getEscola().getId());
+			pstmt.setDate(2,new java.sql.Date(ensaio.getData().getTime()));
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			closeConnection(c);
+		}
+		return true;
+		/*ensaio.setId( EnsaioDAO.ensaios.size() );
 
 		if(EnsaioDAO.ensaios.put( ensaio.getId(), ensaio ) != null)
 		{
@@ -46,7 +64,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 		else
 		{
 			return false;
-		}
+		}*/
 	}
 
 	@Override
@@ -61,11 +79,33 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		if (EnsaioDAO.ensaios.containsKey(ensaio.getId())) {
+		Connection c = getConnection();
+		String sqlUpdate = "update ensaio set data_ensaio = ?, where id_ensaio = ? and escola_samba_id_escola_samba = ?;";
+		try {
+			c.setAutoCommit(false);
+			pstmt = c.prepareStatement(sqlUpdate);
+			pstmt.setDate(1,new java.sql.Date(ensaio.getData().getTime()));
+			pstmt.setInt(2, ensaio.getId());
+			pstmt.setInt(3, ensaio.getEscola().getId());
+			pstmt.execute();
+			pstmt.close();
+			c.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally{
+			closeConnection(c);
+		}
+		return true;
+		/*if (EnsaioDAO.ensaios.containsKey(ensaio.getId())) {
 			return EnsaioDAO.ensaios.put(ensaio.getId(), ensaio) != null;
 		} else {
 			return false;
-		}
+		}*/
 	}
 
 	@Override
@@ -80,31 +120,84 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 			return false;
 		}
 
-		return (EnsaioDAO.ensaios.remove(ensaio.getId()) != null);
+		Connection c = getConnection();
+		String sql = "Delete from ensaio where id_ensaio =?";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, ensaio.getId());
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			closeConnection(c);
+		}
+		
+		return true;
+//		return (EnsaioDAO.ensaios.remove(ensaio.getId()) != null);
 	}
 
 	@Override
 	public List<Entidade> obterTodos() {
 		List<Entidade> ensaios = new ArrayList<>();
-		for(int i=0; i< EnsaioDAO.ensaios.size(); i++ )
+		/*for(int i=0; i< EnsaioDAO.ensaios.size(); i++ )
 		{
 			ensaios.add(EnsaioDAO.ensaios.get(i));
+		}
+		return ensaios;*/
+		Connection c = getConnection();
+		String sql = "Select * from ensaio";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ensaios.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
 		}
 		return ensaios;
 	}
 
+	/*
+	 * Retorna um objeto passando o ResultSet
+	 */
+	private Ensaio resultSet2Object(ResultSet rs) throws SQLException
+	{
+		Ensaio e = new Ensaio();
+		e.setId(rs.getInt("id_ensaio"));
+		EscolaSamba es = new EscolaSamba("","");
+		es.setId(rs.getInt("escola_samba_id_escola_samba"));
+		e.setEscola(es);
+		e.setData(rs.getDate("data_ensaio"));
+		return e;
+	}
+	
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		return EnsaioDAO.ensaios.get(numero);
+		Ensaio en = null;
+		Connection c = getConnection();
+		String sql = "Select * from ensaio where id_ensaio = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				en = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return en;
+		//return EnsaioDAO.ensaios.get(numero);
 	}
 
 	@Override
-	public Collection<Entidade> obterTodosCollection() {
-		List<Entidade> ensaios = new ArrayList<>();
-		for(int i=0; i< EnsaioDAO.ensaios.size(); i++ )
-		{
-			ensaios.add(EnsaioDAO.ensaios.get(i));
-		}
-		return ensaios;
+	public Collection<Entidade> obterTodosCollection()
+	{
+		return this.obterTodos();
 	}
 }

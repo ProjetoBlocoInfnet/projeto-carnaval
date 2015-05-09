@@ -11,11 +11,18 @@ public class Conexao
 	
 	public static Connection getConexao(){
 		Connection c = null;
-/*		try {
-			c = DriverManager.getConnection("jdbc:mysql://localhost/aulapos","root","root");
+		try {
+			//Ambiente dev Emmanuel
+			c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","93956619");
+			//Ambiente dev Daniel
+			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
+			//Ambiente dev Elom
+			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
+			//Ambiente Produção
+			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}*/
+		}
 		return c;
 	}
 

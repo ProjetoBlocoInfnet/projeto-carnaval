@@ -1,12 +1,15 @@
 package negocio;
 
-import enumerator.Acao;
+import java.util.Date;
 
 public class Atividade implements Entidade
 {	
 	private Integer id;
+	private Integer id_integrante;
 	private EscolaSamba escolaSamba;
 	private Acao acao;
+	private Date data_inicio = new Date();
+	private Date data_fim;
 
 	@Override
 	public int hashCode() {
@@ -54,6 +57,22 @@ public class Atividade implements Entidade
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
+	public Integer getId_integrante() {
+		return id_integrante;
+	}
+	public void setId_integrante(Integer id_integrante) {
+		this.id_integrante = id_integrante;
+	}
+	public Date getData_inicio() {
+		return data_inicio;
+	}
+	public void setData_inicio(Date data_inicio) {
+		this.data_inicio = data_inicio;
+	}
+	public Date getData_fim() {
+		return data_fim;
+	}
+	public void setData_fim(Date data_fim) {
+		this.data_fim = data_fim;
+	}
 }
