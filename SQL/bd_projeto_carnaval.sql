@@ -121,27 +121,21 @@ CREATE TABLE jurado (
       ON UPDATE NO ACTION
 );
 
-CREATE TABLE atividade_integrante_escola (
-  integrante_id_integrante INTEGER UNSIGNED NOT NULL,
-  acao_id_acao INTEGER UNSIGNED NOT NULL,
-  escola_samba_id_escola_samba INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(integrante_id_integrante, acao_id_acao, escola_samba_id_escola_samba),
-  INDEX integrante_has_atividade_FKIndex1(integrante_id_integrante),
-  INDEX integrante_has_atividade_FKIndex2(acao_id_acao),
-  INDEX integrante_has_atividade_FKIndex3(escola_samba_id_escola_samba),
-  FOREIGN KEY(integrante_id_integrante)
-    REFERENCES integrante(id_integrante)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  FOREIGN KEY(atividade_id_atividade)
-    REFERENCES atividade(id_atividade)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  FOREIGN KEY(escola_samba_id_escola_samba)
-    REFERENCES escola_samba(id_escola_samba)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-);
+CREATE TABLE `atividade_integrante_escola` (
+  `id_atividade` int(11) NOT NULL AUTO_INCREMENT,
+  `integrante_id_integrante` int(10) unsigned NOT NULL,
+  `acao_id_acao` int(10) unsigned NOT NULL,
+  `escola_samba_id_escola_samba` int(10) unsigned NOT NULL,
+  `data_inicio` date NOT NULL,
+  `data_fim` date DEFAULT NULL,
+  PRIMARY KEY (`id_atividade`,`integrante_id_integrante`,`acao_id_acao`,`escola_samba_id_escola_samba`),
+  KEY `integrante_has_atividade_FKIndex1` (`integrante_id_integrante`),
+  KEY `integrante_has_atividade_FKIndex2` (`acao_id_acao`),
+  KEY `integrante_has_atividade_FKIndex3` (`escola_samba_id_escola_samba`),
+  CONSTRAINT `atividade_integrante_escola_ibfk_1` FOREIGN KEY (`integrante_id_integrante`) REFERENCES `integrante` (`id_integrante`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `atividade_integrante_escola_ibfk_2` FOREIGN KEY (`acao_id_acao`) REFERENCES `acao` (`id_acao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `atividade_integrante_escola_ibfk_3` FOREIGN KEY (`escola_samba_id_escola_samba`) REFERENCES `escola_samba` (`id_escola_samba`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE ensaio (
   id_ensaio INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,

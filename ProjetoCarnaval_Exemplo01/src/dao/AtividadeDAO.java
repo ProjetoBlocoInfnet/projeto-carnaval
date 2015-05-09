@@ -8,6 +8,7 @@ import java.util.Map;
 
 import negocio.Atividade;
 import negocio.Entidade;
+import negocio.Integrante;
 
 public class AtividadeDAO extends AbstractDAO implements DAO {
 	private static Map<Integer, Atividade> atividades = new HashMap<>();
@@ -21,13 +22,15 @@ public class AtividadeDAO extends AbstractDAO implements DAO {
 			return false;
 		}
 
-		atividade.setId(AtividadeDAO.atividades.size());
+		/*atividade.setId(AtividadeDAO.atividades.size());
 
 		if (AtividadeDAO.atividades.put(atividade.getId(), atividade) != null) {
 			return true;
 		} else {
 			return false;
-		}
+		}*/
+		
+		return true;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package negocio;
 public class Atividade implements Entidade
 {	
 	private Integer id;
+	private Integer id_integrante;
 	private EscolaSamba escolaSamba;
 	private Acao acao;
 
@@ -52,6 +53,10 @@ public class Atividade implements Entidade
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
+	public Integer getId_integrante() {
+		return id_integrante;
+	}
+	public void setId_integrante(Integer id_integrante) {
+		this.id_integrante = id_integrante;
+	}
 }

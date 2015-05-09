@@ -1,6 +1,6 @@
 package negocio;
 
-public class Acao
+public class Acao implements Entidade
 {
 	private Integer id;
 	private String nome;
