@@ -1,7 +1,5 @@
 package negocio;
 
-import enumerator.Acao;
-
 public class Atividade implements Entidade
 {	
 	private Integer id;

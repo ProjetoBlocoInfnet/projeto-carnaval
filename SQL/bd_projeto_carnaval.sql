@@ -26,10 +26,11 @@ CREATE TABLE usuario (
   PRIMARY KEY(id_usuario)
 );
 
-CREATE TABLE atividade (
-  id_atividade INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE acao (
+  id_acao INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NULL,
   descricao VARCHAR(255) NULL,
-  PRIMARY KEY(id_atividade)
+  PRIMARY KEY(id_acao)
 );
 
 CREATE TABLE pessoa (
@@ -122,11 +123,11 @@ CREATE TABLE jurado (
 
 CREATE TABLE atividade_integrante_escola (
   integrante_id_integrante INTEGER UNSIGNED NOT NULL,
-  atividade_id_atividade INTEGER UNSIGNED NOT NULL,
+  acao_id_acao INTEGER UNSIGNED NOT NULL,
   escola_samba_id_escola_samba INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(integrante_id_integrante, atividade_id_atividade, escola_samba_id_escola_samba),
+  PRIMARY KEY(integrante_id_integrante, acao_id_acao, escola_samba_id_escola_samba),
   INDEX integrante_has_atividade_FKIndex1(integrante_id_integrante),
-  INDEX integrante_has_atividade_FKIndex2(atividade_id_atividade),
+  INDEX integrante_has_atividade_FKIndex2(acao_id_acao),
   INDEX integrante_has_atividade_FKIndex3(escola_samba_id_escola_samba),
   FOREIGN KEY(integrante_id_integrante)
     REFERENCES integrante(id_integrante)
