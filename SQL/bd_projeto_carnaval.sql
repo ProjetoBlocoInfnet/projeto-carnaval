@@ -173,9 +173,12 @@ insert into perfil (nome_perfil, descricao) values ('Integrante','Integrantes pa
 insert into perfil (nome_perfil, descricao) values ('Torcedor','Torcedores das escolas de samba');
 commit;
 
+--Usuario master
 insert into usuario (usuario, senha) values ('admin', '123456');
 commit;
 
+insert into re_usuario_perfil values (1,1);
+commit;
 
 -- Se estiver correto, a query abaixo tem que retornar o admin como administrador do sistema
 
@@ -183,11 +186,24 @@ commit;
 --where usuario.id_usuario = re_usuario_perfil.usuario_id_usuario
 --and perfil.id_perfil = re_usuario_perfil.perfil_id_perfil
 
-
+--Valores fixos dos grupos de escola de samba
 insert into grupos (nome_grupo) values ("Grupo Especial");
 insert into grupos (nome_grupo) values ("Serie A"); 
 insert into grupos (nome_grupo) values ("Grupo B"); 
 insert into grupos (nome_grupo) values ("Grupo C");
 insert into grupos (nome_grupo) values ("Grupo D");
 insert into grupos (nome_grupo) values ("Grupo Avaliação");
+commit;
+
+--Valores iniciais para as acoes. Conforme tiverem mais vamos complementando aqui.
+insert into acao (nome,descricao) values ('Carpinteiro','');
+insert into acao (nome,descricao) values ('Ala','');
+insert into acao (nome,descricao) values ('Mestre Sala','');
+insert into acao (nome,descricao) values ('Porta Bandeira','');
+insert into acao (nome,descricao) values ('Confeccionador de instrumentos','');
+insert into acao (nome,descricao) values ('Figurinista','');
+insert into acao (nome,descricao) values ('Baterista','');
+insert into acao (nome,descricao) values ('Vocalista','');
+insert into acao (nome,descricao) values ('Bailarino','');
+insert into acao (nome,descricao) values ('Sambista','');
 commit;
