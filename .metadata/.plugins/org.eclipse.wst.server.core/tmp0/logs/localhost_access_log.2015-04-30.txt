@@ -380,3 +380,14 @@
 127.0.0.1 - - [30/Apr/2015:17:20:26 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=escolas HTTP/1.1" 200 2775
 127.0.0.1 - - [30/Apr/2015:17:20:30 -0300] "POST /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante HTTP/1.1" 200 2546
 127.0.0.1 - - [30/Apr/2015:17:20:35 -0300] "GET /ProjetoCarnaval_Exemplo01/indexIntegrante.jsp HTTP/1.1" 200 1566
+127.0.0.1 - - [30/Apr/2015:17:37:28 -0300] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [30/Apr/2015:17:37:29 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=escolas HTTP/1.1" 200 1821
+127.0.0.1 - - [30/Apr/2015:17:37:36 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1566
+127.0.0.1 - - [30/Apr/2015:17:37:38 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=ensaios HTTP/1.1" 500 3350
+127.0.0.1 - - [30/Apr/2015:17:37:38 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=ensaios HTTP/1.1" 500 3350
+127.0.0.1 - - [30/Apr/2015:17:39:52 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=ensaios HTTP/1.1" 200 2100
+127.0.0.1 - - [30/Apr/2015:17:49:37 -0300] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [30/Apr/2015:17:49:38 -0300] "GET /ProjetoCarnaval_Exemplo01/indexIntegrante.jsp HTTP/1.1" 200 1821
+127.0.0.1 - - [30/Apr/2015:17:49:43 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1566
+127.0.0.1 - - [30/Apr/2015:17:49:45 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=ensaios HTTP/1.1" 200 2110
+127.0.0.1 - - [30/Apr/2015:17:49:50 -0300] "POST /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante HTTP/1.1" 200 1566
