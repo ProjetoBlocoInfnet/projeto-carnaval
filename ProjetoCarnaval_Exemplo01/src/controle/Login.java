@@ -14,9 +14,7 @@ import dao.UsuarioDAO;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 5480054916620773263L;
 	
 	private HttpSession session = null;
@@ -33,7 +31,7 @@ public class Login extends HttpServlet {
 		
 		if (usuario == null){
 			System.out.println("usuário inexistente");
-			request.setAttribute("resultado", "Usu�rio inexistente");
+			request.setAttribute("resultado", "Usuário inexistente");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{				

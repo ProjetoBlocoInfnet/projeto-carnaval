@@ -50,13 +50,13 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		String sqlIdPessoa = "select * from pessoa where cpf = ? and nome = ?;";
 		String sqlIntegrante = "insert into integrante (pessoa_id_pessoa)values(?);";
 		try {
-			c.setAutoCommit(false); //caso tudo dê errado, isso permite que eu dê rollback nos inserts
+			c.setAutoCommit(false); //caso tudo dï¿½ errado, isso permite que eu dï¿½ rollback nos inserts
 			pstmt = c.prepareStatement(sqlUsuario);
 			pstmt.setString(1, integrante.getLogin());
 			pstmt.setString(2, integrante.getSenha());
 			pstmt.execute();
-			//Como o commit dessa operação só pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
-			//Porque estou na mesma transação da inserção na tabela usuario. Eu não conseguiria pegar via UsuarioDAO.
+			//Como o commit dessa operaï¿½ï¿½o sï¿½ pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
+			//Porque estou na mesma transaï¿½ï¿½o da inserï¿½ï¿½o na tabela usuario. Eu nï¿½o conseguiria pegar via UsuarioDAO.
 			Integer id_usuario = 0;
 			pstmt = c.prepareStatement(sqlIdUsuario);
 			pstmt.setString(1, integrante.getLogin());
@@ -166,8 +166,8 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		}
 
 		/*
-		 * O integrante ainda deve existir no banco por motivos de histórico
-		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * O integrante ainda deve existir no banco por motivos de histï¿½rico
+		 * A exclusï¿½o do usuï¿½rio ï¿½ pertencente ao escopo do UsuarioDAO, entï¿½o, este mï¿½todo invoca UsuarioDAO.excluirUsuario
 		 * 
 		 */
 		return new UsuarioDAO().excluirUsuario(integrante.getLogin(), integrante.getSenha());
@@ -215,6 +215,28 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 			closeConnection(c);
 		}
 		return integrantes;
+	}
+	
+	//Retorna Integrantes pelo nome
+	public List<Entidade> obterListaPorNome(String nome)
+	{	
+		List<Entidade> integrantes = new ArrayList<>();
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where nome like '%?%';";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, nome);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				integrantes.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return integrantes;
+		
 	}
 
 	

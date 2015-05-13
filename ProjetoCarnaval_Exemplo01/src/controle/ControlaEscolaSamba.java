@@ -1,14 +1,12 @@
 package controle;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import negocio.Entidade;
 import negocio.EscolaSamba;
@@ -25,7 +23,6 @@ public class ControlaEscolaSamba extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    private HttpSession session = null;
     private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
 
     protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
