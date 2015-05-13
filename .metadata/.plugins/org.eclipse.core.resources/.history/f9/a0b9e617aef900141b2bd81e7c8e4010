@@ -13,6 +13,7 @@ public class Integrante extends Pessoa
 		super( login, senha );
 	}
 
+<<<<<<< HEAD
 
 	public Set<Atividade> getAtividades() {
 		return atividades;
@@ -21,8 +22,12 @@ public class Integrante extends Pessoa
 	public void setAtividades(Set<Atividade> atividades) {
 		this.atividades = atividades;
 	}
+
 	
+	public EscolaSamba getEscolaSamba() {
+=======
 	public Set<EscolaSamba> getEscolaSamba() {
+>>>>>>> adicionando um Set<EscolaSamba> na Classe Integrante, e alterando o controlaIntegrante para usar o Set<>
 		return escolaSamba;
 	}
 

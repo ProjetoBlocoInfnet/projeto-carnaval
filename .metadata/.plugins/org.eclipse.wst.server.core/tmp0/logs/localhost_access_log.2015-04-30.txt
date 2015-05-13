@@ -320,3 +320,10 @@
 127.0.0.1 - - [30/Apr/2015:15:45:58 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaEnsaio HTTP/1.1" 200 3695
 127.0.0.1 - - [30/Apr/2015:15:46:00 -0300] "GET /ProjetoCarnaval_Exemplo01/indexEscolaSamba.jsp HTTP/1.1" 200 1537
 127.0.0.1 - - [30/Apr/2015:15:46:02 -0300] "POST /ProjetoCarnaval_Exemplo01/Logout HTTP/1.1" 200 2056
+127.0.0.1 - - [30/Apr/2015:15:49:30 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1812
+127.0.0.1 - - [30/Apr/2015:15:49:42 -0300] "POST /ProjetoCarnaval_Exemplo01/Logout HTTP/1.1" 200 2056
+127.0.0.1 - - [30/Apr/2015:15:49:48 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1537
+127.0.0.1 - - [30/Apr/2015:15:49:50 -0300] "POST /ProjetoCarnaval_Exemplo01/Logout HTTP/1.1" 200 2056
+127.0.0.1 - - [30/Apr/2015:15:49:55 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1586
+127.0.0.1 - - [30/Apr/2015:15:49:57 -0300] "POST /ProjetoCarnaval_Exemplo01/Logout HTTP/1.1" 200 2056
+127.0.0.1 - - [30/Apr/2015:15:50:13 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1812

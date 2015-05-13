@@ -51,9 +51,7 @@ public class ControlaIntegrante extends HttpServlet {
 			integrante.setCep( request.getParameter( "cep" ) );
 			integrante.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
 								
-			//integrante.setEscolaSamba(this.recuperarEscolaDaSession(request));	  
-			
-			integrante.getEscolaSamba().add(this.recuperarEscolaDaSession(request));
+			integrante.setEscolaSamba(this.recuperarEscolaDaSession(request));	  
 
 	    	return integrante;
 	    }
@@ -118,9 +116,7 @@ public class ControlaIntegrante extends HttpServlet {
 		case "consultar":
 			if(request.getParameter("nome") !=null){
 				
-				//verificar
 				List<Entidade> listaIntegrantes  = tabelaItegrante.obterListaPorNome(request.getParameter("nome").toString(),this.recuperarEscolaDaSession(request));
-				//List<Entidade> listaIntegrantes  = tabelaItegrante.obterListaPorNome(request.getParameter("nome").toString());
 				if(listaIntegrantes.size()> 0){
 					
 					request.setAttribute("listaIntegrante", listaIntegrantes);
