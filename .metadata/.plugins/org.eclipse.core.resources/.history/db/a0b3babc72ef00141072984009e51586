@@ -1,0 +1,104 @@
+package controle;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import negocio.Atividade;
+import negocio.Ensaio;
+import negocio.Entidade;
+import negocio.EscolaSamba;
+import negocio.Integrante;
+import negocio.Usuario;
+import dao.EnsaioDAO;
+import dao.EscolaSambaDAO;
+import dao.IntegranteDAO;
+
+/**
+ * Servlet implementation class ControlaAreaIntegrante
+ */
+public class ControlaAreaIntegrante extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+      
+	private HttpSession session = null;
+	
+	private EnsaioDAO tabelaEnsaio = new EnsaioDAO();
+    private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
+    private IntegranteDAO tabelaIntegrante = new IntegranteDAO();
+	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ControlaAreaIntegrante() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String tela = request.getParameter("tela");
+		
+		session = request.getSession();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");	
+		
+		
+		switch (tela) {
+		case "escolas":
+			
+			Set<EscolaSamba> escolas = new HashSet<EscolaSamba>();	
+			
+			Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(usuario.getId());
+			
+			Set<EscolaSamba> listaEscola = integrante.getEscolaSamba();
+			
+			
+			
+			
+			for ( Atividade ativ : ((Integrante) usuario ).atividades ) {
+				escolas.add( ativ.getEscolaSamba() );
+			}
+			
+			
+			request.setAttribute("listaEscola", escolas);
+			
+			request.getRequestDispatcher("/areaIntegrante/index.jsp").forward(request, response);
+			
+			break;
+		
+		case "ensaios":
+			
+			
+			
+			
+				for ( Entidade e : new EnsaioDAO().obterTodos() ) {
+					ensaio = (Ensaio)e;
+					
+					if ( escolas.contains( ensaio.getEscola() ) ) {
+						ensaios.add( ensaio );
+					}
+				}
+			
+			break;	
+			
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}

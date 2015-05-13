@@ -29,12 +29,19 @@ public class UsuarioDAO extends AbstractDAO
 		escola.setNome("Escola de Samba exemplo");
 		new EscolaSambaDAO().cadastrar( escola );
 		
+		EscolaSamba escola2 = new EscolaSamba("escolaSamba2","123456");
+		escola2.setPerfil(Perfil.ESCOLASAMBA);
+		escola2.setNome("Escola de Samba exemplo2");
+		new EscolaSambaDAO().cadastrar( escola2 );
+		
 		torcedor.setEscolaSamba( (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 ) );
 		
 
 		Integrante integrante = new Integrante("integrante","123456");
 		integrante.setPerfil(Perfil.INTEGRANTE);
 		integrante.setNome("Integrante exemplo");
+		integrante.getEscolaSamba().add(escola);
+		integrante.getEscolaSamba().add(escola2);
 		new IntegranteDAO().cadastrar( integrante );
 		
 		Atividade atividade = new Atividade();

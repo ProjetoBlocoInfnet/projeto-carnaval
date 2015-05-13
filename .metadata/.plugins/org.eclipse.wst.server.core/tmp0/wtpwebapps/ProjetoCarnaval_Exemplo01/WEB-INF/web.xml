@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>Carnaval</display-name>
   <welcome-file-list>
     <welcome-file>CadastroTorcedor.jsp</welcome-file>
@@ -64,7 +64,18 @@
   <servlet-mapping>
     <servlet-name>CadastroAtividadeIntegrante</servlet-name>
     <url-pattern>/CadastroAtividadeIntegrante</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <description></description>
+    <display-name>ControlaTorcedor</display-name>
+    <servlet-name>ControlaTorcedor</servlet-name>
+    <servlet-class>controle.ControlaTorcedor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlaTorcedor</servlet-name>
+    <url-pattern>/ControlaTorcedor</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <description></description>
     <display-name>ControlaJurado</display-name>
@@ -87,12 +98,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ControlaTorcedor</display-name>
-    <servlet-name>ControlaTorcedor</servlet-name>
-    <servlet-class>controle.ControlaTorcedor</servlet-class>
+    <display-name>ControlaAreaIntegrante</display-name>
+    <servlet-name>ControlaAreaIntegrante</servlet-name>
+    <servlet-class>controle.ControlaAreaIntegrante</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ControlaTorcedor</servlet-name>
-    <url-pattern>/ControlaTorcedor</url-pattern>
+    <servlet-name>ControlaAreaIntegrante</servlet-name>
+    <url-pattern>/ControlaAreaIntegrante</url-pattern>
   </servlet-mapping>
+>>>>>>> Area Integrante, minhas escolas
 </web-app>

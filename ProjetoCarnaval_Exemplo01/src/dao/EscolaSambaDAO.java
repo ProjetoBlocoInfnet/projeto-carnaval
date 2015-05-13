@@ -378,4 +378,6 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return escolasSamba;*/
 		return this.obterTodos();
 	}
+
+	
 }

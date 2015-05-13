@@ -20,7 +20,7 @@
 	
 </head>
 <body>
-
+<% Usuario usuario = (Usuario) session.getAttribute("usuario"); %>
 <div class="container">
 	
 	<div>
@@ -32,18 +32,9 @@
 		  </div>
 	</form>	
 	<div class="alert alert-info" role="alert">
-	<%
-		Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
-	%>
-	<strong>Usuário: </strong>
-	
-	<% 
-		out.println( usuario.getLogin() ); 
-	%>
-	
-	<br/>
-	<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito%><br/>
-	</div>
+	<strong>Usuário: </strong><%=usuario.getLogin() %><br>
+	<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito %><br>
+	</div>	
 	<hr/>
 	<br>
 	<ul class="nav nav-tabs">

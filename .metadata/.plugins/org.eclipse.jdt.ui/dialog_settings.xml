@@ -14,6 +14,20 @@
 	<section name="SelfEncapsulateFieldWizard">
 		<item value="false" key="GenerateJavadoc"/>
 	</section>
+	<section name="SourceActionDialog.methods">
+		<item value="false" key="Blocks"/>
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="false" key="InstanceOf"/>
+		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="DialogBounds_GenerateHashCodeEqualsDialog">
+		<item value="497" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="584" key="DIALOG_HEIGHT"/>
+		<item value="435" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="completion_proposal_size">
