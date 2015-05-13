@@ -10,6 +10,7 @@ import java.util.List;
 
 import enumerator.Perfil;
 import negocio.Entidade;
+import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Pessoa.Sexos;
 
@@ -217,15 +218,18 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		return integrantes;
 	}
 	
+
 	//Retorna Integrantes pelo nome
-	public List<Entidade> obterListaPorNome(String nome)
+	public List<Entidade> obterListaPorNome(String nome,EscolaSamba escola)
 	{	
 		List<Entidade> integrantes = new ArrayList<>();
 		Connection c = getConnection();
-		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where nome like '%?%';";
+		
+		String sql = "select * from usuario join (pessoa, integrante,escola_samba) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where nome like '%?%' and escola_samba_id_escola_samba = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, nome);
+			pstmt.setInt(2, escola.getId());
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				integrantes.add(this.resultSet2Object(rs));

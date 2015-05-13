@@ -13,12 +13,12 @@ public class Conexao
 		Connection c = null;
 		try {
 			//Ambiente dev Emmanuel
-			c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","93956619");
+			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","93956619");
 			//Ambiente dev Daniel
 			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
 			//Ambiente dev Elom
-			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
-			//Ambiente Produção
+			c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","Debora0103");
+			//Ambiente Produï¿½ï¿½o
 			//c = DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","root");
 		} catch (SQLException e) {
 			e.printStackTrace();

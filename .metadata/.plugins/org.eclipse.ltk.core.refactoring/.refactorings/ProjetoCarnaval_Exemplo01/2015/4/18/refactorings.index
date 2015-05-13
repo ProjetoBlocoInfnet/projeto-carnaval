@@ -2,3 +2,6 @@
 1430358753277	Rename type 'CadastroIntegrante'
 1430360012878	Rename resource 'CadastroEscolaSamba.jsp'
 1430360859037	Encapsulate field 'escolaSamba'
+1430402278223	Rename type 'CadastroEnsaio'
+1430402478473	Copy files
+1430404083994	Rename resource 'CadastroIntegrante.jsp'

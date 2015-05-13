@@ -27,7 +27,13 @@ public class ControlaIntegrante extends HttpServlet {
       
 	 private IntegranteDAO tabelaItegrante = new IntegranteDAO();
 	 
-	
+	 protected EscolaSamba recuperarEscolaDaSession(HttpServletRequest request) {
+	    	session = request.getSession();
+			Usuario usuarioEscola = (Usuario) session.getAttribute("usuario");			
+			EscolaSambaDAO DAOEscola = new EscolaSambaDAO();
+			EscolaSamba escola = (EscolaSamba)DAOEscola.obterPorId(usuarioEscola.getId());
+			return escola;
+	}
 	    
 	protected Integrante criarObjeto(HttpServletRequest request)
 	    {
@@ -44,11 +50,8 @@ public class ControlaIntegrante extends HttpServlet {
 			integrante.setEndereco( request.getParameter( "endereco" ) );
 			integrante.setCep( request.getParameter( "cep" ) );
 			integrante.setSexo( Sexos.from( request.getParameter( "sexo" ) ) );
-			
-			session = request.getSession();
-			Usuario usuarioEscola = (Usuario) session.getAttribute("usuario");			
-			EscolaSambaDAO DAOEscola = new EscolaSambaDAO();			
-			integrante.setEscolaSamba((EscolaSamba)DAOEscola.obterPorId(usuarioEscola.getId()));	  
+								
+			integrante.setEscolaSamba(this.recuperarEscolaDaSession(request));	  
 
 	    	return integrante;
 	    }
@@ -113,7 +116,9 @@ public class ControlaIntegrante extends HttpServlet {
 		case "consultar":
 			if(request.getParameter("nome") !=null){
 				
-				List<Entidade> listaIntegrantes  = tabelaItegrante.obterListaPorNome(request.getParameter("nome").toString());
+				//verificar
+				List<Entidade> listaIntegrantes  = tabelaItegrante.obterListaPorNome(request.getParameter("nome").toString(),this.recuperarEscolaDaSession(request));
+				//List<Entidade> listaIntegrantes  = tabelaItegrante.obterListaPorNome(request.getParameter("nome").toString());
 				if(listaIntegrantes.size()> 0){
 					
 					request.setAttribute("listaIntegrante", listaIntegrantes);

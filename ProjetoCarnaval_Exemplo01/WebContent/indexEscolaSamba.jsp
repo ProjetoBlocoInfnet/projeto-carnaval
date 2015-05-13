@@ -47,8 +47,8 @@
 	<hr/>
 	<br>
 	<ul class="nav nav-tabs">
-  		<li role="presentation"><a href="ControlaIntegrante">Cadastrar Integrante</a></li>
-  		<li role="presentation"><a href="CadastraEnsaio.html">Cadastrar Ensaio</a></li>
+  		<li role="presentation"><a href="ControlaIntegrante">Integrante</a></li>
+  		<li role="presentation"><a href="ControlaEnsaio">Ensaio</a></li>
 	</ul>
 	<br><br>
 	

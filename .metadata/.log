@@ -649,4 +649,15 @@ Caused by: java.net.UnknownHostException: MyPcWaizmam: unknown error
 	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1302)
 	at java.net.InetAddress.getLocalHost(InetAddress.java:1479)
 	... 25 more
+<<<<<<< HEAD
 >>>>>>> Atualização dos Controles ContrlaEscolaSamba, ControlaQuesito, ControlaJurado, Atualização da àrea da Escola de Samba, alterando cadastro, consulta e Exclusão de Integrante
+=======
+
+!ENTRY org.eclipse.jface.text 4 0 2015-04-30 15:09:13.325
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.wst.sse.ui.internal.taginfo.AnnotationHoverProcessor.getHoverInfo(AnnotationHoverProcessor.java:120)
+	at org.eclipse.wst.sse.ui.internal.taginfo.BestMatchHover.getHoverInfo2(BestMatchHover.java:156)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+>>>>>>> ControlaEnsaio, cadastro de ensaio, excluir ensaio, controlaIntegrante linkando o integrante a escola de samba que está logada, navegabilidade e padronização de layout de tela

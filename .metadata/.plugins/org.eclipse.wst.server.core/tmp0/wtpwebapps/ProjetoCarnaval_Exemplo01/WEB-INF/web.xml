@@ -27,13 +27,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CadastroEnsaio</display-name>
-    <servlet-name>CadastroEnsaio</servlet-name>
-    <servlet-class>controle.CadastroEnsaio</servlet-class>
+    <display-name>ControlaEnsaio</display-name>
+    <servlet-name>ControlaEnsaio</servlet-name>
+    <servlet-class>controle.ControlaEnsaio</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CadastroEnsaio</servlet-name>
-    <url-pattern>/CadastroEnsaio</url-pattern>
+    <servlet-name>ControlaEnsaio</servlet-name>
+    <url-pattern>/ControlaEnsaio</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
