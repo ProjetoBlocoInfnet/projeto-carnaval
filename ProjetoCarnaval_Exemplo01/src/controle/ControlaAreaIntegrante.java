@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Ensaio;
-import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Usuario;
@@ -30,7 +29,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 	private HttpSession session = null;
 	
 	private EnsaioDAO tabelaEnsaio = new EnsaioDAO();
-    private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
+    //private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
     private IntegranteDAO tabelaIntegrante = new IntegranteDAO();
 	
     /**

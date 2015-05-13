@@ -128,14 +128,6 @@ String action = request.getParameter("action");
 			break;
 		}
 		
-		
-		
-		/*EscolaSamba escola = new EscolaSambaDAO().obterPorNome( request.getParameter( "escola" ));
-		Date data = new Date();
-		Ensaio ensaio = new Ensaio( escola, data );
-		
-		new EnsaioDAO().cadastrar( ensaio );
-		request.getRequestDispatcher("indexEscolaSamba.jsp").forward(request, response);*/
 	}
 
 }

@@ -1,0 +1,11 @@
+127.0.0.1 - - [13/May/2015:15:34:04 -0300] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [13/May/2015:15:34:18 -0300] "GET /ProjetoCarnaval_Exemplo01/ HTTP/1.1" 200 1821
+127.0.0.1 - - [13/May/2015:15:34:19 -0300] "GET /favicon.ico HTTP/1.1" 404 973
+127.0.0.1 - - [13/May/2015:15:34:33 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1586
+127.0.0.1 - - [13/May/2015:15:34:35 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba HTTP/1.1" 200 5176
+127.0.0.1 - - [13/May/2015:15:34:41 -0300] "POST /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba HTTP/1.1" 200 5111
+127.0.0.1 - - [13/May/2015:15:35:05 -0300] "POST /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba HTTP/1.1" 200 5708
+127.0.0.1 - - [13/May/2015:15:35:09 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba?idEscola=4&acao=excluir HTTP/1.1" 500 2981
+127.0.0.1 - - [13/May/2015:15:35:10 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba?idEscola=4&acao=excluir HTTP/1.1" 500 2981
+127.0.0.1 - - [13/May/2015:15:35:19 -0300] "POST /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba HTTP/1.1" 500 1560
+127.0.0.1 - - [13/May/2015:15:35:19 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaEscolaSamba HTTP/1.1" 500 2981
