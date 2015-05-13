@@ -50,7 +50,7 @@ if(request.getAttribute("listaIntegrante") != null){
 	<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito %><br>
 	</div>	
 	<hr/>
-	<a href="indexAdmin.jsp"><button type="button" class="btn btn-default">Voltar</button></a>
+	<a href="indexEscolaSamba.jsp"><button type="button" class="btn btn-default">Voltar</button></a>
 	<br><br>
 	<form action="ControlaIntegrante" method="post">
 		<input type="hidden" name="action" value="telaCadastro">

@@ -25,28 +25,8 @@ public class ControlaEscolaSamba extends HttpServlet {
     
     private EscolaSambaDAO tabelaEscolaSamba = new EscolaSambaDAO();
 
-    protected boolean mantemEscolaSamba(String acao, HttpServletRequest request)
-    {
-    	if("salvar".equals(acao))
-    	{
-    		EscolaSamba e = this.criarObjeto(request);
-    		return tabelaEscolaSamba.cadastrar(e);
-    	}
-    	else if("consultar".equals(acao))
-    	{
-    		EscolaSamba e = tabelaEscolaSamba.obterPorNome(request.getParameter("nome").toString());
-    		if(e != null)
-    		{    			
-    			return true;
-    		}
-    		else
-    		{
-    			return false;
-    		}
-    	}
-		return false;
-    }
-    
+
+  
     protected EscolaSamba criarObjeto(HttpServletRequest request)
     {
     	String login = request.getParameter("nome").trim();
@@ -61,33 +41,7 @@ public class ControlaEscolaSamba extends HttpServlet {
     	e.setEnderecoBarracao(request.getParameter("enderecoBarracao").toString());
     	e.setEnderecoQuadra(request.getParameter("enderecoQuadra").toString());
     	e.setFiliacao(request.getParameter("filiacao").toString());
-    	e.setGrupoAtual(Grupos.from(request.getParameter("grupos")));
-    	
-/*    	String grupo = request.getParameter("grupoAtual");
-    	switch (grupo) {
-		case "GrupoEspecial":
-			e.setGrupoAtual(Grupos.GrupoEspecial);
-			break;
-		case "SerieA":
-			e.setGrupoAtual(Grupos.SerieA);
-			break;
-		case "GrupoB":
-			e.setGrupoAtual(Grupos.GrupoB);
-			break;
-		case "GrupoC":
-			e.setGrupoAtual(Grupos.GrupoC);
-			break;
-		case "GrupoD":
-			e.setGrupoAtual(Grupos.GrupoD);
-			break;
-		case "GrupoAvaliacao":
-			e.setGrupoAtual(Grupos.GrupoAvaliacao);
-			break;
-		default:
-			break;
-		}
- */   	
-    	
+    	e.setGrupoAtual(Grupos.from(Integer.valueOf(request.getParameter("grupoAtual")))); 
     	e.setLema(request.getParameter("lema").toString());
     	e.setTelefone(request.getParameter("telefone").toString());
     	e.setCnpj(request.getParameter("cnpj"));
@@ -98,18 +52,7 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
-		{
-			request.setAttribute("oSucesso","s");
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-		}
-		request.setAttribute("oAcao",request.getParameter("acao").toString());
-		request.getRequestDispatcher("CadastroEscolaSamba.jsp").forward(request, response);
-*/
+
 		if(request.getParameter("acao") != null){
 			
 			String action = request.getParameter("acao");
@@ -144,19 +87,7 @@ public class ControlaEscolaSamba extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-		if(this.mantemEscolaSamba(request.getParameter("acao").toString(), request))
-		{
-			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-			request.setAttribute("oAcao",request.getParameter("acao").toString());
-			request.getRequestDispatcher("CadastroEscolaSamba.jsp").forward(request, response);
-		}
-*/
-		
+	
 		String action = request.getParameter("action");
 		
 		switch (action) {
@@ -164,7 +95,8 @@ public class ControlaEscolaSamba extends HttpServlet {
 			request.getRequestDispatcher("/escolaSamba/CadastroEscolaSamba.jsp").forward(request, response);
 			break;
 		case "cadastrar":
-			if(mantemEscolaSamba("salvar",request)){
+			
+			if(tabelaEscolaSamba.cadastrar(this.criarObjeto(request))){
 				request.setAttribute("resultado_ok", "Escola de Samba Cadastrada com sucesso!");
 			}else{
 				request.setAttribute("resultado_error", "Erro ao cadastrar a Escola de Samba!");

@@ -41,7 +41,7 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 	</div>	
 	<hr/>
 	<br>
-	<form action="ControlaEscolaSamba" method="get">
+	<form action="ControlaIntegrante" method="get">
 		<input type="submit" class="btn btn-info" value="Voltar">
 	</form>
 	<br><br>

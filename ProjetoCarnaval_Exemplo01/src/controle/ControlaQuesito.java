@@ -28,30 +28,7 @@ public class ControlaQuesito extends HttpServlet {
     
     private QuesitoDAO tabelaQuesitos = new QuesitoDAO();
 
-    protected boolean mantemQuesito(String acao, HttpServletRequest request)
-    {
-		//TODO Emmanuel Aranha - Fazer as op��es de salvar, alterar e excluir
-    	
-    	if("salvar".equals(acao))
-    	{
-    		Quesito q = this.criarObjeto(request);
-    		return tabelaQuesitos.cadastrar(q);
-    	}
-    	else if("consultar".equals(acao))
-    	{
-    		Quesito q = tabelaQuesitos.obterPorNome(request.getParameter("nome").toString());
-    		if(q != null)
-    		{
-    			return true;
-    		}
-    		else
-    		{
-    			return false;
-    		}
-    	}
-		return false;
-    }
-
+   
     protected Quesito criarObjeto(HttpServletRequest request)
     {
     	Quesito q = new Quesito();
@@ -94,13 +71,15 @@ public class ControlaQuesito extends HttpServlet {
 			request.getRequestDispatcher("/quesito/CadastroQuesito.jsp").forward(request, response);
 			break;
 		case "cadastrar":
-			if(mantemQuesito("salvar",request)){
+			
+			if(tabelaQuesitos.cadastrar(this.criarObjeto(request))){
 				request.setAttribute("resultado_ok", "Quesito Cadastrado com sucesso!");
 			}else{
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Quesito!");
 			}
 			doGet(request, response);
-			break;
+			break;			
+			
 		case "consultar":
 			if(request.getParameter("nome") !=null){
 				
