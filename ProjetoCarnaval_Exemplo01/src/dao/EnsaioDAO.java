@@ -161,9 +161,10 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 		return ensaios;
 	}
 	
-	public List<Entidade> obterTodos(EscolaSamba escola) {
+
+	public List<Ensaio> obterTodos(EscolaSamba escola) {
 		
-		List<Entidade> ensaios = new ArrayList<>();
+		List<Ensaio> ensaios = new ArrayList<>();
 		Connection c = getConnection();
 		String sql = "select * from ensaio join (escola_samba) on (ensaio.id_ensaio = escola_samba.id_escola_samba) where escola_samba_id_escola_samba = ?;";
 		try {

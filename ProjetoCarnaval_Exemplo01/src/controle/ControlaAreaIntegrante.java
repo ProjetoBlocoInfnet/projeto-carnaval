@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import negocio.Ensaio;
 import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
@@ -45,6 +46,12 @@ public class ControlaAreaIntegrante extends HttpServlet {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		return usuario;
     }
+    
+    protected Set<EscolaSamba> setEscolaSamba(HttpServletRequest request) {
+    	Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+		Set<EscolaSamba> listaEscola = integrante.getEscolaSamba();	
+		return listaEscola;
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,33 +59,40 @@ public class ControlaAreaIntegrante extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		if(request.getParameter("tela") != null){
+		
+		if(request.getParameter("tela") != null || request.getAttribute("tela") != null){
 			
-			String tela = request.getParameter("tela");
-			Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
-			Set<EscolaSamba> listaEscola = integrante.getEscolaSamba();		
+			System.out.println(request.getAttribute("tela"));
+			String tela = null;
+			if(request.getParameter("tela") != null){
+				tela = request.getParameter("tela");
+			}else if(request.getAttribute("tela") != null){
+				tela = (String) request.getAttribute("tela");
+			}
 			
 			switch (tela) {
 			
 			case "escolas":			
-							
-				for (EscolaSamba escolaSamba : listaEscola) {
-					System.out.println(escolaSamba.getNome());
-				}
 				
-				request.setAttribute("listaEscola", listaEscola);			
+				request.setAttribute("listaEscola", this.setEscolaSamba(request));			
 				request.getRequestDispatcher("/areaIntegrante/minhasEscolas.jsp").forward(request, response);
 				
 				break;
 			
 			case "ensaios":
-								
 				
-				for (EscolaSamba escolaSamba : listaEscola) {
-					System.out.println(escolaSamba.getNome());
+				List<Ensaio> listaTodosEnsaio = new ArrayList<Ensaio>();
+				List<Ensaio> listaEnsaios = null;
+				
+				for (EscolaSamba escolaSamba : this.setEscolaSamba(request)) {					
+					listaEnsaios = (List<Ensaio>) tabelaEnsaio.obterTodos(escolaSamba);					
+					for (Ensaio ensaio : listaEnsaios) {
+						listaTodosEnsaio.add(ensaio);
+					}					
 				}
-				
-				request.setAttribute("listaEscolaConsulta", listaEscola);
+																
+				request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
+				request.setAttribute("listaEnsaio", listaTodosEnsaio);
 				
 				request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
 				
@@ -125,39 +139,49 @@ public class ControlaAreaIntegrante extends HttpServlet {
 					}
 							
 			}else{
+				request.setAttribute("tela","ensaios");
 				doGet(request, response);
 			}
 			
 			break;
 		case "consultarEnsaioEscola":
 			
-			if(request.getParameter("idEscola") !=null){
+			if(request.getParameter("escolaId") != null){
 				
-				Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
-				Set<EscolaSamba> SetEscola = integrante.getEscolaSamba();		
-				List<Entidade> listEnsaio = new ArrayList<Entidade>();
-				
-				Integer id = Integer.valueOf(request.getParameter("idEscola"));
-				
-				for (EscolaSamba escolaSamba : SetEscola) {
-					if(escolaSamba.getId() == id){
-						
-						 listEnsaio = (List<Entidade>)tabelaEnsaio.obterTodos(escolaSamba);
-						
-					}
-				}
-				if(listEnsaio.size()> 0){
+					System.out.println(request.getParameter("escolaId"));
 					
-					request.setAttribute("listaEnsaio", listEnsaio);
-					request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
+					Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+					Set<EscolaSamba> SetEscola = integrante.getEscolaSamba();		
+					List<Ensaio> listEnsaio = new ArrayList<Ensaio>();
+					
+					Integer id = Integer.valueOf(request.getParameter("escolaId"));
+					
+					for (EscolaSamba escolaSamba : SetEscola) {
+						if(escolaSamba.getId() == id){							
+							 listEnsaio = (List<Ensaio>)tabelaEnsaio.obterTodos(escolaSamba);							 
+						}
+					}
+					
+					for (Ensaio ensaio : listEnsaio) {
+						System.out.println(ensaio.getEscola().getNome());
+						System.out.println(ensaio.getData());
+					}
+										
+					if(listEnsaio.size()> 0){
+						System.out.println("entrou aqui");
+						request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
+						request.setAttribute("listaEnsaio", listEnsaio);
+						request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
+					}else{
+						request.setAttribute("tela","ensaios");
+						request.setAttribute("resultado_error", "Nenhum Ensaio foi encontrado");
+						doGet(request, response);
+					}
+						
 				}else{
-					request.setAttribute("resultado_error", "Nenhum Ensaio foi encontrado");
+					request.setAttribute("tela","ensaios");
 					doGet(request, response);
 				}
-						
-		}else{
-			doGet(request, response);
-		}
 			
 			break;
 		default:

@@ -29,10 +29,10 @@
 
 <%
 Usuario usuario = (Usuario) session.getAttribute("usuario");
-List<Entidade> listaEnsaios = null;
+List<Ensaio> listaEnsaios = null;
 Set<Entidade> listaEscolas = null;
 if(request.getAttribute("listaEnsaio") != null){
-	listaEnsaios = (List<Entidade>) request.getAttribute("listaEnsaio");
+	listaEnsaios = (List<Ensaio>) request.getAttribute("listaEnsaio");
 }
 if(request.getAttribute("listaEscolaConsulta") != null){
 	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscolaConsulta");
@@ -62,7 +62,8 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 		<div class="row">  
 		  <div class="col-lg-6">
 		    <div class="input-group">
-		      <select name="idEscola" id="escola" class="form-control">  
+		      <select name="escolaId" id="escola" class="form-control">  
+		      <option>selecione a escola de Samba --></option>
 		      <% for(Entidade entidade : listaEscolas){ 
 		      		EscolaSamba escola = (EscolaSamba) entidade;
 		      %>
@@ -82,18 +83,17 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 	if(listaEnsaios != null){
 		if(listaEnsaios.size() > 0 ){ %>
 		<div >
-		<h4>Lista de Ensaios Escolas de Samba</h4>
+		<h4>Lista de Ensaios das Escolas de Samba</h4>
 		<hr>
 		<table class="table table-hover">
 	  		<thead>
 	  		<th>Id</th>
 	  		<th>Data </th>
 	  		<th>Escola</th>
-	  		<th>Ação</th>
 	  		</thead>
 	  		<tbody>
-	  		<% for(Entidade entidade : listaEnsaios){ 
-	  			Ensaio ensaio = (Ensaio) entidade; 
+	  		<% for(Ensaio ensaio : listaEnsaios){ 
+	  			//Ensaio ensaio = (Ensaio) entidade; 
 	  		%>
 		  		<tr>
 		  			<td><%=ensaio.getId() %></td>  

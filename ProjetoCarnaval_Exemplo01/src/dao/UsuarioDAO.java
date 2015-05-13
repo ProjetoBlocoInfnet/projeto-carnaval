@@ -54,10 +54,15 @@ public class UsuarioDAO extends AbstractDAO
 		setUsuario.add(integrante);
 		setUsuario.add(torcedor);;
 		setUsuario.add(escola);
+<<<<<<< HEAD
 		for(Entidade e : new TorcedorDAO().obterTodos()) //Rataria pra aceitar os usu�rios cadastrados no DAO Fake
 		{
 			setUsuario.add((Torcedor) e);
 		}
+=======
+		setUsuario.add(escola2);
+		
+>>>>>>> Area Integrante, alteração nas views, controlaAreaIntegrante, EnsaioDAO
 	}
 	*/
 	public Usuario obterUsuario(String login, String senha){

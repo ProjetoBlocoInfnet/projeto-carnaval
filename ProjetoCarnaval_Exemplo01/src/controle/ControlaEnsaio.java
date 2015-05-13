@@ -79,7 +79,7 @@ public class ControlaEnsaio extends HttpServlet {
 			
 			
 		}
-		List<Entidade> listaEnsaio = tabelaEnsaio.obterTodos(this.recuperarEscolaDaSession(request));
+		List<Ensaio> listaEnsaio = tabelaEnsaio.obterTodos(this.recuperarEscolaDaSession(request));
 		request.setAttribute("listaEnsaio", listaEnsaio);
 		
 		request.getRequestDispatcher("/ensaio/index.jsp").forward(request, response);

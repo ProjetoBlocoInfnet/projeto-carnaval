@@ -36,9 +36,9 @@
 <%
 Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-List<Entidade> listaEnsaios = null;
+List<Ensaio> listaEnsaios = null;
 if(request.getAttribute("listaEnsaio") != null){
-	listaEnsaios = (List<Entidade>) request.getAttribute("listaEnsaio");
+	listaEnsaios = (List<Ensaio>) request.getAttribute("listaEnsaio");
 }
 %>
 
@@ -107,8 +107,8 @@ if(request.getAttribute("listaEnsaio") != null){
   		<th>Ação</th>
   		</thead>
   		<tbody>
-  		<% for(Entidade entidade : listaEnsaios){ 
-  			Ensaio ensaio = (Ensaio) entidade; 
+  		<% for(Ensaio ensaio : listaEnsaios){ 
+  			//Ensaio ensaio = (Ensaio) entidade; 
   		%>
 	  		<tr>
 	  			<td><%=ensaio.getId() %></td>  
