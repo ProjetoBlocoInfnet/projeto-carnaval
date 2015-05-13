@@ -55,10 +55,10 @@ Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
 	</nav>
 	<br/><br/>
 
-	<%
+	<% 
 	HashSet<EscolaSamba> escolas = new HashSet<EscolaSamba>();	
 	
-	for ( Atividade ativ : ((Integrante) usuario ).atividades ) {
+	for ( Atividade ativ : ((Integrante) usuario ).getAtividades() ) {
 		escolas.add( ativ.getEscolaSamba() );
 	}
 	%>
