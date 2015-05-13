@@ -1,5 +1,6 @@
 package enumerator;
 
+import negocio.Pessoa.Sexos;
 
 public enum Grupos
 {
