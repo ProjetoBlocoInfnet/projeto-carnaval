@@ -49,6 +49,9 @@ public class ControlaAreaIntegrante extends HttpServlet {
     protected Set<EscolaSamba> setEscolaSamba(HttpServletRequest request) {
     	Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
 		Set<EscolaSamba> listaEscola = integrante.getEscolaSamba();	
+		
+		//Set<EscolaSamba> listaEscola = tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+		
 		return listaEscola;
 	}
 
@@ -57,6 +60,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Códigos comentados podem ser utilizados é só ajustar
 		
 		
 		if(request.getParameter("tela") != null || request.getAttribute("tela") != null){
@@ -77,6 +81,12 @@ public class ControlaAreaIntegrante extends HttpServlet {
 				request.getRequestDispatcher("/areaIntegrante/minhasEscolas.jsp").forward(request, response);
 				
 				break;
+			case "torcedores":			
+				
+				request.setAttribute("listaEscola", this.setEscolaSamba(request));			
+				request.getRequestDispatcher("/areaIntegrante/torcedores.jsp").forward(request, response);
+				
+				break;
 			
 			case "ensaios":
 				
@@ -90,8 +100,8 @@ public class ControlaAreaIntegrante extends HttpServlet {
 					}					
 				}
 																
-				request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
-				request.setAttribute("listaEnsaio", listaTodosEnsaio);
+				//request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
+				//request.setAttribute("listaEnsaio", listaTodosEnsaio);
 				
 				request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
 				

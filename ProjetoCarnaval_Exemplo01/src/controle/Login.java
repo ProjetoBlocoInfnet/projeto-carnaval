@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
-		session = request.getSession();
+		session = request.getSession();		
 		
 		Usuario usuario = (Usuario) new UsuarioDAO().obterUsuario(login,senha);
 		

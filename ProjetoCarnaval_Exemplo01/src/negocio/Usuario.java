@@ -48,4 +48,6 @@ public class Usuario implements Entidade{
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+
+
 }

@@ -19,7 +19,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	
 </head>
 <body>
@@ -89,7 +88,10 @@ if(request.getAttribute("listaQuesito") != null){
 	  			<td><%=quesito.getId() %></td>  
 	  			<td><%=quesito.getNome() %></td>  		
 	  			<td><%=quesito.getDescricao() %></td> 	
-	  			<td><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> | <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+	  			<td>
+					<a href="ControlaQuesito?idQuesito=<%=quesito.getId()%>&acao=alterar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> | 
+	  				<a href="ControlaQuesito?idQuesito=<%=quesito.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+				</td>
 	  		</tr>
   		<% } %>
   		</tbody>

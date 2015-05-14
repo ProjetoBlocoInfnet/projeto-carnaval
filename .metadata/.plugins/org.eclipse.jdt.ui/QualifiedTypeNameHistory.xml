@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="dao.EscolaSambaDAO"/>
-<fullyQualifiedTypeName name="enumerator.Grupos"/>
-<fullyQualifiedTypeName name="negocio.Pessoa.Sexos"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="dao.EnsaioDAO"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
 </qualifiedTypeNameHistroy>

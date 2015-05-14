@@ -99,10 +99,10 @@ if(request.getAttribute("listaEscola") != null){
 	  			<td><%=escola.getTelefone() %></td>  
 	  			<td><%=escola.getEmail() %></td>  	
 	  			<td><%=escola.getCnpj() %></td> 
-	  			<td><%= escola.getGrupoAtual()%></td> 		
+	  			<td><%= escola.getGrupoAtual()%></td> 	  				
 	  			<td>
 	  				<a href="ControlaEscolaSamba?idEscola=<%=escola.getId()%>&acao=alterar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> | 
-	  				<a href="ControlaEscolaSamba?idEscola=<%=escola.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+	  				<a href="ControlaEscolaSamba?idEscola=<%=escola.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 	  				
 	  			</td>
 	  		</tr>
   		<% } %>

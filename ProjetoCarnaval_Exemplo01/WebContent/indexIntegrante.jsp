@@ -50,6 +50,7 @@ Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
 	<ul class="nav nav-tabs">
   		<li role="presentation"><a href="ControlaAreaIntegrante?tela=escolas">Minhas escolas</a></li>
   		<li role="presentation"><a href="ControlaAreaIntegrante?tela=ensaios">Ensaios</a></li>
+  		<li role="presentation"><a href="ControlaAreaIntegrante?tela=torcedores">Torcedores</a></li>
 	</ul>
 	<br><br>
 

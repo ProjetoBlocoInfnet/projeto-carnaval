@@ -1,11 +1,3 @@
-<%@ page import="negocio.Entidade" %>
-<%@ page import="negocio.Usuario" %>
-
-<%@ page import="negocio.Torcedor" %>
-<%@ page import="negocio.EscolaSamba" %>
-
-<%@ page import="dao.TorcedorDAO" %>
-<%@ page import="dao.EscolaSambaDAO" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -33,80 +25,19 @@
 
 </head>
 <body>
+<div class="container">
+	
+	<div>
+	<h1>Área do Torcedor</h1>
+	</div>	
+	<hr/>
+	<br>
+	<ul class="nav nav-tabs">
+  		<li role="presentation"><a href="ControlaTorcedor?tela=escolas">Minhas escolas</a></li>
+  		<li role="presentation"><a href="ControlaTorcedor?tela=torcedores">Torcedores</a></li>
+	</ul>
+	<br><br>
 
-	<div class="container">
 
-		<div>
-			<h1>Área do Torcedor</h1>
-		</div>
-		<form action="Logout" method="post">
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Logout</button>
-			</div>
-		</form>
-		
-		<%
-			Usuario usuario = (Usuario)request.getSession().getAttribute( "usuario" );
-		
-		%>
-		
-		<div class="alert alert-info" role="alert">
-			<strong>Usuário: </strong><% out.println( usuario.getLogin() );%><br>
-			<strong>Perfil: </strong><%=usuario.getPerfil().nomeBonito %><br>
-		</div>
-		<hr />
-		<br>
-
-		<nav>
-		<ul class="nav nav-tabs">
-			<li><a data-toggle="tab" href="#escola">Dados da Escola de
-					Samba</a></li>
-			<li><a data-toggle="tab" href="#torcedores">Outros
-					Torcedores</a></li>
-		</ul>
-		<br />
-		<br />
-		</nav>
-		<div class="tab-content">
-			<%
-				EscolaSamba escola = ( (Torcedor) usuario ).getEscolaSamba();
-			%>
-		
-			<div class="tab-pane active" id="escola">
-				
-
-				<table class="table table-hover">
-					<thead>
-						<th>Nome Escola</th>
-						<th>Endereço da Quadra</th>
-						<th>Endereço do Barracão</th>
-						<th>Grupo</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td><%=escola.getNome() %></td>
-							<td><%=escola.getEnderecoQuadra()%></td>
-							<td><%=escola.getEnderecoBarracao()%></td>
-							<td><%=escola.getGrupoAtual().nomeBonito %></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			<div class="tab-pane" id = "torcedores">
-				<ul>
-				<%
-					Torcedor t;
-				
-					for ( Entidade e : new TorcedorDAO().obterTodos() ) {
-						t = (Torcedor)e;
-						out.println( "<li>" + t.getNome() + "</li>" );
-					}
-				%>
-				</ul>
-			</div>
-			
-		</div>
-	</div>
 </body>
 </html>

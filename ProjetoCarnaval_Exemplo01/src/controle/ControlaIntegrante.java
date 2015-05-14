@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import negocio.Atividade;
 import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Pessoa.Sexos;
 import negocio.Usuario;
+import dao.AtividadeDAO;
 import dao.EscolaSambaDAO;
 import dao.IntegranteDAO;
 
@@ -26,6 +28,7 @@ public class ControlaIntegrante extends HttpServlet {
 	private HttpSession session = null;
       
 	 private IntegranteDAO tabelaItegrante = new IntegranteDAO();
+	 private AtividadeDAO tabelaAtividade = new AtividadeDAO();
 	 
 	 protected EscolaSamba recuperarEscolaDaSession(HttpServletRequest request) {
 	    	session = request.getSession();
@@ -41,7 +44,7 @@ public class ControlaIntegrante extends HttpServlet {
 	    	login = login.replace(" ", "");
 	    	String senha = "123456";
 	    	
-	    	Integrante integrante = new Integrante( login, senha );
+	    	Integrante integrante = new Integrante( login.toLowerCase(), senha );
 	    	
 			integrante.setNome( request.getParameter( "nome" ) );
 			integrante.setEmail( request.getParameter( "email" ) );
@@ -74,6 +77,19 @@ public class ControlaIntegrante extends HttpServlet {
 			case "alterar":
 				
 				break;
+			case "atividade":
+				
+				List<Entidade> listaAtividades= tabelaAtividade.obterTodos();
+				request.setAttribute("listaAtividades", listaAtividades);
+				
+				for (Entidade e: listaAtividades) {
+					Atividade atividade = (Atividade) e;
+					System.out.println(atividade.getAcao().getNome());
+				}
+				
+				
+				
+				break;
 			case "excluir":
 				if(tabelaItegrante.excluir(entidade)){
 					request.setAttribute("resultado_ok", "Integrante excluído com sucesso!");
@@ -85,12 +101,22 @@ public class ControlaIntegrante extends HttpServlet {
 				break;
 			}
 			
+			List<Entidade> listaIntegrante = tabelaItegrante.obterTodos();
+			request.setAttribute("listaIntegrante", listaIntegrante);
+			if(action.equals("atividade")){
+				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
+			}else{
+				request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
+			}
 			
+			
+		}else{
+			List<Entidade> listaIntegrante = tabelaItegrante.obterTodos();
+			request.setAttribute("listaIntegrante", listaIntegrante);
+			
+			request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
 		}
-		List<Entidade> listaIntegrante = tabelaItegrante.obterTodos();
-		request.setAttribute("listaIntegrante", listaIntegrante);
 		
-		request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
 		
 	}
 

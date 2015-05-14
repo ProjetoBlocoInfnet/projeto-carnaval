@@ -62,7 +62,15 @@
 		    </div>
 		  </div>
 	</form>
-
+	<hr>
+	<form action="ControlaTorcedor" method="post"  >
+			<div class="form-group">
+		    <div class="col-sm-offset-1 col-sm-10">
+		      <button type="submit" class="btn btn-primary">Acessar como Torcedor</button>
+		    </div>
+		  </div>
+	</form>
+	
 	
 </div>
 </body>

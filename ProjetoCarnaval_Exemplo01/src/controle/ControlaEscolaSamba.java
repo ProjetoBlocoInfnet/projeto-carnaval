@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,10 +34,13 @@ public class ControlaEscolaSamba extends HttpServlet {
     	login = login.replace(" ", "");
     	String senha = "123456";
     	
-    	EscolaSamba e = new EscolaSamba(login, senha);
+    	System.out.println(request.getParameter("dataFundacao"));
+    	
+    	EscolaSamba e = new EscolaSamba(login.toLowerCase(), senha);
     	e.setNome(request.getParameter("nome").toString());
     	e.getCor().add(request.getParameter("cor").toString());
-    	//e.setDataFundacao(new Date(Integer.valueOf(request.getParameter("dataFundacao"))));
+    	e.setDataFundacao(new Date(request.getParameter("dataFundacao")));
+    	//e.setDataFundacao((Integer.valueOf(request.getParameter("dataFundacao"))));
     	e.setEmail(request.getParameter("email").toString());
     	e.setEnderecoBarracao(request.getParameter("enderecoBarracao").toString());
     	e.setEnderecoQuadra(request.getParameter("enderecoQuadra").toString());

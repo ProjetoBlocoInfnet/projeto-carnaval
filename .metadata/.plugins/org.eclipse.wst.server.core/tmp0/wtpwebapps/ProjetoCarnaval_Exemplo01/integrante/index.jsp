@@ -97,7 +97,8 @@ if(request.getAttribute("listaIntegrante") != null){
 	  			<td><%=integrante.getEmail() %></td>
 	  			<td>
 	  				<a href="ControlaIntegrante?idIntegrante=<%=integrante.getId()%>&acao=alterar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> | 
-	  				<a href="ControlaIntegrante?idIntegrante=<%=integrante.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+	  				<a href="ControlaIntegrante?idIntegrante=<%=integrante.getId()%>&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> |
+	  				<a href="ControlaIntegrante?idIntegrante=<%=integrante.getId()%>&acao=atividade"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Atividade</a> 
 	  			</td>
 	  		</tr>
   		<% } %>

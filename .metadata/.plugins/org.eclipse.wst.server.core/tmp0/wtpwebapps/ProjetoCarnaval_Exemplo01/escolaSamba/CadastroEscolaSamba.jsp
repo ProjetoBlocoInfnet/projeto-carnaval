@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="datepicker/css/datepicker.css">
 	
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
@@ -16,7 +17,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="datepicker/js/bootstrap-datepicker.js"></script>
 	
 </head>
 <body>
@@ -82,7 +83,15 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		   <div class="form-group">
 		    <label for="dataFundacao" class="col-sm-2 control-label">Data de Fundação</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="dataFundacao" class="form-control" id="dataFundacao" placeholder="Data de Fundação">
+		      <input type="text" name="dataFundacao" class="form-control" id="dataFundacao" placeholder="Data de Fundação">		      
+		      <script>
+			      $(document).ready(function () {
+			        $('#dataFundacao').datepicker({
+			            format: "dd/mm/yyyy",
+			            language: "pt-BR"
+			        });
+			      });
+			    </script>
 		    </div>
 		  </div>
 		  
@@ -104,12 +113,12 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		    <label for="grupoAtual" class="col-sm-2 control-label">Grupo Atual</label>
 		    <div class="col-sm-10">
 		     <select name="grupoAtual" id="grupoAtual" class="form-control">
-		      	<option value="GrupoEspecial">Grupo Especial</option>
-	        	<option value="SerieA">Série A</option>
-	        	<option value="GrupoB">Série B</option>
-	       	 	<option value="GrupoC">Série C</option>
-	        	<option value="GrupoD">Série D</option>
-	       		<option value="GrupoAvaliacao">Grupo de Avaliação</option>     
+		      	<option value="1">Grupo Especial</option>
+	        	<option value="2">Série A</option>
+	        	<option value="3">Série B</option>
+	       	 	<option value="4">Série C</option>
+	        	<option value="5">Série D</option>
+	       		<option value="6">Grupo de Avaliação</option>     
 		     </select>
 		    </div>
 		  </div>
