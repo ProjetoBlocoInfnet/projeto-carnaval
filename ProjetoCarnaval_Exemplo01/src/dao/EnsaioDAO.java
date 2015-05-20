@@ -191,7 +191,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	{
 		Ensaio e = new Ensaio();
 		e.setId(rs.getInt("id_ensaio"));
-		e.setEscola((EscolaSamba) new EscolaSambaDAO().obterPorId(rs.getInt("escola_samba_id_escola_samba")));
+		e.setEscola((EscolaSamba) new EscolaSambaDAO().obterPorIdEscola(rs.getInt("escola_samba_id_escola_samba")));
 		e.setData(rs.getDate("data_ensaio"));
 		return e;
 	}
