@@ -1,0 +1,8 @@
+127.0.0.1 - - [12/May/2015:22:24:30 -0300] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [12/May/2015:22:27:27 -0300] "GET /ProjetoCarnaval_Exemplo01/ HTTP/1.1" 200 1821
+127.0.0.1 - - [12/May/2015:22:27:28 -0300] "GET /favicon.ico HTTP/1.1" 404 973
+127.0.0.1 - - [12/May/2015:22:27:39 -0300] "POST /ProjetoCarnaval_Exemplo01/Login HTTP/1.1" 200 1566
+127.0.0.1 - - [12/May/2015:22:27:42 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=ensaios HTTP/1.1" 200 2173
+127.0.0.1 - - [12/May/2015:22:27:44 -0300] "GET /ProjetoCarnaval_Exemplo01/indexIntegrante.jsp HTTP/1.1" 200 1566
+127.0.0.1 - - [12/May/2015:22:27:45 -0300] "GET /ProjetoCarnaval_Exemplo01/ControlaAreaIntegrante?tela=escolas HTTP/1.1" 200 2775
+127.0.0.1 - - [12/May/2015:22:27:47 -0300] "GET /ProjetoCarnaval_Exemplo01/indexIntegrante.jsp HTTP/1.1" 200 1566

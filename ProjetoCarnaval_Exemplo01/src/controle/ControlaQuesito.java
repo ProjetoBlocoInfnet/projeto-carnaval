@@ -28,30 +28,7 @@ public class ControlaQuesito extends HttpServlet {
     
     private QuesitoDAO tabelaQuesitos = new QuesitoDAO();
 
-    protected boolean mantemQuesito(String acao, HttpServletRequest request)
-    {
-		//TODO Emmanuel Aranha - Fazer as op��es de salvar, alterar e excluir
-    	
-    	if("salvar".equals(acao))
-    	{
-    		Quesito q = this.criarObjeto(request);
-    		return tabelaQuesitos.cadastrar(q);
-    	}
-    	else if("consultar".equals(acao))
-    	{
-    		Quesito q = tabelaQuesitos.obterPorNome(request.getParameter("nome").toString());
-    		if(q != null)
-    		{
-    			return true;
-    		}
-    		else
-    		{
-    			return false;
-    		}
-    	}
-		return false;
-    }
-
+   
     protected Quesito criarObjeto(HttpServletRequest request)
     {
     	Quesito q = new Quesito();
@@ -60,10 +37,33 @@ public class ControlaQuesito extends HttpServlet {
     	return q;
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("acao") != null){
+			
+			String action = request.getParameter("acao");
+			Integer id = Integer.valueOf(request.getParameter("idQuesito")); 
+			
+			Entidade entidade = tabelaQuesitos.obterPorId(id);
+			
+			switch (action) {
+			case "alterar":
+				
+				break;
+			case "excluir":
+				if(tabelaQuesitos.excluir(entidade)){
+					request.setAttribute("resultado_ok", "Quesito excluído com sucesso!");
+				}else{
+					request.setAttribute("resultado_error", "Erro ao excluir o Quesito!");
+				}
+				break;
+			default:
+				break;
+			}
+			
+			
+		}
 				
 		List<Entidade> listaQuesitos = tabelaQuesitos.obterTodos();
 		request.setAttribute("listaQuesito", listaQuesitos);
@@ -71,21 +71,9 @@ public class ControlaQuesito extends HttpServlet {
 		request.getRequestDispatcher("/quesito/index.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-		if(this.mantemQuesito(request.getParameter("acao").toString(), request))
-		{
-			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-			request.setAttribute("oAcao",request.getParameter("acao").toString());
-			request.getRequestDispatcher("CadastroQuesito.jsp").forward(request, response);
-*/
+
 	
 		String action = request.getParameter("action");
 		
@@ -94,13 +82,15 @@ public class ControlaQuesito extends HttpServlet {
 			request.getRequestDispatcher("/quesito/CadastroQuesito.jsp").forward(request, response);
 			break;
 		case "cadastrar":
-			if(mantemQuesito("salvar",request)){
+			
+			if(tabelaQuesitos.cadastrar(this.criarObjeto(request))){
 				request.setAttribute("resultado_ok", "Quesito Cadastrado com sucesso!");
 			}else{
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Quesito!");
 			}
 			doGet(request, response);
-			break;
+			break;			
+			
 		case "consultar":
 			if(request.getParameter("nome") !=null){
 				

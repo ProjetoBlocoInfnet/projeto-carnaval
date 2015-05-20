@@ -29,29 +29,7 @@ public class ControlaJurado extends HttpServlet {
 
     private JuradoDAO tabelaJurados = new JuradoDAO();
 
-    protected boolean mantemJurado(String acao, HttpServletRequest request)
-    {
-		//TODO Emmanuel Aranha - Fazer as op��es de salvar, alterar e excluir
-    	
-    	if("salvar".equals(acao))
-    	{
-    		Jurado j = this.criarObjeto(request);
-    		return tabelaJurados.cadastrar(j);
-    	}
-    	else if("consultar".equals(acao))
-    	{
-    		Jurado j = tabelaJurados.obterPorNome(request.getParameter("nome").toString());
-    		if(j != null)
-    		{
-    			return true;
-    		}
-    		else
-    		{
-    			return false;
-    		}
-    	}
-		return false;
-    }
+ 
 
     protected Jurado criarObjeto(HttpServletRequest request)
     {	
@@ -63,7 +41,7 @@ public class ControlaJurado extends HttpServlet {
     	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
-    	j.setSexo(Sexos.from(request.getParameter("sexos")));
+    	j.setSexo(Sexos.from(request.getParameter("sexo")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
@@ -76,19 +54,7 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-		if(this.mantemJurado(request.getParameter("acao").toString(), request))
-		{
-			request.setAttribute("oSucesso","s");
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-		}
-		request.setAttribute("oAcao",request.getParameter("acao").toString());
-		request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
-*/
-		
+
 		List<Entidade> listaJurados = tabelaJurados.obterTodos();
 		request.setAttribute("listaJurado", listaJurados);
 	
@@ -99,17 +65,7 @@ public class ControlaJurado extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-/*
-		if(this.mantemJurado(request.getParameter("acao").toString(), request))
-		{
-			request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
-		}
-		else
-		{
-			request.setAttribute("oSucesso","n");
-			request.setAttribute("oAcao",request.getParameter("acao").toString());
-			request.getRequestDispatcher("CadastroJurado.jsp").forward(request, response);
-*/
+
 		
 		String action = request.getParameter("action");
 		
@@ -118,13 +74,15 @@ public class ControlaJurado extends HttpServlet {
 			request.getRequestDispatcher("/jurado/CadastroJurado.jsp").forward(request, response);
 			break;
 		case "cadastrar":
-			if(mantemJurado("salvar",request)){
+			
+			if(tabelaJurados.cadastrar(this.criarObjeto(request))){
 				request.setAttribute("resultado_ok", "Jurado Cadastrado com sucesso!");
 			}else{
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Jurado!");
 			}
 			doGet(request, response);
-			break;
+			break;	
+			
 		case "consultar":
 			if(request.getParameter("nome") !=null){
 				
