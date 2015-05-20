@@ -15,4 +15,21 @@ public class Jurado extends Pessoa
 	public void setQuesitoJulgado(Quesito quesitoJulgado) {
 		this.quesitoJulgado = quesitoJulgado;
 	}
+
+	@Override
+	public String toString() {
+		return "Jurado [quesitoJulgado=" + quesitoJulgado
+				+ ", getQuesitoJulgado()=" + getQuesitoJulgado()
+				+ ", getNome()=" + getNome() + ", getEndereco()="
+				+ getEndereco() + ", getCpf()=" + getCpf() + ", getCep()="
+				+ getCep() + ", getTelefone()=" + getTelefone()
+				+ ", getEmail()=" + getEmail() + ", getSexo()=" + getSexo()
+				+ ", getId()=" + getId() + ", obterMensagemAcesso()="
+				+ obterMensagemAcesso() + ", getLogin()=" + getLogin()
+				+ ", getSenha()=" + getSenha() + ", getPerfil()=" + getPerfil()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }

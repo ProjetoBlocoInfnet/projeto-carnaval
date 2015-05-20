@@ -87,7 +87,6 @@ if(request.getAttribute("listaJurado") != null){
   		<tbody>
   		<% for(Entidade entidade : listaJurados){ 
   			Jurado jurado = (Jurado) entidade;  	
-  			
   		%>
 	  		<tr>
 	  			<td><%=jurado.getId() %></td>  

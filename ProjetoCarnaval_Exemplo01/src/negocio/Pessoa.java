@@ -21,7 +21,8 @@ public abstract class Pessoa extends Usuario {
 		public String toString() {
 			return nomeBonito;
 		}
-
+		
+		
 		public static Sexos from(String valor) {
 
 			for (Sexos s : Sexos.values()) {

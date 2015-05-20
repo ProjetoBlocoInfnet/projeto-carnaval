@@ -2,8 +2,8 @@ INDEX VERSION 1.127+/home/waizmam/Documentos/Projects_git/projeto-carnaval/.meta
 3888198363.index
 669337892.index
 1913109094.index
-1585628865.index
 3721837726.index
+1585628865.index
 1883619563.index
 742522455.index
 2706981297.index
@@ -26,6 +26,7 @@ INDEX VERSION 1.127+/home/waizmam/Documentos/Projects_git/projeto-carnaval/.meta
 120211678.index
 2841451250.index
 2066489604.index
+185480245.index
 867751841.index
 2200319003.index
 4005015089.index

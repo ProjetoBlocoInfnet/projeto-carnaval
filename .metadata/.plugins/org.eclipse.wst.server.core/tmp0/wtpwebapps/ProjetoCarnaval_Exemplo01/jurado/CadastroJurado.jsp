@@ -1,4 +1,7 @@
 <%@ page import="negocio.Usuario" %>
+<%@ page import="negocio.Entidade" %>
+<%@ page import="negocio.Quesito" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,7 +26,10 @@
 
 <%
 Usuario usuario = (Usuario) session.getAttribute("usuario");
-
+List<Entidade> listaQuesitos = null;
+if(request.getAttribute("listaQuesitos") != null){
+	listaQuesitos = (List<Entidade>) request.getAttribute("listaQuesitos");
+}
 %>
 
 <div class="container">
@@ -56,6 +62,24 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		    <label for="nome" class="col-sm-2 control-label">Nome</label>
 		    <div class="col-sm-10">
 		      <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+		    </div>
+		  </div>
+		  
+		    <div class="form-group">
+		    <label for="sexo" class="col-sm-2 control-label">Sexo</label>
+		    <div class="col-sm-10">
+		    <div class="radio">
+				  <label>
+				    <input type="radio" name="sexo" id="sexo" value="M" >
+				   Masculino
+				  </label>
+				</div>
+				<div class="radio">
+				  <label>
+				    <input type="radio" name="sexo" id="sexo" value="F">
+				    Feminino
+				  </label>
+				</div>
 		    </div>
 		  </div>
 		  
@@ -93,6 +117,20 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		      <input type="text" name="email" class="form-control" id="email" placeholder="E-mail">
 		    </div>
 		  </div> 
+		  
+		   <div class="form-group">
+		    <label for="cpf" class="col-sm-2 control-label">Atividades:</label>
+		    <div class="col-sm-10">
+		      <select  name="quesito" class="form-control">
+		      <%for(Entidade entidade: listaQuesitos){ 
+		      		Quesito q = (Quesito) entidade;		      		
+		      %>
+				  <option value="<%= q.getId()%>"><%= q.getNome()%></option>
+			  <%} %>
+				
+				</select>
+		    </div>
+		  </div>
 	  		
 	  	<br>
 		  <div class="form-group">

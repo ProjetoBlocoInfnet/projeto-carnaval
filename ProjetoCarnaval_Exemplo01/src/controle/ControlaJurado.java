@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import negocio.Entidade;
 import negocio.Jurado;
 import negocio.Pessoa.Sexos;
+import negocio.Quesito;
 import dao.JuradoDAO;
+import dao.QuesitoDAO;
 
 /**
  * Servlet implementation class ControlaJurado
@@ -28,6 +30,7 @@ public class ControlaJurado extends HttpServlet {
     }
 
     private JuradoDAO tabelaJurados = new JuradoDAO();
+    private QuesitoDAO tabelaQuesitos = new QuesitoDAO();
 
  
 
@@ -39,13 +42,15 @@ public class ControlaJurado extends HttpServlet {
     	
     	Jurado j = new Jurado(login,senha);
     	
+    	
     	j.setNome(request.getParameter("nome").toString());
     	j.setEndereco(request.getParameter("endereco").toString());
     	j.setSexo(Sexos.from(request.getParameter("sexo")));
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
-    	j.setEmail(request.getParameter("email").toString());
+    	j.setEmail(request.getParameter("email").toString());    	    	  	
+    	j.setQuesitoJulgado((Quesito)tabelaQuesitos.obterPorId(Integer.valueOf(request.getParameter("quesito"))));
     	return j;
     }
 
@@ -55,9 +60,8 @@ public class ControlaJurado extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<Entidade> listaJurados = tabelaJurados.obterTodos();
-		request.setAttribute("listaJurado", listaJurados);
-	
+		List<Entidade> listaJurados = (List<Entidade>) tabelaJurados.obterTodos();	
+		request.setAttribute("listaJurado", listaJurados);	
 		request.getRequestDispatcher("/jurado/index.jsp").forward(request, response);
 	}
 
@@ -71,6 +75,8 @@ public class ControlaJurado extends HttpServlet {
 		
 		switch (action) {
 		case "telaCadastro":
+			List<Entidade> listaQuesitos = (List<Entidade>) tabelaQuesitos.obterTodos();
+			request.setAttribute("listaQuesitos", listaQuesitos);
 			request.getRequestDispatcher("/jurado/CadastroJurado.jsp").forward(request, response);
 			break;
 		case "cadastrar":
