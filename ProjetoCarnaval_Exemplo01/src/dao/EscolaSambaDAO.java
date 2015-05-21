@@ -273,7 +273,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
 		}*/
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba);";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario);";
 		try {
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -294,7 +294,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
 		}*/
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario.ativo = true;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -331,7 +331,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		//return escolas.get( numero );
 		EscolaSamba es = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where id_escola_samba = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario_id_usuario = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
@@ -347,12 +347,34 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return es;
 	}
 
+	public Entidade obterPorIdEscola(Integer numero) {
+		// TODO Auto-generated method stub
+		//return escolas.get( numero );
+		EscolaSamba es = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				es = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return es;
+	}
+
+	
 	public Entidade obterAtivoPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		//return escolas.get( numero );
 		EscolaSamba es = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario.ativo = true and usuario_id_usuario = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
