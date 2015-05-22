@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import negocio.Entidade;
 import negocio.Jurado;
 import negocio.Pessoa.Sexos;
+import negocio.Quesito;
 import dao.JuradoDAO;
+import dao.QuesitoDAO;
 
 /**
  * Servlet implementation class ControlaJurado
@@ -45,7 +47,8 @@ public class ControlaJurado extends HttpServlet {
     	j.setTelefone(request.getParameter("telefone").toString());
     	j.setCep(request.getParameter("cep").toString());
     	j.setCpf(request.getParameter("cpf").toString());
-    	j.setEmail(request.getParameter("email").toString());
+    	j.setEmail(request.getParameter("email").toString());    	
+    	j.setQuesitoJulgado(new Quesito(Integer.valueOf(request.getParameter("quesito"))));
     	return j;
     }
 
@@ -57,7 +60,7 @@ public class ControlaJurado extends HttpServlet {
 
 		List<Entidade> listaJurados = tabelaJurados.obterTodos();
 		request.setAttribute("listaJurado", listaJurados);
-	
+			
 		request.getRequestDispatcher("/jurado/index.jsp").forward(request, response);
 	}
 
@@ -71,6 +74,10 @@ public class ControlaJurado extends HttpServlet {
 		
 		switch (action) {
 		case "telaCadastro":
+			
+			QuesitoDAO q = new QuesitoDAO();
+			List<Entidade> listaQuesitos = (List<Entidade>) q.obterTodos();
+			request.setAttribute("listaQuesitos", listaQuesitos);
 			request.getRequestDispatcher("/jurado/CadastroJurado.jsp").forward(request, response);
 			break;
 		case "cadastrar":
