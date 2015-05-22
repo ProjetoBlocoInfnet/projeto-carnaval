@@ -76,7 +76,7 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		   <div class="form-group">
 		    <label for="cep" class="col-sm-2 control-label">CEP</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="cep" class="form-control" id="cep" placeholder="CEP">
+		      <input type="text" name="cep" class="form-control" id="cep" placeholder="CEP" maxlength="11">
 		    </div>
 		  </div>
 
