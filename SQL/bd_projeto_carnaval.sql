@@ -166,6 +166,79 @@ CREATE TABLE torcedor (
       ON UPDATE NO ACTION
 );
 
+CREATE TABLE carnaval_posicao_jurado (
+  id_carnaval_posicao_jurado INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  descricao_posicao VARCHAR(50) NULL,
+  PRIMARY KEY(id_carnaval_posicao_jurado)
+);
+
+CREATE TABLE carnaval (
+  id_carnaval INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  grupos_id_grupo INTEGER UNSIGNED NOT NULL,
+  data_primeiro_desfile DATE NULL,
+  data_ultimo_desfile INTEGER UNSIGNED NULL,
+  PRIMARY KEY(id_carnaval),
+  INDEX carnaval_FKIndex1(grupos_id_grupo),
+  FOREIGN KEY(grupos_id_grupo)
+    REFERENCES grupos(id_grupo)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE carnaval_quesitos (
+  id_carnaval_quesitos INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
+  ordem_quesito INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(id_carnaval_quesitos, carnaval_id_carnaval, ordem_quesito),
+  INDEX carnaval_quesitos_FKIndex1(carnaval_id_carnaval),
+  FOREIGN KEY(carnaval_id_carnaval)
+    REFERENCES carnaval(id_carnaval)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE carnaval_quesito_jurado (
+  id_carnaval_quesito_jurado INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  carnaval_posicao_jurado_id_carnaval_posicao_jurado INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_ordem_quesito INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
+  jurado_id_jurado INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_id_carnaval_quesitos INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(id_carnaval_quesito_jurado),
+  INDEX carnaval_quesito_jurado_FKIndex1(carnaval_quesitos_id_carnaval_quesitos, carnaval_quesitos_carnaval_id_carnaval, carnaval_quesitos_ordem_quesito),
+  INDEX carnaval_quesito_jurado_FKIndex2(jurado_id_jurado),
+  INDEX carnaval_quesito_jurado_FKIndex3(carnaval_posicao_jurado_id_carnaval_posicao_jurado),
+  FOREIGN KEY(carnaval_quesitos_id_carnaval_quesitos, carnaval_quesitos_carnaval_id_carnaval, carnaval_quesitos_ordem_quesito)
+    REFERENCES carnaval_quesitos(id_carnaval_quesitos, carnaval_id_carnaval, ordem_quesito)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(jurado_id_jurado)
+    REFERENCES jurado(id_jurado)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(carnaval_posicao_jurado_id_carnaval_posicao_jurado)
+    REFERENCES carnaval_posicao_jurado(id_carnaval_posicao_jurado)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE carnaval_desfile_escola (
+  id_carnaval_desfile_escola INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  escola_samba_id_escola_samba INTEGER UNSIGNED NOT NULL,
+  carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
+  data_hora_inicio DATETIME NULL,
+  PRIMARY KEY(id_carnaval_desfile_escola),
+  INDEX carnaval_desfile_escola_FKIndex1(carnaval_id_carnaval),
+  INDEX carnaval_desfile_escola_FKIndex2(escola_samba_id_escola_samba),
+  FOREIGN KEY(carnaval_id_carnaval)
+    REFERENCES carnaval(id_carnaval)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(escola_samba_id_escola_samba)
+    REFERENCES escola_samba(id_escola_samba)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
 
 insert into perfil (nome_perfil, descricao) values ('Administrador','Administrador do sistema');
 insert into perfil (nome_perfil, descricao) values ('Escola de Samba','Escolas de samba usuárias do sistema');
