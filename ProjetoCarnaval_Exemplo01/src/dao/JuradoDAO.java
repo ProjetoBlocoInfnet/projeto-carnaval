@@ -284,6 +284,27 @@ public class JuradoDAO extends AbstractDAO implements DAO
 		return jurados;
 	}
 
+	public List<Entidade> obterTodosAtivosPorQuesito(Quesito quesito) {
+		List<Entidade> jurados = new ArrayList<>();
+		/*for(int i=0; i< JuradoDAO.jurados.size(); i++ )
+		{
+			jurados.add(JuradoDAO.jurados.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, jurado) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = jurado.pessoa_id_pessoa) where usuario.ativo = true and quesito_id_quesito = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, quesito.getId());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				jurados.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return jurados;
+	}
 	
 	private Jurado resultSet2Object(ResultSet rs) throws SQLException
 	{

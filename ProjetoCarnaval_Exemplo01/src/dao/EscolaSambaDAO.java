@@ -287,6 +287,28 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return escolasSamba;
 	}
 
+	public List<Entidade> obterTodosAtivosPorGrupo(Grupos grupo) {
+		List<Entidade> escolasSamba = new ArrayList<>();
+		/*for(int i=0; i< EscolaSambaDAO.escolas.size(); i++ )
+		{
+			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario.ativo = true and grupos_id_grupo = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, grupo.id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				escolasSamba.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return escolasSamba;
+	}
+	
 	public List<Entidade> obterTodosAtivos() {
 		List<Entidade> escolasSamba = new ArrayList<>();
 		/*for(int i=0; i< EscolaSambaDAO.escolas.size(); i++ )
