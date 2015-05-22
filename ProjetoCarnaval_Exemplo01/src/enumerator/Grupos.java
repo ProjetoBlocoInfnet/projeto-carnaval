@@ -1,5 +1,6 @@
 package enumerator;
 
+
 public enum Grupos
 {
 	GrupoEspecial(1, "Grupo Especial"), 
@@ -7,7 +8,7 @@ public enum Grupos
 	GrupoB(3, "Grupo B"), 
 	GrupoC(4, "Grupo C"), 
 	GrupoD(5, "Grupo D"), 
-	GrupoAvaliacao(6, "Grupo Avaliação" );
+	GrupoAvaliacao(6, "Grupo AvaliaÃ§Ã£o" );
 	
 	public final Integer id;
 	public final String nomeBonito;
@@ -17,18 +18,8 @@ public enum Grupos
 		this.nomeBonito = nomeBonito;
 	}
 	
-	public static Grupos from(String valor) {
 
-		for (Grupos g : Grupos.values()) {
-			if (g.nomeBonito.equalsIgnoreCase(valor)) {
-				return g;
-			}
-		}
-
-		return null;
-	}
-	
-	public static Grupos from(Integer valor) {
+	public static Grupos from(int valor) {
 
 		for (Grupos g : Grupos.values()) {
 			if (g.id == valor) {

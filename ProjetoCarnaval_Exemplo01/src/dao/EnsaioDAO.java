@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,8 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	
 	/*private static Map< Integer, Ensaio > ensaios = new HashMap<>();
 
-	//Dados de teste. As vari�veis est�o privadas ent�o n�o temos risco de acesso externo.
-	private EscolaSamba samba;
+
+	/*private EscolaSamba samba;
 	private Ensaio ensaio;
 	{
 	this.samba = (EscolaSamba) new EscolaSambaDAO().obterPorId( 0 );
@@ -159,6 +160,29 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 		}
 		return ensaios;
 	}
+	
+
+	public List<Ensaio> obterTodos(EscolaSamba escola) {
+		
+		List<Ensaio> ensaios = new ArrayList<>();
+		Connection c = getConnection();
+		String sql = "select * from ensaio join (escola_samba) on (ensaio.id_ensaio = escola_samba.id_escola_samba) where escola_samba_id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, escola.getId());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ensaios.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return ensaios;
+		
+		
+	}
 
 	/*
 	 * Retorna um objeto passando o ResultSet
@@ -167,9 +191,7 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	{
 		Ensaio e = new Ensaio();
 		e.setId(rs.getInt("id_ensaio"));
-		EscolaSamba es = new EscolaSamba("","");
-		es.setId(rs.getInt("escola_samba_id_escola_samba"));
-		e.setEscola(es);
+		e.setEscola((EscolaSamba) new EscolaSambaDAO().obterPorIdEscola(rs.getInt("escola_samba_id_escola_samba")));
 		e.setData(rs.getDate("data_ensaio"));
 		return e;
 	}
@@ -199,5 +221,28 @@ public class EnsaioDAO extends AbstractDAO implements DAO
 	public Collection<Entidade> obterTodosCollection()
 	{
 		return this.obterTodos();
+	}
+
+	public List<Entidade> obterPorData(Date data, EscolaSamba escola) {
+		
+		List<Entidade> ensaios = new ArrayList<>();
+		Connection c = getConnection();
+		String sql = "select * from ensaio join (escola_samba) on (ensaio.id_ensaio = escola_samba.id_escola_samba) where escola_samba_id_escola_samba = ? and data_ensaio = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, escola.getId());
+			pstmt.setDate(2, (java.sql.Date) data);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ensaios.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return ensaios;
+		
+				
 	}
 }

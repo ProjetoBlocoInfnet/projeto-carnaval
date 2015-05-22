@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import enumerator.Grupos;
-import enumerator.Perfil;
 import negocio.Entidade;
 import negocio.EscolaSamba;
+import enumerator.Grupos;
+import enumerator.Perfil;
 
 public class EscolaSambaDAO extends AbstractDAO implements DAO
 {
@@ -138,13 +138,13 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		String sqlUsuarioPerfil = "insert into re_usuario_perfil (usuario_id_usuario,perfil_id_perfil)values(?,?);";
 		String sqlEscolaSamba = "insert into escola_samba (usuario_id_usuario,nome,endereco_quadra, endereco_barracao, data_fundacao, lema, filiacao, grupos_id_grupo, email, telefone, cnpj)values(?,?,?,?,?,?,?,?,?,?,?);";
 		try {
-			c.setAutoCommit(false); //caso tudo dê errado, isso permite que eu dê rollback nos inserts
+			c.setAutoCommit(false); //caso tudo dï¿½ errado, isso permite que eu dï¿½ rollback nos inserts
 			pstmt = c.prepareStatement(sqlUsuario);
 			pstmt.setString(1, escolaSamba.getLogin());
 			pstmt.setString(2, escolaSamba.getSenha());
 			pstmt.execute();
-			//Como o commit dessa operação só pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
-			//Porque estou na mesma transação da inserção na tabela usuario. Eu não conseguiria pegar via UsuarioDAO.
+			//Como o commit dessa operaï¿½ï¿½o sï¿½ pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
+			//Porque estou na mesma transaï¿½ï¿½o da inserï¿½ï¿½o na tabela usuario. Eu nï¿½o conseguiria pegar via UsuarioDAO.
 			Integer id_usuario = 0;
 			pstmt = c.prepareStatement(sqlIdUsuario);
 			pstmt.setString(1, escolaSamba.getLogin());
@@ -257,8 +257,8 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		}
 		
 		/*
-		 * A escola de samba ainda deve existir no banco por motivos de histórico
-		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * A escola de samba ainda deve existir no banco por motivos de histï¿½rico
+		 * A exclusï¿½o do usuï¿½rio ï¿½ pertencente ao escopo do UsuarioDAO, entï¿½o, este mï¿½todo invoca UsuarioDAO.excluirUsuario
 		 * 
 		 */
 		return new UsuarioDAO().excluirUsuario(escolaSamba.getLogin(), escolaSamba.getSenha());
@@ -273,7 +273,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
 		}*/
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba);";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario);";
 		try {
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -294,7 +294,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 			escolasSamba.add(EscolaSambaDAO.escolas.get(i));
 		}*/
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario.ativo = true;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -331,7 +331,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		//return escolas.get( numero );
 		EscolaSamba es = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where id_escola_samba = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario_id_usuario = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
@@ -347,12 +347,34 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return es;
 	}
 
+	public Entidade obterPorIdEscola(Integer numero) {
+		// TODO Auto-generated method stub
+		//return escolas.get( numero );
+		EscolaSamba es = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				es = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return es;
+	}
+
+	
 	public Entidade obterAtivoPorId(Integer numero) {
 		// TODO Auto-generated method stub
 		//return escolas.get( numero );
 		EscolaSamba es = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.id_escola_samba) where usuario.ativo = true and id_escola_samba = ?;";
+		String sql = "select * from usuario join (escola_samba) on (usuario.id_usuario = escola_samba.usuario_id_usuario) where usuario.ativo = true and usuario_id_usuario = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);
@@ -378,4 +400,6 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return escolasSamba;*/
 		return this.obterTodos();
 	}
+
+	
 }
