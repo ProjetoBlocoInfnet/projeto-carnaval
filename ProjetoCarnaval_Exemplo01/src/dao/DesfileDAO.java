@@ -18,35 +18,6 @@ public class DesfileDAO extends AbstractDAO implements DAO {
 
 	private static Map<Integer,Desfile> desfiles = new HashMap<>();
 	
-	{
-		Desfile d = new Desfile();
-		d.setId(0);
-		d.setData(new java.sql.Date(15000));
-		Set<EscolaSamba> escolas = new HashSet<EscolaSamba>();
-		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(0));
-		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(1));
-		d.setEscolasSamba(escolas);
-		d.setGrupo(Grupos.GrupoEspecial);
-		Set<Jurado> jurados = new HashSet<Jurado>();
-		jurados.add((Jurado) new JuradoDAO().obterPorId(0));
-		jurados.add((Jurado) new JuradoDAO().obterPorId(1));
-		d.setJurados(jurados);
-		DesfileDAO.desfiles.put(0, d);
-		
-		d = new Desfile();
-		d.setId(0);
-		d.setData(new java.sql.Date(17000));
-		escolas = new HashSet<EscolaSamba>();
-		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(1));
-		escolas.add((EscolaSamba) new EscolaSambaDAO().obterPorId(2));
-		d.setEscolasSamba(escolas);
-		d.setGrupo(Grupos.GrupoD);
-		jurados = new HashSet<Jurado>();
-		jurados.add((Jurado) new JuradoDAO().obterPorId(1));
-		d.setJurados(jurados);
-		DesfileDAO.desfiles.put(1, d);
-	}
-	
 	@Override
 	public boolean cadastrar(Entidade entidade) {
 		Desfile desfile = new Desfile();

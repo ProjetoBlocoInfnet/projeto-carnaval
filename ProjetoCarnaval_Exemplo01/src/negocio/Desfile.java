@@ -1,7 +1,9 @@
 package negocio;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import enumerator.Grupos;
@@ -9,11 +11,13 @@ import enumerator.Grupos;
 public class Desfile implements Entidade
 {
 	private Integer id;
-	private Date data;
+	private Date data_primeiro_desfile;
+	private Date data_ultimo_desfile;
 	private Grupos grupo;
+	private Map<Integer,Quesito> quesitos = new HashMap<>();
 	private Set<EscolaSamba> escolasSamba = new HashSet<>();
 	private Set<Jurado> jurados = new HashSet<>();
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -37,18 +41,35 @@ public class Desfile implements Entidade
 			return false;
 		return true;
 	}
-
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Date getData_primeiro_desfile() {
+		return data_primeiro_desfile;
+	}
+	public void setData_primeiro_desfile(Date data_primeiro_desfile) {
+		this.data_primeiro_desfile = data_primeiro_desfile;
+	}
+	public Date getData_ultimo_desfile() {
+		return data_ultimo_desfile;
+	}
+	public void setData_ultimo_desfile(Date data_ultimo_desfile) {
+		this.data_ultimo_desfile = data_ultimo_desfile;
+	}
 	public Grupos getGrupo() {
 		return grupo;
 	}
 	public void setGrupo(Grupos grupo) {
 		this.grupo = grupo;
+	}
+	public Map<Integer, Quesito> getQuesitos() {
+		return quesitos;
+	}
+	public void setQuesitos(Map<Integer, Quesito> quesitos) {
+		this.quesitos = quesitos;
 	}
 	public Set<EscolaSamba> getEscolasSamba() {
 		return escolasSamba;
@@ -61,11 +82,5 @@ public class Desfile implements Entidade
 	}
 	public void setJurados(Set<Jurado> jurados) {
 		this.jurados = jurados;
-	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
 	}
 }
