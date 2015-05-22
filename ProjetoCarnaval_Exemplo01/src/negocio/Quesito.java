@@ -5,6 +5,19 @@ public class Quesito implements Entidade
 	private Integer id;
 	private String nome;
 	private String descricao;
+	
+	public Quesito() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public Quesito(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
 
 	@Override
 	public int hashCode() {
