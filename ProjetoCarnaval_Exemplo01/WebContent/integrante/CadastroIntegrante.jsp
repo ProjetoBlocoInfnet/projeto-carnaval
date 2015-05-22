@@ -69,14 +69,14 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		   <div class="form-group">
 		    <label for="cpf" class="col-sm-2 control-label">cpf</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="cpf" class="form-control" id="cpf" placeholder="CPF">
+		      <input type="text" name="cpf" class="form-control" id="cpf" placeholder="CPF" maxlength="11">
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="cep" class="col-sm-2 control-label">CEP</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="cep" class="form-control" id="cep" placeholder="CEP" maxlength="11">
+		      <input type="text" name="cep" class="form-control" id="cep" placeholder="CEP" maxlength="8">
 		    </div>
 		  </div>
 
@@ -110,7 +110,7 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		  <div class="form-group">
 		    <label for="telefone" class="col-sm-2 control-label">Telefone</label>
 		    <div class="col-sm-10">		   
-		      <input type="text" name="telefone" class="form-control" id="telefone" placeholder="Telefone">
+		      <input type="text" name="telefone" class="form-control" id="telefone" placeholder="Telefone" maxlength="10">
 		    </div>
 		  </div>
 		  
