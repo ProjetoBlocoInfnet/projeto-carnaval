@@ -77,6 +77,7 @@ public class ControlaIntegrante extends HttpServlet {
 			case "alterar":
 				
 				break;
+
 			case "atividade":
 				
 				List<Entidade> listaAtividades= tabelaAtividade.obterTodos();
@@ -140,6 +141,8 @@ public class ControlaIntegrante extends HttpServlet {
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Integrante!");
 			}
 			doGet(request, response);
+			break;
+		case "cadastrarAtividade":
 			break;
 		case "consultar":
 			if(request.getParameter("nome") !=null){
