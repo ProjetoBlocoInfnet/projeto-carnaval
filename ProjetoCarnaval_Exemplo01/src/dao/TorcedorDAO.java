@@ -228,6 +228,33 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		}
 		return torcedores;
 	}
+
+	public List<Entidade> obterTodosAtivosEscolaEmComum(EscolaSamba escolaSamba) {
+		if(escolaSamba == null || escolaSamba.getId() == null)
+		{
+			return null;
+		}
+
+		List<Entidade> torcedores = new ArrayList<>();
+		/*for(int i=0; i< TorcedorDAO.torcedores.size(); i++ )
+		{
+			torcedor.add(TorcedorDAO.torcedores.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where usuario.ativo = true and escola_samba_id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, escolaSamba.getId());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				torcedores.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return torcedores;
+	}
 	
 	private Torcedor resultSet2Object(ResultSet rs) throws SQLException
 	{
