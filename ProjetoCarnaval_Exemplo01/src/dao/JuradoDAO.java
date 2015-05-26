@@ -26,7 +26,7 @@ public class JuradoDAO extends AbstractDAO implements DAO
 		j.setNome("Ricardo");
 		JuradoDAO.jurados.put(0, j);
 		j = new Jurado("","");
-		j.setNome("Lúcio");
+		j.setNome("Lï¿½cio");
 		JuradoDAO.jurados.put(1, j);
 	}
 */	
@@ -163,13 +163,13 @@ public class JuradoDAO extends AbstractDAO implements DAO
 		String sqlIdPessoa = "select * from pessoa where cpf = ? and nome = ?;";
 		String sqlJurado = "insert into jurado (pessoa_id_pessoa,quesito_id_quesito)values(?,?);";
 		try {
-			c.setAutoCommit(false); //caso tudo dê errado, isso permite que eu dê rollback nos inserts
+			c.setAutoCommit(false); //caso tudo dï¿½ errado, isso permite que eu dï¿½ rollback nos inserts
 			pstmt = c.prepareStatement(sqlUsuario);
 			pstmt.setString(1, jurado.getLogin());
 			pstmt.setString(2, jurado.getSenha());
 			pstmt.execute();
-			//Como o commit dessa operação só pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
-			//Porque estou na mesma transação da inserção na tabela usuario. Eu não conseguiria pegar via UsuarioDAO.
+			//Como o commit dessa operaï¿½ï¿½o sï¿½ pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
+			//Porque estou na mesma transaï¿½ï¿½o da inserï¿½ï¿½o na tabela usuario. Eu nï¿½o conseguiria pegar via UsuarioDAO.
 			Integer id_usuario = 0;
 			pstmt = c.prepareStatement(sqlIdUsuario);
 			pstmt.setString(1, jurado.getLogin());
@@ -233,8 +233,8 @@ public class JuradoDAO extends AbstractDAO implements DAO
 		}
 
 		/*
-		 * O jurado ainda deve existir no banco por motivos de histórico
-		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * O jurado ainda deve existir no banco por motivos de histï¿½rico
+		 * A exclusï¿½o do usuï¿½rio ï¿½ pertencente ao escopo do UsuarioDAO, entï¿½o, este mï¿½todo invoca UsuarioDAO.excluirUsuario
 		 * 
 		 */
 		//return (JuradoDAO.jurados.remove(jurado.getId()) != null);
@@ -288,7 +288,7 @@ public class JuradoDAO extends AbstractDAO implements DAO
 	private Jurado resultSet2Object(ResultSet rs) throws SQLException
 	{
 		Jurado t = new Jurado(rs.getString("usuario"),rs.getString("senha"));
-		t.setId(rs.getInt("id_integrante"));
+		t.setId(rs.getInt("id_jurado"));
 		t.setNome(rs.getString("nome"));
 		t.setEndereco(rs.getString("endereco"));
 		t.setCpf(rs.getString("cpf"));
