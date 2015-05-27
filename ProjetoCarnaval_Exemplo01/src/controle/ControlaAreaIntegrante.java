@@ -47,7 +47,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
     }
     
     protected Set<EscolaSamba> setEscolaSamba(HttpServletRequest request) {
-    	Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+    	Integrante integrante = (Integrante) tabelaIntegrante.obterPorIdUsuario(this.obterUsuarioSession(request).getId());
 		Set<EscolaSamba> listaEscola = integrante.getEscolaSamba();	
 		
 		//Set<EscolaSamba> listaEscola = tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
@@ -83,7 +83,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 				break;
 			case "torcedores":			
 				
-				request.setAttribute("listaEscola", this.setEscolaSamba(request));			
+				request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));		
 				request.getRequestDispatcher("/areaIntegrante/torcedores.jsp").forward(request, response);
 				
 				break;
@@ -99,7 +99,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 						listaTodosEnsaio.add(ensaio);
 					}					
 				}
-																
+				request.setAttribute("listaEnsaio", listaTodosEnsaio);
 				//request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
 				//request.setAttribute("listaEnsaio", listaTodosEnsaio);
 				

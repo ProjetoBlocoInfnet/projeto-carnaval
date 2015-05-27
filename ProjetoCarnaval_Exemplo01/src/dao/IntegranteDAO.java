@@ -297,6 +297,26 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		return i;
 	}
 
+	public Entidade obterPorIdUsuario(Integer numero) {
+		//return IntegranteDAO.integrantes.get( numero );
+		Integrante i = null;
+		Connection c = getConnection();
+		String sql = "select * from usuario join (pessoa, integrante) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where id_usuario = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				i = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		
+		return i;
+	}
+	
 	public Entidade obterAtivoPorId(Integer numero) {
 		//return IntegranteDAO.integrantes.get( numero );
 		Integrante i = null;
