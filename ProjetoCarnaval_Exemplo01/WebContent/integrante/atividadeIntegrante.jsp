@@ -112,6 +112,8 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
   		<thead>
   		<th>Id</th>
   		<th>Atividade</th>
+  		<th>Data Inicio</th>
+  		<th>Data Fim</th>
   		<th>Ação</th>
   		</thead>
   		<tbody>  		
@@ -124,7 +126,9 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 	  		<tr>
 	  			<td><%= atividade.getId()%></td>  
 	  			<td><%= atividade.getAcao().getNome() %></td>
-	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
+	  			<td><%= atividade.getData_inicio() %></td>
+	  			<td><%= atividade.getData_fim() %></td>
+	  			<td><a href="ControlaIntegrante?idIntegrante=<%=request.getParameter("idIntegrante")%>&idAtividade=<%=atividade.getId()%>&acao=excluirAtividade"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
 	  			</td>
 	  		</tr>
 		  <%	}

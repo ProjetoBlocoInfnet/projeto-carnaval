@@ -102,6 +102,18 @@ public class ControlaIntegrante extends HttpServlet {
 					request.setAttribute("resultado_error", "Erro ao excluir o Integrante!");
 				}
 				break;
+			case "excluirAtividade":
+				if(new AtividadeDAO().excluir(new AtividadeDAO().obterPorId(Integer.valueOf(request.getParameter("idAtividade")))))
+				{
+					request.setAttribute("resultado_ok", "Atividade excluída com sucesso!");
+				}
+				else
+				{
+					request.setAttribute("resultado_error", "Erro ao excluir a atividade!");
+				}
+				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+				request.setAttribute("idIntegrante", request.getParameter("idIntegrante"));
+				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			default:
 				break;
 			}
@@ -111,6 +123,7 @@ public class ControlaIntegrante extends HttpServlet {
 			if(action.equals("atividade")){
 				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
 				request.setAttribute("idIntegrante", request.getParameter("idIntegrante"));
+				request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(id, this.recuperarEscolaDaSession(request).getId()));
 				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			}else{
 				request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
