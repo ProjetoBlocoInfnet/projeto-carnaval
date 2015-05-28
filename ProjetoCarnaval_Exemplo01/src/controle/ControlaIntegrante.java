@@ -147,16 +147,19 @@ public class ControlaIntegrante extends HttpServlet {
 			}
 			doGet(request, response);
 			break;
-		case "cadastrarAtividade":
+		case "cadastrarAtividade": //TODO implementação feita pelo Emmanuel. Validar arquitetura
+			Integer idIntegrante = Integer.valueOf(request.getParameter("idIntegrante"));
 			Atividade atividade = new Atividade();
-			atividade.setId_integrante(Integer.valueOf(request.getParameter("idIntegrante")));
+			atividade.setId_integrante(idIntegrante);
 			atividade.setEscolaSamba(this.recuperarEscolaDaSession(request));
 			atividade.setAcao((Acao) new AcaoDAO().obterPorId(Integer.valueOf(request.getParameter("atividade"))));
 			if(new AtividadeDAO().cadastrar(atividade)){
-				request.setAttribute("resultado_ok", "Integrante Cadastrado com sucesso!");
+				request.setAttribute("resultado_ok", "Atividade Cadastrada com sucesso!");
 			}else{
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Integrante!");
 			}
+			request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(idIntegrante, this.recuperarEscolaDaSession(request).getId()));
+			request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
 			request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			break;
 		case "consultar":
