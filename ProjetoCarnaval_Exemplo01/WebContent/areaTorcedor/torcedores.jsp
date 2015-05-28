@@ -31,11 +31,15 @@
 <div class="container">
 	
 	<div>
-	<h1>Área do Integrante</h1>
-	
-	
+	<h1>Área do Torcedor</h1>	
 	<hr/>
-	<a href="ControlaTorcedor"><button type="button" class="btn btn-default">Voltar</button></a>
+	<form action="Logout" method="post">
+		  <div class="form-group">
+		      <button type="submit" class="btn btn-primary">Logout</button>
+		  </div>
+	</form>
+	<br>
+	<a href="ControlaTorcedor?tela=areaTorcedor"><button type="button" class="btn btn-default">Voltar</button></a>
 	<br><br>
 		
 	<form action="ControlaAreaIntegrante" method="post">

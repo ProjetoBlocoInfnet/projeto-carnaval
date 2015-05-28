@@ -3,7 +3,7 @@ package enumerator;
 public enum Perfil {
 
 	ADMINISTRADOR(1,  "indexAdmin.jsp", "Administrador" ),
-	TORCEDOR( 4, "indexTorcedor.jsp", "Torcedor" ),
+	TORCEDOR( 4, "areaTorcedor/index.jsp", "Torcedor" ),
 	INTEGRANTE( 3, "indexIntegrante.jsp", "Integrante" ),
 	ESCOLASAMBA( 2, "indexEscolaSamba.jsp", "Escola de samba" );
 
