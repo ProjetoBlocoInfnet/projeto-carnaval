@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import negocio.Acao;
 import negocio.Atividade;
 import negocio.Entidade;
 import negocio.EscolaSamba;
@@ -108,6 +109,7 @@ public class ControlaIntegrante extends HttpServlet {
 			List<Entidade> listaIntegrante = tabelaItegrante.obterTodos();
 			request.setAttribute("listaIntegrante", listaIntegrante);
 			if(action.equals("atividade")){
+				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
 				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			}else{
 				request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
@@ -146,8 +148,16 @@ public class ControlaIntegrante extends HttpServlet {
 			doGet(request, response);
 			break;
 		case "cadastrarAtividade":
-			request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
-			//request.getRequestDispatcher("/integrante/index.jsp").forward(request, response); TODO inserir a tela correta para associação de atividade a integrante aqui
+			Atividade atividade = new Atividade();
+			atividade.setId_integrante(Integer.valueOf(request.getParameter("idIntegrante")));
+			atividade.setEscolaSamba(this.recuperarEscolaDaSession(request));
+			atividade.setAcao((Acao) new AcaoDAO().obterPorId(Integer.valueOf(request.getParameter("atividade"))));
+			if(new AtividadeDAO().cadastrar(atividade)){
+				request.setAttribute("resultado_ok", "Integrante Cadastrado com sucesso!");
+			}else{
+				request.setAttribute("resultado_error", "Erro ao cadastrar o Integrante!");
+			}
+			request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			break;
 		case "consultar":
 			if(request.getParameter("nome") !=null){

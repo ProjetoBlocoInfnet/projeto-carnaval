@@ -2,6 +2,7 @@
 <%@ page import="negocio.Entidade" %>
 <%@ page import="negocio.Integrante" %>
 <%@ page import="negocio.Atividade" %>
+<%@ page import="negocio.Acao" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,6 +32,12 @@ List<Entidade> listaAtividades = null;
 if(request.getAttribute("listaAtividades") != null){
 	listaAtividades = (List<Entidade>) request.getAttribute("listaAtividades");
 }
+
+List<Entidade> listaAcao = null;
+if(request.getAttribute("listaAcao") != null){
+	listaAcao = (List<Entidade>) request.getAttribute("listaAcao");
+}
+
 
 List<Entidade> listaAtividadesIntegrante = null;
 if(request.getAttribute("listaAtividadesIntegrante") != null){
@@ -71,11 +78,11 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 		    <label for="cpf" class="col-sm-2 control-label">Atividades:</label>
 		    <div class="col-sm-10">
 		      <select multiple name="atividade[]" class="form-control">
-		      <%for(Entidade entidade: listaAtividades){ 
-		      		Atividade atividade = (Atividade) entidade;
+		      <%for(Entidade entidade: listaAcao){ 
+		    	  Acao acao = (Acao) entidade;
 		      		
 		      %>
-				  <option value="<%= atividade.getId()%>"><%= atividade.getAcao().getNome() %></option>
+				  <option value="<%= acao.getId()%>"><%= acao.getNome() %></option>
 			  <%} %>
 				
 				</select>
