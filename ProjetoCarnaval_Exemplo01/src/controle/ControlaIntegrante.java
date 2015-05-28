@@ -110,6 +110,7 @@ public class ControlaIntegrante extends HttpServlet {
 			request.setAttribute("listaIntegrante", listaIntegrante);
 			if(action.equals("atividade")){
 				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+				request.setAttribute("idIntegrante", request.getParameter("idIntegrante"));
 				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			}else{
 				request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
@@ -152,7 +153,7 @@ public class ControlaIntegrante extends HttpServlet {
 			Atividade atividade = new Atividade();
 			atividade.setId_integrante(idIntegrante);
 			atividade.setEscolaSamba(this.recuperarEscolaDaSession(request));
-			atividade.setAcao((Acao) new AcaoDAO().obterPorId(Integer.valueOf(request.getParameter("atividade"))));
+			atividade.setAcao((Acao) new AcaoDAO().obterPorId(Integer.valueOf(request.getParameter("atividade[]"))));
 			if(new AtividadeDAO().cadastrar(atividade)){
 				request.setAttribute("resultado_ok", "Atividade Cadastrada com sucesso!");
 			}else{

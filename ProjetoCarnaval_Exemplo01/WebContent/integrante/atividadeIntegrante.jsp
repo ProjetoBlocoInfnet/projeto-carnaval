@@ -71,6 +71,7 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 	<form class="form-horizontal" action="ControlaIntegrante" method="post" id="form-escolaSamba">
 		
 		<input type="hidden" name="action" value="cadastrarAtividade">
+		<input type="hidden" name="idIntegrante" value="<%=request.getParameter("idIntegrante")%>">
 		  
 		   
 		  
@@ -78,12 +79,15 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 		    <label for="cpf" class="col-sm-2 control-label">Atividades:</label>
 		    <div class="col-sm-10">
 		      <select multiple name="atividade[]" class="form-control">
-		      <%for(Entidade entidade: listaAcao){ 
-		    	  Acao acao = (Acao) entidade;
+		      <%if(listaAcao != null && listaAcao.size() > 0)
+		      	{
+		      		for(Entidade entidade: listaAcao){ 
+		    	  		Acao acao = (Acao) entidade;
 		      		
 		      %>
 				  <option value="<%= acao.getId()%>"><%= acao.getNome() %></option>
-			  <%} %>
+			  <%	}
+		      	} %>
 				
 				</select>
 		    </div>
@@ -111,7 +115,9 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
   		<th>Ação</th>
   		</thead>
   		<tbody>  		
-		      <%for(Entidade entidade: listaAtividadesIntegrante){ 
+		      <%if(listaAtividadesIntegrante != null && listaAtividadesIntegrante.size() > 0)
+		      {
+		      	for(Entidade entidade: listaAtividadesIntegrante){ 
 		      		Atividade atividade = (Atividade) entidade;
 		      		
 		      %>
@@ -121,7 +127,8 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
 	  			</td>
 	  		</tr>
-		  <%} %>
+		  <%	}
+		    } %>
   		</tbody>
 	</table>
 	</div>
