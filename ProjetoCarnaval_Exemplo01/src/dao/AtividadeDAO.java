@@ -172,6 +172,28 @@ public class AtividadeDAO extends AbstractDAO implements DAO
 		return atividades;
 	}
 
+	public List<Entidade> obterTodosPorIdIntegranteNestaEscola(Integer idIntegrante, Integer idEscolaSamba) {
+		List<Entidade> atividades = new ArrayList<>();
+		/*for (int i = 0; i < AtividadeDAO.atividades.size(); i++) {
+			atividades.add(AtividadeDAO.atividades.get(i));
+		}*/
+		Connection c = getConnection();
+		String sql = "Select * from atividade_integrante_escola where integrante_id_integrante = ? and escola_samba_id_escola_samba = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, idIntegrante);
+			pstmt.setInt(2, idEscolaSamba);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				atividades.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return atividades;
+	}
+
 	@Override
 	public Entidade obterPorId(Integer numero) {
 		//return AtividadeDAO.atividades.get(numero);

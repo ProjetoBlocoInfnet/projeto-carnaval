@@ -15,6 +15,7 @@ import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Pessoa.Sexos;
 import negocio.Usuario;
+import dao.AcaoDAO;
 import dao.AtividadeDAO;
 import dao.EscolaSambaDAO;
 import dao.IntegranteDAO;
@@ -82,6 +83,8 @@ public class ControlaIntegrante extends HttpServlet {
 				
 				List<Entidade> listaAtividades= tabelaAtividade.obterTodos();
 				request.setAttribute("listaAtividades", listaAtividades);
+				//Pega todas as atividades deste integrante para a escola de samba que está fazendo o cadastro.
+				request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(id, this.recuperarEscolaDaSession(request).getId()));
 				
 				for (Entidade e: listaAtividades) {
 					Atividade atividade = (Atividade) e;
@@ -143,6 +146,8 @@ public class ControlaIntegrante extends HttpServlet {
 			doGet(request, response);
 			break;
 		case "cadastrarAtividade":
+			request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+			//request.getRequestDispatcher("/integrante/index.jsp").forward(request, response); TODO inserir a tela correta para associação de atividade a integrante aqui
 			break;
 		case "consultar":
 			if(request.getParameter("nome") !=null){

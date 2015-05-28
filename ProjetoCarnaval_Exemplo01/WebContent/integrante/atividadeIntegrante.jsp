@@ -31,6 +31,12 @@ List<Entidade> listaAtividades = null;
 if(request.getAttribute("listaAtividades") != null){
 	listaAtividades = (List<Entidade>) request.getAttribute("listaAtividades");
 }
+
+List<Entidade> listaAtividadesIntegrante = null;
+if(request.getAttribute("listaAtividadesIntegrante") != null){
+	listaAtividadesIntegrante = (List<Entidade>) request.getAttribute("listaAtividadesIntegrante");
+}
+
 %>
 
 <div class="container">
@@ -98,18 +104,17 @@ if(request.getAttribute("listaAtividades") != null){
   		<th>Ação</th>
   		</thead>
   		<tbody>  		
+		      <%for(Entidade entidade: listaAtividadesIntegrante){ 
+		      		Atividade atividade = (Atividade) entidade;
+		      		
+		      %>
 	  		<tr>
-	  			<td>1</td>  
-	  			<td>Mestre Sala</td>
+	  			<td><%= atividade.getId()%></td>  
+	  			<td><%= atividade.getAcao().getNome() %></td>
 	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
 	  			</td>
 	  		</tr>
-	  		<tr>
-	  			<td>2</td>  
-	  			<td>Confeccionador de instrumentos</td>
-	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
-	  			</td>
-	  		</tr>
+		  <%} %>
   		</tbody>
 	</table>
 	</div>
