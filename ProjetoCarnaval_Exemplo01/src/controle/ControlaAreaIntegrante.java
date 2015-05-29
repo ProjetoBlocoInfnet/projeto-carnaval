@@ -127,7 +127,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 			
 			if(request.getParameter("nome") !=null){
 			
-					Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+					Integrante integrante = (Integrante) tabelaIntegrante.obterPorIdUsuario(this.obterUsuarioSession(request).getId());
 					Set<EscolaSamba> SetEscola = integrante.getEscolaSamba();		
 					Set<EscolaSamba> listEscola = new HashSet<EscolaSamba>();
 					
