@@ -78,7 +78,7 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 		   <div class="form-group">
 		    <label for="cpf" class="col-sm-2 control-label">Atividades:</label>
 		    <div class="col-sm-10">
-		      <select multiple name="atividade[]" class="form-control">
+		      <select name="atividade[]" class="form-control">
 		      <%if(listaAcao != null && listaAcao.size() > 0)
 		      	{
 		      		for(Entidade entidade: listaAcao){ 
@@ -110,7 +110,6 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 	<div >
 	<table class="table table-hover">
   		<thead>
-  		<th>Id</th>
   		<th>Atividade</th>
   		<th>Data Inicio</th>
   		<th>Data Fim</th>
@@ -124,7 +123,6 @@ if(request.getAttribute("listaAtividadesIntegrante") != null){
 		      		
 		      %>
 	  		<tr>
-	  			<td><%= atividade.getId()%></td>  
 	  			<td><%= atividade.getAcao().getNome() %></td>
 	  			<td><%= atividade.getData_inicio() %></td>
 	  			<td><%= atividade.getData_fim() %></td>
