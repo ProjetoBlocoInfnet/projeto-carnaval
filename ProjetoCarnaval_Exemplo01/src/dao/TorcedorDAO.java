@@ -61,13 +61,13 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		String sqlIdPessoa = "select * from pessoa where cpf = ? and nome = ?;";
 		String sqlTorcedor = "insert into torcedor (pessoa_id_pessoa,escola_samba_id_escola_samba)values(?,?);";
 		try {
-			c.setAutoCommit(false); //caso tudo dê errado, isso permite que eu dê rollback nos inserts
+			c.setAutoCommit(false); //caso tudo dï¿½ errado, isso permite que eu dï¿½ rollback nos inserts
 			pstmt = c.prepareStatement(sqlUsuario);
 			pstmt.setString(1, torcedor.getLogin());
 			pstmt.setString(2, torcedor.getSenha());
 			pstmt.execute();
-			//Como o commit dessa operação só pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
-			//Porque estou na mesma transação da inserção na tabela usuario. Eu não conseguiria pegar via UsuarioDAO.
+			//Como o commit dessa operaï¿½ï¿½o sï¿½ pode ser feito no final, precisarei fazer a consulta para pegar o id_usuario aqui mesmo
+			//Porque estou na mesma transaï¿½ï¿½o da inserï¿½ï¿½o na tabela usuario. Eu nï¿½o conseguiria pegar via UsuarioDAO.
 			Integer id_usuario = 0;
 			pstmt = c.prepareStatement(sqlIdUsuario);
 			pstmt.setString(1, torcedor.getLogin());
@@ -178,8 +178,8 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		}
 
 		/*
-		 * O torcedor ainda deve existir no banco por motivos de histórico
-		 * A exclusão do usuário é pertencente ao escopo do UsuarioDAO, então, este método invoca UsuarioDAO.excluirUsuario
+		 * O torcedor ainda deve existir no banco por motivos de histï¿½rico
+		 * A exclusï¿½o do usuï¿½rio ï¿½ pertencente ao escopo do UsuarioDAO, entï¿½o, este mï¿½todo invoca UsuarioDAO.excluirUsuario
 		 * 
 		 */
 		//return (TorcedorDAO.torcedores.remove(torcedor.getId()) != null);
@@ -259,7 +259,7 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 	private Torcedor resultSet2Object(ResultSet rs) throws SQLException
 	{
 		Torcedor t = new Torcedor(rs.getString("usuario"),rs.getString("senha"));
-		t.setId(rs.getInt("id_integrante"));
+		t.setId(rs.getInt("id_torcedor"));
 		t.setNome(rs.getString("nome"));
 		t.setEndereco(rs.getString("endereco"));
 		t.setCpf(rs.getString("cpf"));
@@ -267,7 +267,7 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		t.setSexo(Sexos.from(rs.getString("sexo")));
 		t.setEmail(rs.getString("email"));
 		t.setTelefone(rs.getString("telefone"));
-		t.setEscolaSamba((EscolaSamba) new EscolaSambaDAO().obterPorId(rs.getInt("escola_samba_id_escola_samba")));
+		t.setEscolaSamba((EscolaSamba) new EscolaSambaDAO().obterPorIdEscola(rs.getInt("escola_samba_id_escola_samba")));
 		return t;
 	}
 	@Override
@@ -275,7 +275,7 @@ public class TorcedorDAO extends AbstractDAO implements DAO
 		//return TorcedorDAO.torcedores.get(numero);
 		Torcedor t = null;
 		Connection c = getConnection();
-		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where id_torcedor = ?;";
+		String sql = "select * from usuario join (pessoa, torcedor) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = torcedor.pessoa_id_pessoa) where id_usuario = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, numero);

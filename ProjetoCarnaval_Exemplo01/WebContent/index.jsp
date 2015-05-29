@@ -63,10 +63,11 @@
 		  </div>
 	</form>
 	<hr>
-	<form action="ControlaTorcedor" method="post"  >
+	<form action="ControlaTorcedor" method="get" >
 			<div class="form-group">
 		    <div class="col-sm-offset-1 col-sm-10">
-		      <button type="submit" class="btn btn-primary">Acessar como Torcedor</button>
+		      <input type="hidden" name="tela" value="cadastrar">
+		      <button type="submit" class="btn btn-primary">Cadastrar Torcedor</button>
 		    </div>
 		  </div>
 	</form>
