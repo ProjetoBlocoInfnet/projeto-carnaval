@@ -63,12 +63,15 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 		  <div class="col-lg-6">
 		    <div class="input-group">
 		      <select name="escolaId" id="escola" class="form-control">  
-		      <option>selecione a escola de Samba --></option>
-		      <% for(Entidade entidade : listaEscolas){ 
+		      <option value="0">selecione a escola de Samba --></option>
+		      <% if(listaEscolas != null && listaEscolas.size() > 0)
+		      {
+		      for(Entidade entidade : listaEscolas){ 
 		      		EscolaSamba escola = (EscolaSamba) entidade;
 		      %>
   					<option value="<%=escola.getId() %>"><%=escola.getNome() %></option>
-  			<% } %>	
+  			<% 	}
+		      }%>	
 		     </select>
 		      <span class="input-group-btn">
 		        <input type="submit" class="btn btn-default" type="button" value="Consultar Ensaio">

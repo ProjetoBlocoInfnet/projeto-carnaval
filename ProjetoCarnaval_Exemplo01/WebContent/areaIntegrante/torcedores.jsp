@@ -2,6 +2,7 @@
 <%@ page import="negocio.Entidade" %>
 <%@ page import="negocio.Ensaio" %>
 <%@ page import="negocio.EscolaSamba" %>
+<%@ page import="negocio.Torcedor" %>
 <%@ page import="enumerator.Grupos" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
@@ -33,6 +34,11 @@ Set<Entidade> listaEscolas = null;
 if(request.getAttribute("listaEscolaConsulta") != null){
 	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscolaConsulta");
 }
+
+List<Entidade> listaTorcedores = null;
+if(request.getAttribute("listaTorcedores") != null){
+	listaTorcedores = (List<Entidade>) request.getAttribute("listaTorcedores");
+}
 %>
 
 <div class="container">
@@ -54,20 +60,23 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 	<br><br>
 		
 	<form action="ControlaAreaIntegrante" method="post">
-		<input type="hidden" name="action" value="consultarEnsaioEscola">
+		<input type="hidden" name="action" value="consultarTorcedorEscola">
 		<div class="row">  
 		  <div class="col-lg-6">
 		    <div class="input-group">
 		      <select name="escolaId" id="escola" class="form-control">  
-		      <option>selecione a escola de Samba --></option>
-		      <% for(Entidade entidade : listaEscolas){ 
+		      <option value="0">selecione a escola de Samba --></option>
+		      <% if(listaEscolas != null && listaEscolas.size() > 0)
+		      {
+		      for(Entidade entidade : listaEscolas){ 
 		      		EscolaSamba escola = (EscolaSamba) entidade;
 		      %>
   					<option value="<%=escola.getId() %>"><%=escola.getNome() %></option>
-  			<% } %>	
+  			<% 	}
+		      }%>	
 		     </select>
 		      <span class="input-group-btn">
-		        <input type="submit" class="btn btn-default" type="button" value="Consultar Ensaio">
+		        <input type="submit" class="btn btn-default" type="button" value="Consultar Torcedores">
 		      </span>
 		    </div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
@@ -87,16 +96,19 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 	  		</thead>
 	  		<tbody>
 	  		
+	  		<% if(listaTorcedores != null && listaTorcedores.size() > 0)
+	  		{
+	  			for(Entidade entidade : listaTorcedores){ 
+	  				Torcedor torcedor = (Torcedor) entidade;  	
+	  			
+	  		%>
 		  		<tr>
-		  			<td>1</td>  
-		  			<td>Torcedor I</td>
-		  			<td>Masculino</td>  	  			
+		  			<td><%=torcedor.getId() %></td>  
+		  			<td><%=torcedor.getNome() %></td>  		
+		  			<td><%=torcedor.getSexo().nomeBonito %></td>  		
 		  		</tr>
-		  		<tr>
-		  			<td>2</td>  
-		  			<td>Torcedor II</td>
-		  			<td>Feminino</td>  	  			
-		  		</tr>
+	  		<% }
+	  		}%>
 	  		</tbody>
 		</table>
 		</div>
