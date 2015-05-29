@@ -159,7 +159,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 				
 					System.out.println(request.getParameter("escolaId"));
 					
-					Integrante integrante = (Integrante) tabelaIntegrante.obterPorId(this.obterUsuarioSession(request).getId());
+					Integrante integrante = (Integrante) tabelaIntegrante.obterPorIdUsuario(this.obterUsuarioSession(request).getId());
 					Set<EscolaSamba> SetEscola = integrante.getEscolaSamba();		
 					List<Ensaio> listEnsaio = new ArrayList<Ensaio>();
 					
