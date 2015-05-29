@@ -334,7 +334,7 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		Set<EscolaSamba> escolas = new HashSet<>();
 		
 		Connection c = getConnection();
-		String sql = "select distinct escola_samba.* from integrante join (atividade_integrante_escola, escola_samba) on (integrante.id_integrante = atividade_integrante_escola.integrante_id_integrante and atividade_integrante_escola.escola_samba_id_escola_samba = escola_samba.id_escola_samba) where integrante.id_integrante = ?;";
+		String sql = "select distinct escola_samba.*, usuario.* from integrante join (atividade_integrante_escola, escola_samba, usuario) on (integrante.id_integrante = atividade_integrante_escola.integrante_id_integrante and atividade_integrante_escola.escola_samba_id_escola_samba = escola_samba.id_escola_samba and escola_samba.usuario_id_usuario = usuario.id_usuario) where integrante.id_integrante = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, integrante.getId());
