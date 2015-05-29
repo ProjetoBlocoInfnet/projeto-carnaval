@@ -197,24 +197,6 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		return integrantes;
 	}
 	
-	/*public Set<EscolaSamba> obterTodasEscolasPorIntegrante(Integrante integrante) {
-		Set<EscolaSamba> escolas = new HashSet<>();
-		
-		Connection c = getConnection();
-		String sql = "select * from escola_samba join (usuario, integrante) on (usuario.id_usuario = escola_samba.usuario_id_usuario and escola_samba.id_pessoa = integrante.pessoa_id_pessoa);";
-		try {
-			pstmt = c.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				escolas.add(this.resultSet2Object(rs));
-			}
-		} catch (SQLException e) {
-		}finally{
-			closeConnection(c);
-		}
-		return integrantes;
-	}*/
-
 	public List<Entidade> obterTodosAtivos() {
 		List<Entidade> integrantes = new ArrayList<>();
 		/*for(int i=0; i< IntegranteDAO.integrantes.size(); i++ )

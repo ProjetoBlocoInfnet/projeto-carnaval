@@ -10,6 +10,7 @@ import java.util.List;
 
 import negocio.Entidade;
 import negocio.EscolaSamba;
+import negocio.Integrante;
 import enumerator.Grupos;
 import enumerator.Perfil;
 
@@ -307,6 +308,26 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		}
 		return escolasSamba;
 	}
+	
+	public List<Entidade> obterTodasEscolasPorIntegrante(Integrante integrante) {
+		List<Entidade> escolas = new ArrayList<>();
+		
+		Connection c = getConnection();
+		String sql = "select distinct escola_samba.* from integrante join (atividade_integrante_escola, escola_samba) on (integrante.id_integrante = atividade_integrante_escola.integrante_id_integrante and atividade_integrante_escola.escola_samba_id_escola_samba = escola_samba.id_escola_samba) where integrante.id_integrante = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, integrante.getId());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				escolas.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return escolas;
+	}
+
 	
 	private EscolaSamba resultSet2Object(ResultSet rs) throws SQLException
 	{
