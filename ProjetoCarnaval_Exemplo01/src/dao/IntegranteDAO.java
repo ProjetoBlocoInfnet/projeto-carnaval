@@ -255,6 +255,7 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		i.setSexo(Sexos.from(rs.getString("sexo")));
 		i.setEmail(rs.getString("email"));
 		i.setTelefone(rs.getString("telefone"));
+		i.setEscolaSamba(new EscolaSambaDAO().obterTodasEscolasPorIntegranteSet(i));
 		return i;
 	}
 	

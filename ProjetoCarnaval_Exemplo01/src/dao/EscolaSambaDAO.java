@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import negocio.Entidade;
 import negocio.EscolaSamba;
@@ -328,6 +330,24 @@ public class EscolaSambaDAO extends AbstractDAO implements DAO
 		return escolas;
 	}
 
+	public Set<EscolaSamba> obterTodasEscolasPorIntegranteSet(Integrante integrante) {
+		Set<EscolaSamba> escolas = new HashSet<>();
+		
+		Connection c = getConnection();
+		String sql = "select distinct escola_samba.* from integrante join (atividade_integrante_escola, escola_samba) on (integrante.id_integrante = atividade_integrante_escola.integrante_id_integrante and atividade_integrante_escola.escola_samba_id_escola_samba = escola_samba.id_escola_samba) where integrante.id_integrante = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, integrante.getId());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				escolas.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return escolas;
+	}
 	
 	private EscolaSamba resultSet2Object(ResultSet rs) throws SQLException
 	{
