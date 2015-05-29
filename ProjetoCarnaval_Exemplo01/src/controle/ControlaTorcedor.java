@@ -69,6 +69,11 @@ public class ControlaTorcedor extends HttpServlet {
 				tela = (String) request.getAttribute("tela");
 			}			
 			
+			EscolaSamba escolaSamba = null;
+			if(tela.equals("escolas") || tela.equals("torcedores")){
+					 escolaSamba =  (EscolaSamba) new EscolaSambaDAO().obterPorIdEscola(recuperarTorcedorDaSession(request).getEscolaSamba().getId());
+			}
+			
 			switch (tela) {
 			case "areaTorcedor":
 				request.getRequestDispatcher("/areaTorcedor/index.jsp").forward(request, response);
@@ -81,13 +86,16 @@ public class ControlaTorcedor extends HttpServlet {
 				request.getRequestDispatcher("indexTorcedor.jsp").forward(request, response);
 				break;			
 			case "escolas":			
-				EscolaSamba escolaSamba =  (EscolaSamba) new EscolaSambaDAO().obterPorIdEscola(recuperarTorcedorDaSession(request).getEscolaSamba().getId());
+				
 								
 				request.setAttribute("escolaSamba", escolaSamba);
 				request.getRequestDispatcher("/areaTorcedor/minhasEscolas.jsp").forward(request, response);
 				
 				break;
 			case "torcedores":							
+				
+				List<Entidade> ListOutrosTorcedoresEscolaSamba = (List<Entidade>) new TorcedorDAO().obterTodosAtivosEscolaEmComum(escolaSamba);
+				request.setAttribute("ListOutrosTorcedoresEscolaSamba", ListOutrosTorcedoresEscolaSamba);
 				request.getRequestDispatcher("/areaTorcedor/torcedores.jsp").forward(request, response);
 				
 				break;

@@ -1,9 +1,6 @@
 <%@ page import="negocio.Usuario" %>
 <%@ page import="negocio.Entidade" %>
-<%@ page import="negocio.Ensaio" %>
-<%@ page import="negocio.EscolaSamba" %>
-<%@ page import="enumerator.Grupos" %>
-<%@ page import="java.util.Set" %>
+<%@ page import="negocio.Torcedor" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,7 +23,13 @@
 	
 </head>
 <body>
-
+<% 
+Usuario usuario = (Usuario) session.getAttribute("usuario");
+List<Torcedor> ListOutrosTorcedoresEscolaSamba = null;
+if (request.getAttribute("ListOutrosTorcedoresEscolaSamba") != null){
+	ListOutrosTorcedoresEscolaSamba = (List<Torcedor>) request.getAttribute("ListOutrosTorcedoresEscolaSamba");
+} 
+%>	
 
 <div class="container">
 	
@@ -42,25 +45,10 @@
 	<a href="ControlaTorcedor?tela=areaTorcedor"><button type="button" class="btn btn-default">Voltar</button></a>
 	<br><br>
 		
-	<form action="ControlaAreaIntegrante" method="post">
-		<input type="hidden" name="action" value="consultarEnsaioEscola">
-		<div class="row">  
-		  <div class="col-lg-6">
-		    <div class="input-group">
-		      <select name="escolaId" id="escola" class="form-control">  
-		      <option>selecione a escola de Samba --></option>
-		      	
-		     </select>
-		      <span class="input-group-btn">
-		        <input type="submit" class="btn btn-default" type="button" value="Consultar Ensaio">
-		      </span>
-		    </div><!-- /input-group -->
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
-	</form>
+	
 	<hr>
 	
-	
+	<%  if(ListOutrosTorcedoresEscolaSamba != null && ListOutrosTorcedoresEscolaSamba.size() > 0){ %>
 		<div >
 		<h4>Lista de Torcedores das Escolas de Samba</h4>
 		<hr>
@@ -71,21 +59,20 @@
 	  		<th>sexo</th>
 	  		</thead>
 	  		<tbody>
+	  		<% for(Entidade e :ListOutrosTorcedoresEscolaSamba){
+	  			Torcedor torcedor = (Torcedor) e;
+	  			%>
 	  		
 		  		<tr>
-		  			<td>1</td>  
-		  			<td>Torcedor I</td>
-		  			<td>Masculino</td>  	  			
+		  			<td><%=torcedor.getId() %></td>  
+		  			<td><%=torcedor.getNome() %></td>
+		  			<td><%=torcedor.getSexo() %></td>  	  			
 		  		</tr>
-		  		<tr>
-		  			<td>2</td>  
-		  			<td>Torcedor II</td>
-		  			<td>Feminino</td>  	  			
-		  		</tr>
+		  	<%} %>		
 	  		</tbody>
 		</table>
 		</div>
-		
+	<%} %>	
 	
 </div>
 

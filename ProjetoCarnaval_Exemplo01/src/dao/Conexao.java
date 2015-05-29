@@ -20,7 +20,7 @@ public class Conexao
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				
-				return DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","93956619");
+				return DriverManager.getConnection("jdbc:mysql://localhost/projeto_carnaval","root","Debora0103");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
