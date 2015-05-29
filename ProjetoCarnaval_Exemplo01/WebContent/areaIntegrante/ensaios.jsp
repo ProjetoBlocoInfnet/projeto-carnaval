@@ -63,7 +63,7 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 		  <div class="col-lg-6">
 		    <div class="input-group">
 		      <select name="escolaId" id="escola" class="form-control">  
-		      <option>selecione a escola de Samba --></option>
+		      <option value="0">selecione a escola de Samba --></option>
 		      <% if(listaEscolas != null && listaEscolas.size() > 0)
 		      {
 		      for(Entidade entidade : listaEscolas){ 

@@ -122,7 +122,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
-		
+		String escolaId = null;
 		switch (action) {
 		case "consultarEscola":
 			
@@ -156,15 +156,14 @@ public class ControlaAreaIntegrante extends HttpServlet {
 			break;
 		case "consultarEnsaioEscola":
 			
-			if(request.getParameter("escolaId") != null){
+			escolaId = request.getParameter("escolaId");
+			if(escolaId != null && !"0".equals(escolaId)){
 				
-					System.out.println(request.getParameter("escolaId"));
-					
 					Integrante integrante = (Integrante) tabelaIntegrante.obterPorIdUsuario(this.obterUsuarioSession(request).getId());
 					Set<EscolaSamba> SetEscola = integrante.getEscolaSamba();		
 					List<Ensaio> listEnsaio = new ArrayList<Ensaio>();
 					
-					Integer id = Integer.valueOf(request.getParameter("escolaId"));
+					Integer id = Integer.valueOf(escolaId);
 					
 					for (EscolaSamba escolaSamba : SetEscola) {
 						if(escolaSamba.getId() == id){							
@@ -195,14 +194,15 @@ public class ControlaAreaIntegrante extends HttpServlet {
 			
 			break;
 		case "consultarTorcedorEscola":
-			if(request.getParameter("escolaId") != null){
+			escolaId = request.getParameter("escolaId");
+			if(escolaId != null && !"0".equals(escolaId)){
 				
 				List<Entidade> torcedoresEscola = new TorcedorDAO().obterTodosAtivosEscolaEmComum((EscolaSamba) new EscolaSambaDAO().obterPorId(Integer.valueOf(request.getParameter("escolaId"))));
 									
 				if(torcedoresEscola != null && torcedoresEscola.size()> 0){
 					request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
 					request.setAttribute("listaTorcedores", torcedoresEscola);
-					request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
+					request.getRequestDispatcher("/areaIntegrante/torcedores.jsp").forward(request, response);
 				}else{
 					request.setAttribute("tela","torcedores");
 					request.setAttribute("resultado_error", "Nenhum Torcedor foi encontrado");
