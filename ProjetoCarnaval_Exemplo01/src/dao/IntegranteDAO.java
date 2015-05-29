@@ -243,7 +243,7 @@ public class IntegranteDAO extends AbstractDAO implements DAO
 		List<Entidade> integrantes = new ArrayList<>();
 		Connection c = getConnection();
 		
-		String sql = "select * from usuario join (pessoa, integrante,escola_samba) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa) where nome like '%?%' and escola_samba_id_escola_samba = ?;";
+		String sql = "select * from usuario join (pessoa, integrante, atividade_integrante_escola) on (usuario.id_usuario = pessoa.usuario_id_usuario and pessoa.id_pessoa = integrante.pessoa_id_pessoa and integrante.id_integrante = atividade_integrante_escola.integrante_id_integrante) where pessoa.nome like '%?%' and escola_samba_id_escola_samba = ?;";
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, nome);
