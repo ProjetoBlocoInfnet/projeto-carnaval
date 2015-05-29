@@ -72,24 +72,22 @@ public class ControlaAreaIntegrante extends HttpServlet {
 			}else if(request.getAttribute("tela") != null){
 				tela = (String) request.getAttribute("tela");
 			}
+			request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
 			
 			switch (tela) {
 			
 			case "escolas":			
 				
-				request.setAttribute("listaEscola", this.setEscolaSamba(request));			
 				request.getRequestDispatcher("/areaIntegrante/minhasEscolas.jsp").forward(request, response);
 				
 				break;
 			case "torcedores":			
 				
-				request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));		
 				request.getRequestDispatcher("/areaIntegrante/torcedores.jsp").forward(request, response);
 				
 				break;
 			
 			case "ensaios":
-				
 				List<Ensaio> listaTodosEnsaio = new ArrayList<Ensaio>();
 				List<Ensaio> listaEnsaios = null;
 				

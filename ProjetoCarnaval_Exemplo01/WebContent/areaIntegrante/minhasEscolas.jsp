@@ -28,8 +28,8 @@
 <%
 Usuario usuario = (Usuario) session.getAttribute("usuario");
 Set<Entidade> listaEscolas = null;
-if(request.getAttribute("listaEscola") != null){
-	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscola");
+if(request.getAttribute("listaEscolaConsulta") != null){
+	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscolaConsulta");
 }
 %>
 
