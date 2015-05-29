@@ -2,6 +2,7 @@
 <%@ page import="negocio.Entidade" %>
 <%@ page import="negocio.Ensaio" %>
 <%@ page import="negocio.EscolaSamba" %>
+<%@ page import="negocio.Torcedor" %>
 <%@ page import="enumerator.Grupos" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
@@ -32,6 +33,11 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 Set<Entidade> listaEscolas = null;
 if(request.getAttribute("listaEscolaConsulta") != null){
 	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscolaConsulta");
+}
+
+Set<Entidade> listaTorcedores = null;
+if(request.getAttribute("listaTorcedores") != null){
+	listaTorcedores = (Set<Entidade>) request.getAttribute("listaTorcedores");
 }
 %>
 
@@ -90,16 +96,19 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 	  		</thead>
 	  		<tbody>
 	  		
+	  		<% if(listaTorcedores != null && listaTorcedores.size() > 0)
+	  		{
+	  			for(Entidade entidade : listaTorcedores){ 
+	  				Torcedor torcedor = (Torcedor) entidade;  	
+	  			
+	  		%>
 		  		<tr>
-		  			<td>1</td>  
-		  			<td>Torcedor I</td>
-		  			<td>Masculino</td>  	  			
+		  			<td><%=torcedor.getId() %></td>  
+		  			<td><%=torcedor.getNome() %></td>  		
+		  			<td><%=torcedor.getSexo().nomeBonito %></td>  		
 		  		</tr>
-		  		<tr>
-		  			<td>2</td>  
-		  			<td>Torcedor II</td>
-		  			<td>Feminino</td>  	  			
-		  		</tr>
+	  		<% }
+	  		}%>
 	  		</tbody>
 		</table>
 		</div>

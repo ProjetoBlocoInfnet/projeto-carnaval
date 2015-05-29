@@ -19,6 +19,7 @@ import negocio.Usuario;
 import dao.EnsaioDAO;
 import dao.EscolaSambaDAO;
 import dao.IntegranteDAO;
+import dao.TorcedorDAO;
 
 /**
  * Servlet implementation class ControlaAreaIntegrante
@@ -82,7 +83,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 				
 				break;
 			case "torcedores":			
-				
+				request.setAttribute("listaTorcedores", new TorcedorDAO().obterTodosAtivos());
 				request.getRequestDispatcher("/areaIntegrante/torcedores.jsp").forward(request, response);
 				
 				break;
