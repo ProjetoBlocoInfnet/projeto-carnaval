@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Ensaio;
+import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
+import negocio.Torcedor;
 import negocio.Usuario;
 import dao.EnsaioDAO;
 import dao.EscolaSambaDAO;
@@ -175,7 +177,7 @@ public class ControlaAreaIntegrante extends HttpServlet {
 						System.out.println(ensaio.getData());
 					}
 										
-					if(listEnsaio.size()> 0){
+					if(listEnsaio != null && listEnsaio.size()> 0){
 						System.out.println("entrou aqui");
 						request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
 						request.setAttribute("listaEnsaio", listEnsaio);
@@ -191,6 +193,26 @@ public class ControlaAreaIntegrante extends HttpServlet {
 					doGet(request, response);
 				}
 			
+			break;
+		case "consultarTorcedorEscola":
+			if(request.getParameter("escolaId") != null){
+				
+				List<Entidade> torcedoresEscola = new TorcedorDAO().obterTodosAtivosEscolaEmComum((EscolaSamba) new EscolaSambaDAO().obterPorId(Integer.valueOf(request.getParameter("escolaId"))));
+									
+				if(torcedoresEscola != null && torcedoresEscola.size()> 0){
+					request.setAttribute("listaEscolaConsulta", this.setEscolaSamba(request));
+					request.setAttribute("listaTorcedores", torcedoresEscola);
+					request.getRequestDispatcher("/areaIntegrante/ensaios.jsp").forward(request, response);
+				}else{
+					request.setAttribute("tela","torcedores");
+					request.setAttribute("resultado_error", "Nenhum Torcedor foi encontrado");
+					doGet(request, response);
+				}
+
+			}else{
+				request.setAttribute("tela","torcedores");
+				doGet(request, response);
+			}
 			break;
 		default:
 			break;

@@ -35,9 +35,9 @@ if(request.getAttribute("listaEscolaConsulta") != null){
 	listaEscolas = (Set<Entidade>) request.getAttribute("listaEscolaConsulta");
 }
 
-Set<Entidade> listaTorcedores = null;
+List<Entidade> listaTorcedores = null;
 if(request.getAttribute("listaTorcedores") != null){
-	listaTorcedores = (Set<Entidade>) request.getAttribute("listaTorcedores");
+	listaTorcedores = (List<Entidade>) request.getAttribute("listaTorcedores");
 }
 %>
 
@@ -60,7 +60,7 @@ if(request.getAttribute("listaTorcedores") != null){
 	<br><br>
 		
 	<form action="ControlaAreaIntegrante" method="post">
-		<input type="hidden" name="action" value="consultarEnsaioEscola">
+		<input type="hidden" name="action" value="consultarTorcedorEscola">
 		<div class="row">  
 		  <div class="col-lg-6">
 		    <div class="input-group">
@@ -76,7 +76,7 @@ if(request.getAttribute("listaTorcedores") != null){
 		      }%>	
 		     </select>
 		      <span class="input-group-btn">
-		        <input type="submit" class="btn btn-default" type="button" value="Consultar Ensaio">
+		        <input type="submit" class="btn btn-default" type="button" value="Consultar Torcedores">
 		      </span>
 		    </div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
