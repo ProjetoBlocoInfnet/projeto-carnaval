@@ -2,6 +2,7 @@
 <%@ page import="negocio.Entidade" %>
 <%@ page import="negocio.Integrante" %>
 <%@ page import="negocio.Atividade" %>
+<%@ page import="negocio.Acao" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,6 +32,18 @@ List<Entidade> listaAtividades = null;
 if(request.getAttribute("listaAtividades") != null){
 	listaAtividades = (List<Entidade>) request.getAttribute("listaAtividades");
 }
+
+List<Entidade> listaAcao = null;
+if(request.getAttribute("listaAcao") != null){
+	listaAcao = (List<Entidade>) request.getAttribute("listaAcao");
+}
+
+
+List<Entidade> listaAtividadesIntegrante = null;
+if(request.getAttribute("listaAtividadesIntegrante") != null){
+	listaAtividadesIntegrante = (List<Entidade>) request.getAttribute("listaAtividadesIntegrante");
+}
+
 %>
 
 <div class="container">
@@ -58,19 +71,23 @@ if(request.getAttribute("listaAtividades") != null){
 	<form class="form-horizontal" action="ControlaIntegrante" method="post" id="form-escolaSamba">
 		
 		<input type="hidden" name="action" value="cadastrarAtividade">
+		<input type="hidden" name="idIntegrante" value="<%=request.getParameter("idIntegrante")%>">
 		  
 		   
 		  
 		   <div class="form-group">
 		    <label for="cpf" class="col-sm-2 control-label">Atividades:</label>
 		    <div class="col-sm-10">
-		      <select multiple name="atividade[]" class="form-control">
-		      <%for(Entidade entidade: listaAtividades){ 
-		      		Atividade atividade = (Atividade) entidade;
+		      <select name="atividade[]" class="form-control">
+		      <%if(listaAcao != null && listaAcao.size() > 0)
+		      	{
+		      		for(Entidade entidade: listaAcao){ 
+		    	  		Acao acao = (Acao) entidade;
 		      		
 		      %>
-				  <option value="<%= atividade.getId()%>"><%= atividade.getAcao().getNome() %></option>
-			  <%} %>
+				  <option value="<%= acao.getId()%>"><%= acao.getNome() %></option>
+			  <%	}
+		      	} %>
 				
 				</select>
 		    </div>
@@ -93,23 +110,27 @@ if(request.getAttribute("listaAtividades") != null){
 	<div >
 	<table class="table table-hover">
   		<thead>
-  		<th>Id</th>
   		<th>Atividade</th>
+  		<th>Data Inicio</th>
+  		<th>Data Fim</th>
   		<th>Ação</th>
   		</thead>
   		<tbody>  		
+		      <%if(listaAtividadesIntegrante != null && listaAtividadesIntegrante.size() > 0)
+		      {
+		      	for(Entidade entidade: listaAtividadesIntegrante){ 
+		      		Atividade atividade = (Atividade) entidade;
+		      		
+		      %>
 	  		<tr>
-	  			<td>1</td>  
-	  			<td>Mestre Sala</td>
-	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
+	  			<td><%= atividade.getAcao().getNome() %></td>
+	  			<td><%= atividade.getData_inicio() %></td>
+	  			<td><%= atividade.getData_fim() %></td>
+	  			<td><a href="ControlaIntegrante?idIntegrante=<%=request.getParameter("idIntegrante")%>&idAtividade=<%=atividade.getId()%>&acao=excluirAtividade"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
 	  			</td>
 	  		</tr>
-	  		<tr>
-	  			<td>2</td>  
-	  			<td>Confeccionador de instrumentos</td>
-	  			<td><a href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
-	  			</td>
-	  		</tr>
+		  <%	}
+		    } %>
   		</tbody>
 	</table>
 	</div>

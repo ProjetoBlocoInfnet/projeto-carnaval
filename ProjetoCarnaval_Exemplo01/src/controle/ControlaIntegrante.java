@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import negocio.Acao;
 import negocio.Atividade;
 import negocio.Entidade;
 import negocio.EscolaSamba;
 import negocio.Integrante;
 import negocio.Pessoa.Sexos;
 import negocio.Usuario;
+import dao.AcaoDAO;
 import dao.AtividadeDAO;
 import dao.EscolaSambaDAO;
 import dao.IntegranteDAO;
@@ -77,10 +79,13 @@ public class ControlaIntegrante extends HttpServlet {
 			case "alterar":
 				
 				break;
+
 			case "atividade":
 				
 				List<Entidade> listaAtividades= tabelaAtividade.obterTodos();
 				request.setAttribute("listaAtividades", listaAtividades);
+				//Pega todas as atividades deste integrante para a escola de samba que está fazendo o cadastro.
+				request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(id, this.recuperarEscolaDaSession(request).getId()));
 				
 				for (Entidade e: listaAtividades) {
 					Atividade atividade = (Atividade) e;
@@ -97,6 +102,19 @@ public class ControlaIntegrante extends HttpServlet {
 					request.setAttribute("resultado_error", "Erro ao excluir o Integrante!");
 				}
 				break;
+			case "excluirAtividade":
+				if(new AtividadeDAO().excluir(new AtividadeDAO().obterPorId(Integer.valueOf(request.getParameter("idAtividade")))))
+				{
+					request.setAttribute("resultado_ok", "Atividade excluída com sucesso!");
+				}
+				else
+				{
+					request.setAttribute("resultado_error", "Erro ao excluir a atividade!");
+				}
+				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+				request.setAttribute("idIntegrante", request.getParameter("idIntegrante"));
+				request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(id, this.recuperarEscolaDaSession(request).getId()));
+				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			default:
 				break;
 			}
@@ -104,6 +122,8 @@ public class ControlaIntegrante extends HttpServlet {
 			List<Entidade> listaIntegrante = tabelaItegrante.obterTodos();
 			request.setAttribute("listaIntegrante", listaIntegrante);
 			if(action.equals("atividade")){
+				request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+				request.setAttribute("idIntegrante", request.getParameter("idIntegrante"));
 				request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			}else{
 				request.getRequestDispatcher("/integrante/index.jsp").forward(request, response);
@@ -140,6 +160,21 @@ public class ControlaIntegrante extends HttpServlet {
 				request.setAttribute("resultado_error", "Erro ao cadastrar o Integrante!");
 			}
 			doGet(request, response);
+			break;
+		case "cadastrarAtividade": //TODO implementação feita pelo Emmanuel. Validar arquitetura
+			Integer idIntegrante = Integer.valueOf(request.getParameter("idIntegrante"));
+			Atividade atividade = new Atividade();
+			atividade.setId_integrante(idIntegrante);
+			atividade.setEscolaSamba(this.recuperarEscolaDaSession(request));
+			atividade.setAcao((Acao) new AcaoDAO().obterPorId(Integer.valueOf(request.getParameter("atividade[]"))));
+			if(new AtividadeDAO().cadastrar(atividade)){
+				request.setAttribute("resultado_ok", "Atividade Cadastrada com sucesso!");
+			}else{
+				request.setAttribute("resultado_error", "Erro ao cadastrar o Integrante!");
+			}
+			request.setAttribute("listaAtividadesIntegrante", new AtividadeDAO().obterTodosPorIdIntegranteNestaEscola(idIntegrante, this.recuperarEscolaDaSession(request).getId()));
+			request.setAttribute("listaAcao", new AcaoDAO().obterTodos());
+			request.getRequestDispatcher("/integrante/atividadeIntegrante.jsp").forward(request, response);
 			break;
 		case "consultar":
 			if(request.getParameter("nome") !=null){

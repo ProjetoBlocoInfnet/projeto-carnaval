@@ -9,7 +9,7 @@ public class Atividade implements Entidade
 	private EscolaSamba escolaSamba;
 	private Acao acao;
 	private Date data_inicio = new Date();
-	private Date data_fim;
+	private Date data_fim = new Date();
 
 	@Override
 	public int hashCode() {
