@@ -42,6 +42,7 @@
   		<li role="presentation"><a href="ControlaEscolaSamba">Escola de Samba</a></li>
   		<li role="presentation"><a href="ControlaQuesito">Quesitos</a></li>
   		<li role="presentation"><a href="ControlaJurado">Jurados</a></li>
+  		<li role="presentation"><a href="ControlaCarnaval">Carnaval</a></li>
 	</ul>
 	<br><br>
 	
