@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import enumerator.Grupos;
 import negocio.Desfile;
 import negocio.Entidade;
 
@@ -28,8 +30,8 @@ public class CarnavalDAO extends AbstractDAO implements DAO {
 		try {
 			pstmt = c.prepareStatement(sql);
 			pstmt.setInt(1, desfile.getGrupo().id);
-			pstmt.setDate(4,new java.sql.Date(desfile.getData_primeiro_desfile().getTime()));
-			pstmt.setDate(5,new java.sql.Date(desfile.getData_ultimo_desfile().getTime()));
+			pstmt.setDate(2,new java.sql.Date(desfile.getData_primeiro_desfile().getTime()));
+			pstmt.setDate(3,new java.sql.Date(desfile.getData_ultimo_desfile().getTime()));
 			pstmt.execute();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -42,32 +44,104 @@ public class CarnavalDAO extends AbstractDAO implements DAO {
 
 	@Override
 	public boolean alterar(Entidade entidade) {
-		// TODO Auto-generated method stub
+		Desfile desfile = new Desfile();
+		if (entidade instanceof Desfile) {
+			desfile = (Desfile) entidade;
+		} else {
+			return false;
+		}
+		
+		Connection c = getConnection();
+		String sql = "update carnaval set grupos_id_grupo = ?, data_primeiro_desfile = ?, data_ultimo_desfile = ? where id_carnaval = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, desfile.getGrupo().id);
+			pstmt.setDate(2,new java.sql.Date(desfile.getData_primeiro_desfile().getTime()));
+			pstmt.setDate(3,new java.sql.Date(desfile.getData_ultimo_desfile().getTime()));
+			pstmt.setInt(4, desfile.getId());
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			closeConnection(c);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean excluir(Entidade entidade) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		Desfile desfile = new Desfile();
+		if (entidade instanceof Desfile) {
+			desfile = (Desfile) entidade;
+		} else {
+			return false;
+		}
+		
+		Connection c = getConnection();
+		String sql = "delete from carnaval where id_carnaval = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, desfile.getId());
+			pstmt.execute();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			closeConnection(c);
+		}
+		return false;	}
 
 	@Override
 	public List<Entidade> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Entidade> desfiles = new ArrayList<>();
+		Connection c = getConnection();
+		String sql = "Select * from carnaval;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				desfiles.add(this.resultSet2Object(rs));
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return desfiles;
 	}
 
+	private Desfile resultSet2Object(ResultSet rs) throws SQLException
+	{
+		Desfile d = new Desfile();
+		d.setId(rs.getInt("id_carnaval"));
+		d.setData_primeiro_desfile(rs.getDate("data_primeiro_desfile"));
+		d.setData_ultimo_desfile(rs.getDate("data_ultimo_desfile"));
+		d.setGrupo(Grupos.from(rs.getInt("grupos_id_grupo")));
+		return d;
+	}
+	
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.obterTodos();
 	}
 
 	@Override
 	public Entidade obterPorId(Integer numero) {
-		// TODO Auto-generated method stub
-		return null;
+		Desfile d = null;
+		Connection c = getConnection();
+		String sql = "Select * from carnaval where id_carnaval = ?;";
+		try {
+			pstmt = c.prepareStatement(sql);
+			pstmt.setInt(1, numero);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				d = this.resultSet2Object(rs);
+			}
+		} catch (SQLException e) {
+		}finally{
+			closeConnection(c);
+		}
+		return d;
 	}
 
 }
