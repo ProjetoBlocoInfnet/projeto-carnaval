@@ -16,6 +16,7 @@ public class Desfile implements Entidade
 	private Grupos grupo;
 	private Map<Integer,Quesito> quesitos = new HashMap<>();
 	private Set<EscolaSamba> escolasSamba = new HashSet<>();
+	private Map<Integer,Date> data_hora_desfile_escolas = new HashMap<>();
 	private Set<Jurado> jurados = new HashSet<>();
 	
 	@Override
@@ -82,5 +83,12 @@ public class Desfile implements Entidade
 	}
 	public void setJurados(Set<Jurado> jurados) {
 		this.jurados = jurados;
+	}
+	public Map<Integer, Date> getData_hora_desfile_escolas() {
+		return data_hora_desfile_escolas;
+	}
+	public void setData_hora_desfile_escolas(
+			Map<Integer, Date> data_hora_desfile_escolas) {
+		this.data_hora_desfile_escolas = data_hora_desfile_escolas;
 	}
 }

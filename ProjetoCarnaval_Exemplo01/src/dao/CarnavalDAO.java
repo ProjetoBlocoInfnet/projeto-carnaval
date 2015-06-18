@@ -11,6 +11,7 @@ import java.util.List;
 import enumerator.Grupos;
 import negocio.Desfile;
 import negocio.Entidade;
+import negocio.EscolaSamba;
 
 public class CarnavalDAO extends AbstractDAO implements DAO {
 	private PreparedStatement pstmt;
@@ -38,6 +39,34 @@ public class CarnavalDAO extends AbstractDAO implements DAO {
 			e.printStackTrace();
 		}finally{
 			closeConnection(c);
+		}
+		return false;
+	}
+
+	public boolean cadastrarEscolaCarnaval(Entidade entidade) {
+		Desfile desfile = new Desfile();
+		if (entidade instanceof Desfile) {
+			desfile = (Desfile) entidade;
+		} else {
+			return false;
+		}
+		
+		for(EscolaSamba es : desfile.getEscolasSamba())
+		{
+			Connection c = getConnection();
+			String sql = "insert into carnaval_desfile_escola(escola_samba_id_escola_samba,carnaval_id_carnaval,data_hora_inicio)values(?,?,?);";
+			try {
+				pstmt = c.prepareStatement(sql);
+				pstmt.setInt(1, es.getId());
+				pstmt.setInt(2, desfile.getId());
+				pstmt.setDate(3,new java.sql.Date(desfile.getData_hora_desfile_escolas().get(es.getId()).getTime()));
+				pstmt.execute();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				closeConnection(c);
+			}
 		}
 		return false;
 	}
