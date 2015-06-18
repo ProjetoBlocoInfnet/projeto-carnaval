@@ -34,8 +34,7 @@ public class NotaDAO  extends AbstractDAO implements DAO
 
 	@Override
 	public Collection<Entidade> obterTodosCollection() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.obterTodos();
 	}
 
 	@Override

@@ -300,3 +300,11 @@ insert into acao (nome,descricao) values ('Vocalista','');
 insert into acao (nome,descricao) values ('Bailarino','');
 insert into acao (nome,descricao) values ('Sambista','');
 commit;
+
+--Valores fixos para as posições do Jurado no sambódromo.
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Entrada Sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Ala 3 sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Centro Sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Ala 5 sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Saida Sambodromo');
+commit;
