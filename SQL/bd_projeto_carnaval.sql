@@ -185,17 +185,18 @@ CREATE TABLE carnaval (
       ON UPDATE NO ACTION
 );
 
-CREATE TABLE carnaval_quesitos (
-  id_carnaval_quesitos INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
-  ordem_quesito INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY(id_carnaval_quesitos, carnaval_id_carnaval, ordem_quesito),
-  INDEX carnaval_quesitos_FKIndex1(carnaval_id_carnaval),
-  FOREIGN KEY(carnaval_id_carnaval)
-    REFERENCES carnaval(id_carnaval)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-);
+CREATE TABLE `carnaval_quesitos` (
+  `id_carnaval_quesitos` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `carnaval_id_carnaval` int(10) unsigned NOT NULL,
+  `ordem_quesito` int(10) unsigned NOT NULL,
+  `quesito_id_quesito` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_carnaval_quesitos`,`carnaval_id_carnaval`,`ordem_quesito`,`quesito_id_quesito`),
+  KEY `carnaval_quesitos_FKIndex1` (`carnaval_id_carnaval`),
+  KEY `carnaval_quesitos_id_quesito_idx` (`quesito_id_quesito`),
+  CONSTRAINT `carnaval_quesitos_ibfk_1` FOREIGN KEY (`carnaval_id_carnaval`) REFERENCES `carnaval` (`id_carnaval`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `carnaval_quesitos_id_quesito` FOREIGN KEY (`quesito_id_quesito`) REFERENCES `quesito` (`id_quesito`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE carnaval_quesito_jurado (
   id_carnaval_quesito_jurado INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,

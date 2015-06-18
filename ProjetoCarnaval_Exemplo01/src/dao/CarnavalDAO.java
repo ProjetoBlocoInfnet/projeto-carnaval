@@ -12,6 +12,7 @@ import enumerator.Grupos;
 import negocio.Desfile;
 import negocio.Entidade;
 import negocio.EscolaSamba;
+import negocio.Quesito;
 
 public class CarnavalDAO extends AbstractDAO implements DAO {
 	private PreparedStatement pstmt;
@@ -71,6 +72,36 @@ public class CarnavalDAO extends AbstractDAO implements DAO {
 		return false;
 	}
 
+	public boolean cadastrarQuesitosCarnaval(Entidade entidade) {
+		Desfile desfile = new Desfile();
+		if (entidade instanceof Desfile) {
+			desfile = (Desfile) entidade;
+		} else {
+			return false;
+		}
+		
+		for(int i = 0; i < desfile.getQuesitos().size(); i++)
+		{
+			int key = ++i;
+			Quesito q = desfile.getQuesitos().get(key);
+			Connection c = getConnection();
+			String sql = "insert into carnaval_quesitos(carnaval_id_carnaval,ordem_quesito,quesito_id_quesito)values(?,?,?);";
+			try {
+				pstmt = c.prepareStatement(sql);
+				pstmt.setInt(1, desfile.getId());
+				pstmt.setInt(2, key);
+				pstmt.setInt(3,q.getId());
+				pstmt.execute();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				closeConnection(c);
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean alterar(Entidade entidade) {
 		Desfile desfile = new Desfile();
@@ -97,6 +128,35 @@ public class CarnavalDAO extends AbstractDAO implements DAO {
 		}
 		return false;
 	}
+
+	/*public boolean alterarEscolaCarnaval(Entidade entidade) {
+		Desfile desfile = new Desfile();
+		if (entidade instanceof Desfile) {
+			desfile = (Desfile) entidade;
+		} else {
+			return false;
+		}
+		
+		for(EscolaSamba es : desfile.getEscolasSamba())
+		{
+			Connection c = getConnection();
+			String sql = "update carnaval_desfile_escola set escola_samba_id_escola_samba = ?, carnaval_id_carnaval = ?, data_hora_inicio = ? where id_carnaval_desfile_escola = ?;";
+			try {
+				pstmt = c.prepareStatement(sql);
+				pstmt.setInt(1, es.getId());
+				pstmt.setInt(2, desfile.getId());
+				pstmt.setDate(3,new java.sql.Date(desfile.getData_hora_desfile_escolas().get(es.getId()).getTime()));
+				pstmt
+				pstmt.execute();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				closeConnection(c);
+			}
+		}
+		return false;
+	}*/
 
 	@Override
 	public boolean excluir(Entidade entidade) {
