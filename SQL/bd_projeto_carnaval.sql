@@ -241,6 +241,25 @@ CREATE TABLE carnaval_desfile_escola (
       ON UPDATE NO ACTION
 );
 
+CREATE TABLE `projeto_carnaval`.`carnaval_notas` (
+  `id_carnaval_notas` INT NOT NULL AUTO_INCREMENT,
+  `id_carnaval_quesito_jurado` INT UNSIGNED NOT NULL,
+  `id_carnaval_desfile_escola` INT UNSIGNED NOT NULL,
+  `nota` DECIMAL(2,1) NOT NULL,
+  PRIMARY KEY (`id_carnaval_notas`, `id_carnaval_quesito_jurado`, `id_carnaval_desfile_escola`, `nota`),
+  INDEX `notas_quesito_idx` (`id_carnaval_quesito_jurado` ASC),
+  INDEX `notas_escola_idx` (`id_carnaval_desfile_escola` ASC),
+  CONSTRAINT `notas_quesito`
+    FOREIGN KEY (`id_carnaval_quesito_jurado`)
+    REFERENCES `projeto_carnaval`.`carnaval_quesito_jurado` (`id_carnaval_quesito_jurado`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `notas_escola`
+    FOREIGN KEY (`id_carnaval_desfile_escola`)
+    REFERENCES `projeto_carnaval`.`carnaval_desfile_escola` (`id_carnaval_desfile_escola`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
 insert into perfil (nome_perfil, descricao) values ('Administrador','Administrador do sistema');
 insert into perfil (nome_perfil, descricao) values ('Escola de Samba','Escolas de samba usuárias do sistema');
 insert into perfil (nome_perfil, descricao) values ('Integrante','Integrantes participantes dos desfiles');
