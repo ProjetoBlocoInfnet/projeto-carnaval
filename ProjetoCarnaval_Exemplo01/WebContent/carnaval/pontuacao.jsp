@@ -57,8 +57,18 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
 		<input type="hidden" name="action" value="cadastrarQuesito">
 		  
+		   <div class="form-group">
+		    <label for="escolaSamba" class="col-sm-2 control-label">Escola:</label>
+		    <div class="col-sm-10">
+		      <select name="escolaSamba" class="form-control">		      
+				  <option value="1">Salgueiro</option>
+			  	  <option value="2">Mangueira</option>
+				</select>
+		    </div>
+		  </div> 
+		  
 		  <div class="form-group">
-		    <label for="cpf" class="col-sm-2 control-label">Quesito:</label>
+		    <label for="quesito" class="col-sm-2 control-label">Quesito:</label>
 		    <div class="col-sm-10">
 		      <select name="quesitos" class="form-control">		      
 				  <option value="1">Quesito 1</option>
@@ -68,49 +78,49 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 		  </div>  
 		  
 		 <div class="form-group">
-		    <label for="cpf" class="col-sm-2 control-label">Jurado:</label>
+		    <label for="jurado" class="col-sm-2 control-label">Jurado:</label>
 		    <div class="col-sm-10">
-		      <select name="jurados" multiple class="form-control">		      
+		      <select name="jurados" class="form-control">		      
 				  <option value="1">Jurado 1</option>
 			  	  <option value="2">jurado 2</option>
 				</select>
 		    </div>
 		  </div>
-		  
-		<div class="form-group">
-		    <label for="cpf" class="col-sm-2 control-label">Posição na Avenida:</label>
+		 	
+		 <div class="form-group">
+		    <label for="pontuacao" class="col-sm-2 control-label">Pontuação:</label>
 		    <div class="col-sm-10">
-		      <select name="posicao"  class="form-control">		      
-				  <option value="1">Posicao 1 - Palco</option>
-			  	  <option value="2">Posição 2 - Início</option>
-				</select>
+		      <input type="text" name="pontuacao" value="" class="form-control" placeholder="Pontuação">
 		    </div>
 		  </div>
+		   
 	  		
 	  	<br>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-primary">Associar Jurado ao Quesito</button>
+		      <button type="submit" class="btn btn-primary">Incluir Pontuação</button>
 		    </div>
 		  </div>
 	</form>
 	
 	<hr>
-	<h3>Jurados Associados</h3>
+	<h3>Quadro de Pontuações</h3>
 	<hr>
 	<div >
 	<table class="table table-hover">
   		<thead>
-  		<th>Jurado</th>
-  		<th>Posição </th>
+  		<th>Escola de Samba</th>  		
   		<th>Quesito </th>
+  		<th>Jurado</th>
+  		<th>Pontuação</th>
   		<th>Ação</th>
   		</thead>
   		<tbody>	      
 	  		<tr>
+	  			<td>Salgueiro</td>
+	  			<td>Quesito 1</td>
 	  			<td>Jurado 1</td>
-	  			<td>Posicao 1 - Palco</td>
-	  			<td>Quesito  1</td>
+	  			<td>20</td>
 	  			<td>
 	  			<a href="ControlaCarnaval?idCarnaval&idJurado=<&acao=excluirJurado"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
 	  			</td>

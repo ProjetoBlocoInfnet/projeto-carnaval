@@ -30,11 +30,22 @@ public class ControlaCarnaval extends HttpServlet {
 			
 			switch (acao) {
 			
-			case "quesito":			
-				
-				request.getRequestDispatcher("/carnaval/carnavalQuesito.jsp").forward(request, response);
-				
+			case "pontuacao":
+				request.getRequestDispatcher("/carnaval/pontuacao.jsp").forward(request, response);
 				break;
+				
+			case "ranking":
+				request.getRequestDispatcher("/carnaval/ranking.jsp").forward(request, response);
+				break;
+				
+			case "escola":			
+				request.getRequestDispatcher("/carnaval/incluirEscolas.jsp").forward(request, response);
+				break;
+				
+			case "quesito":				
+				request.getRequestDispatcher("/carnaval/carnavalQuesito.jsp").forward(request, response);				
+				break;
+				
 			case "jurado":			
 				request.getRequestDispatcher("/carnaval/carnavalJurado.jsp").forward(request, response);
 				break;

@@ -47,17 +47,7 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 	<hr/>
 	<a href="indexAdmin.jsp"><button type="button" class="btn btn-default">Voltar</button></a>
 	<br><br>
-	<form action="ControlaCarnaval" method="post">
-		<input type="hidden" name="action" value="telaCadastro">
-		<input type="submit" class="btn btn-info" value="Cadastrar Carnaval">
-	</form>
-	<br>	
-	<form action="ControlaCarnaval" method="get">
-		<input type="hidden" name="acao" value="ranking">
-		<input type="submit" class="btn btn-info" value="Visualizar Ranking">
-	</form>
 	
-	<br>
 	
 	<form action="ControlaCarnaval" method="post">
 		<input type="hidden" name="action" value="consultar">
@@ -74,33 +64,29 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 	</form>
 	<hr>
 	
-	
+	<h1>Ranking</h1>
+	<hr>
 	<div >
 	<table class="table table-hover">
   		<thead>
-  		<th>Id</th>
-  		<th>Carnaval</th>
-  		<th>Data Primeiro Desfile</th>
-  		<th>Data Ultimo Desfile</th>
-  		<th>Grupo</th>
-  		<th>Ação</th>
+  		<th>Ordem</th>
+  		<th>Escola</th>  		
+  		<th>Col. Pt.  - Ano 2012</th>
+  		<th>Col. Pt.  - Ano 2013</th>
+  		<th>Col. Pt.  - Ano 2014</th>
+  		<th>Col. Pt.  - Ano 2015</th>
+  		<th>TOTAL</th>
   		</thead>
   		<tbody>
   		
 	  		<tr>
-	  			<td></td>  
-	  			<td></td>  		
-	  			<td></td>  		
-	  			<td></td> 
-	  			<td></td> 	  				
-	  			<td>
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=alterar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> | 
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=excluir"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> |
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=quesito"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Quesitos</a> |
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=jurado"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Jurados</a> |
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=escola"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Escolas</a> |
-	  				<a href="ControlaCarnaval?idCarnaval=&acao=pontuacao"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Incluir Pontuações</a>	  				
-	  			</td>
+	  			<td>1º</td>  
+	  			<td>G.R.E.S Unidos da Tijuca</td>  		
+	  			<td>1º - 20pt</td>  		
+	  			<td>2º - 15pt</td> 
+	  			<td>1º - 20pt</td>
+	  			<td>3º - 12pt</td>
+	  			<td>87</td>	  			 	  				
 	  		</tr>
   		
   		</tbody>

@@ -50,64 +50,57 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
 	<hr>
 	<form class="form-horizontal" action="ControlaCarnaval" method="post" id="form-escolaSamba">
 		
-		<input type="hidden" name="action" value="cadastrar">
+		<input type="hidden" name="action" value="incluirEscolas">
 		  
-		
+		<!-- 
+		 	 List<Entidade> listaEscolas = new EscolaSambaDAO().obterTodosAtivosPorGrupoAcesso(grupo); 
+		  
+		 	 Trazer todas as escolas pelo grupo selecionado		  
+		  -->
 		  
 		   <div class="form-group">
-		    <label for="data_primeiro_desfile" class="col-sm-2 control-label">Data Primeiro Desfile</label>
+		    <label for="escolas" class="col-sm-2 control-label">Escolas</label>
 		    <div class="col-sm-10">
-		      <input type="text" name="data_primeiro_desfile" class="form-control" id="data_primeiro_desfile" placeholder="Data Primeiro Desfile">		      
-		      <script>
-			      $(document).ready(function () {
-			        $('#data_primeiro_desfile').datepicker({
-			            format: "dd/mm/yyyy",
-			            language: "pt-BR"
-			        });
-			      });
-			    </script>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="data_ultimo_desfile" class="col-sm-2 control-label">Data Último Desfile</label>
-		    <div class="col-sm-10">
-		      <input type="text" name="data_ultimo_desfile" class="form-control" id="data_ultimo_desfile" placeholder="Data Último Desfile">		      
-		      <script>
-			      $(document).ready(function () {
-			        $('#data_ultimo_desfile').datepicker({
-			            format: "dd/mm/yyyy",
-			            language: "pt-BR"
-			        });
-			      });
-			    </script>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="grupoAtual" class="col-sm-2 control-label">Grupo Atual</label>
-		    <div class="col-sm-10">
-		     <select name="grupoAtual" id="grupoAtual" class="form-control">
-		      	<option value="1">Grupo Especial</option>
-	        	<option value="2">Série A</option>
-	        	<option value="3">Série B</option>
-	       	 	<option value="4">Série C</option>
-	        	<option value="5">Série D</option>
-	       		<option value="6">Grupo de Avaliação</option>     
+		     <select name="escolas" multiple id="escolas" class="form-control">
+		     
+		      	<option value="1">Mangueira</option>
+	        	<option value="2">Salgueiro</option>   
 		     </select>
 		    </div>
 		  </div>
-		  
-		  
-		
 	  		
 	  	<br>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-primary">Cadastrar Carnaval</button>
+		      <button type="submit" class="btn btn-primary">Incluir Escolas</button>
 		    </div>
 		  </div>
 	</form>
+	
+	<hr>
+	<h3>Escolas do Desfile</h3>
+	<hr>
+	<div >
+	<table class="table table-hover">
+  		<thead>
+  		<th>Escola</th>
+  		<th>Lema</th>
+  		<th>grupo </th>
+  		<th>Ação</th>
+  		</thead>
+  		<tbody>	      
+	  		<tr>
+	  			<td>Salgueiro</td>
+	  			<td>unidos do Salgueiro</td>
+	  			<td>Grupo Especial</td>
+	  			<td>
+	  			<a href="ControlaCarnaval?idCarnaval&idEscola=<&acao=excluirEscola"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
+	  			</td>
+	  		</tr>
+		  
+  		</tbody>
+	</table>
+	</div>
 	
 </div>
 
