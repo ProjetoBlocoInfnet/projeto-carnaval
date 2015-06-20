@@ -166,6 +166,99 @@ CREATE TABLE torcedor (
       ON UPDATE NO ACTION
 );
 
+CREATE TABLE carnaval_posicao_jurado (
+  id_carnaval_posicao_jurado INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  descricao_posicao VARCHAR(50) NULL,
+  PRIMARY KEY(id_carnaval_posicao_jurado)
+);
+
+CREATE TABLE carnaval (
+  id_carnaval INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  grupos_id_grupo INTEGER UNSIGNED NOT NULL,
+  data_primeiro_desfile DATE NULL,
+  data_ultimo_desfile INTEGER UNSIGNED NULL,
+  PRIMARY KEY(id_carnaval),
+  INDEX carnaval_FKIndex1(grupos_id_grupo),
+  FOREIGN KEY(grupos_id_grupo)
+    REFERENCES grupos(id_grupo)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE `carnaval_quesitos` (
+  `id_carnaval_quesitos` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `carnaval_id_carnaval` int(10) unsigned NOT NULL,
+  `ordem_quesito` int(10) unsigned NOT NULL,
+  `quesito_id_quesito` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_carnaval_quesitos`,`carnaval_id_carnaval`,`ordem_quesito`,`quesito_id_quesito`),
+  KEY `carnaval_quesitos_FKIndex1` (`carnaval_id_carnaval`),
+  KEY `carnaval_quesitos_id_quesito_idx` (`quesito_id_quesito`),
+  CONSTRAINT `carnaval_quesitos_ibfk_1` FOREIGN KEY (`carnaval_id_carnaval`) REFERENCES `carnaval` (`id_carnaval`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `carnaval_quesitos_id_quesito` FOREIGN KEY (`quesito_id_quesito`) REFERENCES `quesito` (`id_quesito`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE carnaval_quesito_jurado (
+  id_carnaval_quesito_jurado INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  carnaval_posicao_jurado_id_carnaval_posicao_jurado INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_ordem_quesito INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
+  jurado_id_jurado INTEGER UNSIGNED NOT NULL,
+  carnaval_quesitos_id_carnaval_quesitos INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(id_carnaval_quesito_jurado),
+  INDEX carnaval_quesito_jurado_FKIndex1(carnaval_quesitos_id_carnaval_quesitos, carnaval_quesitos_carnaval_id_carnaval, carnaval_quesitos_ordem_quesito),
+  INDEX carnaval_quesito_jurado_FKIndex2(jurado_id_jurado),
+  INDEX carnaval_quesito_jurado_FKIndex3(carnaval_posicao_jurado_id_carnaval_posicao_jurado),
+  FOREIGN KEY(carnaval_quesitos_id_carnaval_quesitos, carnaval_quesitos_carnaval_id_carnaval, carnaval_quesitos_ordem_quesito)
+    REFERENCES carnaval_quesitos(id_carnaval_quesitos, carnaval_id_carnaval, ordem_quesito)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(jurado_id_jurado)
+    REFERENCES jurado(id_jurado)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(carnaval_posicao_jurado_id_carnaval_posicao_jurado)
+    REFERENCES carnaval_posicao_jurado(id_carnaval_posicao_jurado)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE carnaval_desfile_escola (
+  id_carnaval_desfile_escola INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  escola_samba_id_escola_samba INTEGER UNSIGNED NOT NULL,
+  carnaval_id_carnaval INTEGER UNSIGNED NOT NULL,
+  data_hora_inicio DATETIME NULL,
+  PRIMARY KEY(id_carnaval_desfile_escola),
+  INDEX carnaval_desfile_escola_FKIndex1(carnaval_id_carnaval),
+  INDEX carnaval_desfile_escola_FKIndex2(escola_samba_id_escola_samba),
+  FOREIGN KEY(carnaval_id_carnaval)
+    REFERENCES carnaval(id_carnaval)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(escola_samba_id_escola_samba)
+    REFERENCES escola_samba(id_escola_samba)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+);
+
+CREATE TABLE `projeto_carnaval`.`carnaval_notas` (
+  `id_carnaval_notas` INT NOT NULL AUTO_INCREMENT,
+  `id_carnaval_quesito_jurado` INT UNSIGNED NOT NULL,
+  `id_carnaval_desfile_escola` INT UNSIGNED NOT NULL,
+  `nota` DECIMAL(2,1) NOT NULL,
+  PRIMARY KEY (`id_carnaval_notas`, `id_carnaval_quesito_jurado`, `id_carnaval_desfile_escola`, `nota`),
+  INDEX `notas_quesito_idx` (`id_carnaval_quesito_jurado` ASC),
+  INDEX `notas_escola_idx` (`id_carnaval_desfile_escola` ASC),
+  CONSTRAINT `notas_quesito`
+    FOREIGN KEY (`id_carnaval_quesito_jurado`)
+    REFERENCES `projeto_carnaval`.`carnaval_quesito_jurado` (`id_carnaval_quesito_jurado`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `notas_escola`
+    FOREIGN KEY (`id_carnaval_desfile_escola`)
+    REFERENCES `projeto_carnaval`.`carnaval_desfile_escola` (`id_carnaval_desfile_escola`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 insert into perfil (nome_perfil, descricao) values ('Administrador','Administrador do sistema');
 insert into perfil (nome_perfil, descricao) values ('Escola de Samba','Escolas de samba usuárias do sistema');
@@ -206,4 +299,12 @@ insert into acao (nome,descricao) values ('Baterista','');
 insert into acao (nome,descricao) values ('Vocalista','');
 insert into acao (nome,descricao) values ('Bailarino','');
 insert into acao (nome,descricao) values ('Sambista','');
+commit;
+
+--Valores fixos para as posições do Jurado no sambódromo.
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Entrada Sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Ala 3 sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Centro Sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Ala 5 sambodromo');
+Insert into carnaval_posicao_jurado (descricao_posicao) values ('Saida Sambodromo');
 commit;
